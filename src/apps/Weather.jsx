@@ -30,7 +30,7 @@ const WEATHER_DATA = {
 
 export function Weather() {
     return (
-        <AppShell title="weather">
+        <AppShell title="Weather">
             <div className="weather-container">
                 <div className="current-weather">
                     <div className="weather-location">San Francisco</div>
@@ -53,7 +53,7 @@ export function Weather() {
                 </div>
 
                 <div className="hourly-forecast">
-                    <h2 className="section-title">hourly</h2>
+                    <h2 className="section-title">Hourly</h2>
                     <div className="hourly-scroll">
                         {WEATHER_DATA.hourly.map((hour, i) => (
                             <div key={i} className="hourly-item">

@@ -106,7 +106,7 @@ export function Browser() {
     const canGoForward = historyIndex < history.length - 1;
 
     return (
-        <AppShell title="internet explorer">
+        <AppShell title="Microsoft Edge">
             <div className="browser">
                 {/* URL Bar */}
                 <form className="browser-url-bar" onSubmit={handleSubmit}>

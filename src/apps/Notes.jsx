@@ -51,7 +51,7 @@ export function Notes() {
 
     if (selectedNote) {
         return (
-            <AppShell title="notes">
+            <AppShell title="OneNote">
                 <div className="note-editor">
                     <textarea
                         className="note-textarea"
@@ -72,7 +72,7 @@ export function Notes() {
     return (
         <AppShell title="notes">
             <div className="notes-container">
-                <button className="add-note-btn" onClick={createNote}>+ new note</button>
+                <button className="add-note-btn" onClick={createNote}>+ New note</button>
 
                 <div className="notes-list">
                     {notes.map(note => (

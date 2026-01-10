@@ -27,9 +27,9 @@ export function Photos() {
     }
 
     return (
-        <AppShell title="photos">
+        <AppShell title="Photos">
             <div className="photos-container">
-                <h2 className="section-title">camera roll</h2>
+                <h2 className="section-title">Collection</h2>
                 <div className="photos-grid">
                     {SAMPLE_PHOTOS.map(photo => (
                         <div

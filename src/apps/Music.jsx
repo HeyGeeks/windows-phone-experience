@@ -22,7 +22,7 @@ export function Music() {
     const [currentSong, setCurrentSong] = useState(SONGS[0]);
 
     return (
-        <AppShell title="music">
+        <AppShell title="Groove Music">
             <div className="music-container">
                 {/* Now Playing */}
                 <div className="now-playing">
@@ -58,7 +58,7 @@ export function Music() {
 
                 {/* Playlist */}
                 <div className="playlist-section">
-                    <h2 className="section-title">up next</h2>
+                    <h2 className="section-title">Up next</h2>
                     {SONGS.map(song => (
                         <div
                             key={song.id}

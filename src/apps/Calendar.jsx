@@ -54,7 +54,7 @@ export function Calendar() {
     }
 
     return (
-        <AppShell title="calendar">
+        <AppShell title="Calendar">
             <div className="calendar-container">
                 <div className="calendar-header">
                     <button className="nav-arrow" onClick={prevMonth}>‹</button>

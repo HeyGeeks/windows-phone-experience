@@ -37,7 +37,7 @@ export function Clock() {
     });
 
     return (
-        <AppShell title="clock">
+        <AppShell title="Alarms & Clock">
             <div className="clock-container">
                 <div className="clock-time">
                     <span className="clock-hours">{hours}</span>
@@ -48,7 +48,7 @@ export function Clock() {
                 <div className="clock-date">{date}</div>
 
                 <div className="alarms-section">
-                    <h2 className="section-title">alarms</h2>
+                    <h2 className="section-title">Alarms</h2>
                     {alarms.map(alarm => (
                         <div key={alarm.id} className="alarm-item">
                             <div className="alarm-info">
@@ -64,7 +64,7 @@ export function Clock() {
                 </div>
 
                 <div className="world-clock-section">
-                    <h2 className="section-title">world clock</h2>
+                    <h2 className="section-title">World clock</h2>
                     <div className="world-clock-item">
                         <span className="city">New York</span>
                         <span className="city-time">

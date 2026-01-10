@@ -128,11 +128,52 @@ body {
 /* Page Titles */
 .page-title {
     font-size: clamp(32px, 8vw, 48px);
-    font-weight: 300;
+    font-weight: 200;
     color: var(--text-color);
-    text-transform: lowercase;
-    margin: 20px 0;
-    letter-spacing: -1px;
+    margin: 20px 0 10px 0;
+    letter-spacing: 0.5px;
+}
+
+/* All Apps Header & Search */
+.all-apps-header {
+    padding: 10px 0 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-color);
+}
+
+.search-box {
+    background: #FFFFFF;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border: 2px solid #FFFFFF;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-color);
+}
+
+.search-icon {
+    fill: #000000;
+    margin-right: 10px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    height: 100%;
+    flex: 1;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    color: #000000;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #666666;
 }
 
 /* Tile Grid - Flexible */
@@ -209,11 +250,13 @@ body {
     height: 48px;
 }
 
+
 .tile-label {
     font-size: 14px;
     font-weight: 400;
     margin-top: auto;
-    text-transform: lowercase;
+    /* text-transform: lowercase; removed for W10M */
+    letter-spacing: 0.2px;
 }
 
 .tile-small .tile-label {
@@ -568,9 +611,8 @@ body {
 
 .settings-section-title {
     font-size: clamp(20px, 4vw, 24px);
-    font-weight: 300;
+    font-weight: 200;
     color: var(--accent-color);
-    text-transform: lowercase;
     margin-bottom: 15px;
 }
 
