@@ -1,3 +1,353 @@
-.settings-container {
+/* Windows Phone 8.1 Authentic Settings Styles */
+
+/* Hub Container */
+.wp-settings-hub {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Hub Tabs - Horizontal navigation like "system applications" */
+.wp-hub-tabs {
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.wp-hub-tab {
+    font-size: clamp(36px, 10vw, 48px);
+    font-weight: 200;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+
+.wp-hub-tab.active {
     color: var(--text-color);
+}
+
+.wp-hub-tab:hover:not(.active) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hub Pages Container */
+.wp-hub-pages {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.wp-hub-pages::-webkit-scrollbar {
+    display: none;
+}
+
+/* Individual Hub Page */
+.wp-hub-page {
+    min-width: 100%;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
+
+/* Settings List */
+.wp-settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual Setting Item */
+.wp-setting-item {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 0;
+    cursor: pointer;
+    transition: background 0.1s ease;
+    border-left: 0px solid transparent;
+    padding-left: 0;
+}
+
+.wp-setting-item:active {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--accent-color);
+    padding-left: 10px;
+}
+
+/* Setting with toggle - horizontal layout */
+.wp-setting-with-toggle {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wp-setting-with-toggle .wp-setting-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Setting Label */
+.wp-setting-label {
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 300;
+    color: var(--text-color);
+    text-transform: lowercase;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+/* Setting Description */
+.wp-setting-description {
+    font-size: clamp(13px, 3vw, 15px);
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    text-transform: lowercase;
+}
+
+/* Subpage Styles */
+.wp-settings-subpage {
+    padding-right: 20px;
+}
+
+.wp-subpage-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.wp-subpage-header:hover {
+    opacity: 0.7;
+}
+
+.wp-subpage-header svg {
+    fill: var(--text-color);
+    flex-shrink: 0;
+}
+
+.wp-subpage-title {
+    font-size: clamp(36px, 10vw, 48px);
+    font-weight: 200;
+    color: var(--text-color);
+    text-transform: lowercase;
+    letter-spacing: -1px;
+}
+
+/* Section Title */
+.wp-section-title {
+    font-size: clamp(16px, 4vw, 18px);
+    font-weight: 400;
+    color: var(--accent-color);
+    text-transform: lowercase;
+    margin: 25px 0 10px;
+    padding-top: 10px;
+}
+
+/* Settings Intro Text */
+.wp-settings-intro {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Settings Link */
+.wp-settings-link {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: var(--accent-color);
+    text-decoration: underline;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.wp-settings-link:hover {
+    color: var(--text-color);
+}
+
+/* Settings Info Text */
+.wp-settings-info {
+    font-size: clamp(13px, 3vw, 14px);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 2px solid var(--accent-color);
+}
+
+/* Theme Picker */
+.wp-theme-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.wp-theme-color {
+    aspect-ratio: 1;
+    cursor: pointer;
+    transition: transform 0.15s ease, outline 0.15s ease;
+    outline: 3px solid transparent;
+}
+
+.wp-theme-color:hover {
+    transform: scale(1.1);
+}
+
+.wp-theme-color.active {
+    outline: 3px solid var(--text-color);
+}
+
+/* Battery Display */
+.wp-battery-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    margin-bottom: 20px;
+}
+
+.wp-battery-percent {
+    font-size: 72px;
+    font-weight: 200;
+    color: var(--text-color);
+    line-height: 1;
+}
+
+.wp-battery-time {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 10px;
+}
+
+/* Credits Section */
+.wp-credits-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wp-credits-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    padding: 25px;
+    margin-top: 15px;
+}
+
+.wp-credits-intro {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.wp-credits-developer {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.wp-credits-developer h4 {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--text-color);
+    margin: 0 0 5px;
+}
+
+.wp-credits-developer span {
+    font-size: 14px;
+    color: var(--accent-color);
+}
+
+.wp-credits-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.wp-credits-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.15s ease;
+}
+
+.wp-credits-link:hover {
+    background: var(--accent-color);
+}
+
+.wp-link-icon {
+    font-size: 18px;
+}
+
+.wp-credits-footer {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 374px) {
+    .wp-hub-tab {
+        font-size: 28px;
+    }
+
+    .wp-subpage-title {
+        font-size: 28px;
+    }
+
+    .wp-setting-label {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 768px) {
+    .wp-hub-pages {
+        overflow-x: hidden;
+    }
+
+    .wp-hub-page {
+        min-width: 50%;
+    }
+
+    .wp-credits-links {
+        flex-direction: row;
+    }
+
+    .wp-credits-link {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .wp-hub-page {
+        min-width: 50%;
+        max-width: 50%;
+    }
+
+    .wp-theme-picker {
+        grid-template-columns: repeat(10, 50px);
+    }
 }

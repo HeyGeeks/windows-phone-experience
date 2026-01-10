@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon } from './Icons';
 
-export function AppShell({ title, children }) {
+export function AppShell({ title, children, hideTitle = false }) {
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -18,7 +18,7 @@ export function AppShell({ title, children }) {
                 >
                     <Icon name="back" size={20} aria-hidden="true" />
                 </button>
-                <h1 className="page-title">{title}</h1>
+                {!hideTitle && <h1 className="page-title">{title}</h1>}
             </header>
             <main className="app-content" role="main">
                 {children}
