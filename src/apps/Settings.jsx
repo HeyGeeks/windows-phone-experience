@@ -1,29 +1,34 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { AppShell } from '../components/AppShell';
 import { Toggle } from '../components/Toggle';
 import { useTheme, THEME_COLORS } from '../context/ThemeContext';
 import './Settings.css';
 
-// Back arrow icon
-const BackArrow = () => (
-    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-    </svg>
-);
+// Icons
+const Icons = {
+    System: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" /></svg>, // Simple list icon placeholder
+    Devices: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" /></svg>,
+    Network: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>,
+    Personalization: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" /></svg>,
+    Accounts: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>,
+    Time: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" /></svg>,
+    Access: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z" /></svg>,
+    Privacy: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" /></svg>,
+    Update: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.51-3.47-3.51-9.11 0-12.58 3.51-3.47 9.14-3.47 12.65 0l3.65-3.69V10.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z" /></svg>,
+    Apps: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" /></svg>,
+    Search: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" /></svg>,
+    Back: () => <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+};
 
 export function Settings() {
     const { accentColor, setAccentColor } = useTheme();
-    const [currentView, setCurrentView] = useState('main');
-    const [activeTab, setActiveTab] = useState('system');
-    const hubRef = useRef(null);
+    const [viewStack, setViewStack] = useState(['main']); // Stack-based navigation
+    const [searchQuery, setSearchQuery] = useState('');
 
     // System/Phone states
     const [wifi, setWifi] = useState(true);
     const [bluetooth, setBluetooth] = useState(false);
     const [airplane, setAirplane] = useState(false);
-    const [mobileData, setMobileData] = useState(true);
-    const [nfc, setNfc] = useState(true);
-    const [vpn, setVpn] = useState(false);
     const [location, setLocation] = useState(true);
     const [quietHours, setQuietHours] = useState(false);
     const [drivingMode, setDrivingMode] = useState(false);
@@ -33,12 +38,10 @@ export function Settings() {
     // Display states
     const [brightness, setBrightness] = useState(70);
     const [autoRotate, setAutoRotate] = useState(true);
-    const [glanceScreen, setGlanceScreen] = useState(true);
-    const [nightMode, setNightMode] = useState(false);
 
     // App settings states
     const [syncSettings, setSyncSettings] = useState(true);
-    const [appSettings, setAppSettings] = useState(true);
+    const [appSettingsState, setAppSettings] = useState(true);
     const [internetExplorer, setInternetExplorer] = useState(true);
     const [passwords, setPasswords] = useState(false);
 
@@ -46,340 +49,139 @@ export function Settings() {
     const [screenMagnifier, setScreenMagnifier] = useState(false);
     const [highContrast, setHighContrast] = useState(false);
 
-    const tabs = ['system', 'applications'];
+    const currentView = viewStack[viewStack.length - 1];
 
-    useEffect(() => {
-        if (hubRef.current) {
-            const tabIndex = tabs.indexOf(activeTab);
-            hubRef.current.scrollTo({
-                left: tabIndex * hubRef.current.offsetWidth,
-                behavior: 'smooth'
-            });
-        }
-    }, [activeTab]);
+    const navigateTo = (viewId) => {
+        setViewStack([...viewStack, viewId]);
+        setSearchQuery(''); // Clear search on nav
+    };
 
-    const handleScroll = () => {
-        if (hubRef.current) {
-            const scrollPos = hubRef.current.scrollLeft;
-            const width = hubRef.current.offsetWidth;
-            const newTab = Math.round(scrollPos / width);
-            if (tabs[newTab] && tabs[newTab] !== activeTab) {
-                setActiveTab(tabs[newTab]);
-            }
+    const navigateBack = () => {
+        if (viewStack.length > 1) {
+            setViewStack(viewStack.slice(0, -1));
         }
     };
 
-    // Simple setting item that navigates to a subpage
-    const SettingItem = ({ label, description, onClick }) => (
-        <div className="wp-setting-item" onClick={onClick} role="button" tabIndex={0}>
-            <span className="wp-setting-label">{label}</span>
-            {description && <span className="wp-setting-description">{description}</span>}
+    // --- Components ---
+
+    const SearchBar = () => (
+        <div className="w10-search-container">
+            <div className="w10-search-box">
+                <input
+                    type="text"
+                    placeholder="Find a setting"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w10-search-input"
+                />
+                <div className="w10-search-icon">
+                    <Icons.Search />
+                </div>
+            </div>
         </div>
     );
 
-    // Setting item with a toggle
+    const SettingItem = ({ label, description, onClick }) => (
+        <div className="w10-setting-item" onClick={onClick} role="button" tabIndex={0}>
+            <div className="w10-setting-content">
+                <span className="w10-setting-label">{label}</span>
+                {description && <span className="w10-setting-description">{description}</span>}
+            </div>
+        </div>
+    );
+
     const SettingToggle = ({ label, description, active, onChange }) => (
-        <div className="wp-setting-item wp-setting-with-toggle">
-            <div className="wp-setting-info">
-                <span className="wp-setting-label">{label}</span>
-                {description && <span className="wp-setting-description">{description}</span>}
+        <div className="w10-setting-item w10-setting-with-toggle">
+            <div className="w10-setting-content">
+                <span className="w10-setting-label">{label}</span>
+                {description && <span className="w10-setting-description">{description}</span>}
             </div>
             <Toggle active={active} onChange={onChange} />
         </div>
     );
 
-    const SubPageHeader = ({ title, onBack }) => (
-        <div className="wp-subpage-header" onClick={onBack} role="button" tabIndex={0}>
-            <BackArrow />
-            <span className="wp-subpage-title">{title}</span>
+    const PageHeader = ({ title }) => (
+        <div className="w10-page-header">
+            <button className="w10-back-button" onClick={navigateBack}>
+                <Icons.Back />
+            </button>
+            <h2 className="w10-page-title">{title}</h2>
         </div>
     );
 
-    // Main settings hub view
-    const renderMainView = () => (
-        <div className="wp-settings-hub">
-            {/* Hub Tabs */}
-            <div className="wp-hub-tabs">
-                {tabs.map((tab, index) => (
-                    <span
-                        key={tab}
-                        className={`wp-hub-tab ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                    >
-                        {tab}
-                    </span>
-                ))}
-            </div>
+    // --- Data Structure ---
 
-            {/* Hub Pages */}
-            <div className="wp-hub-pages" ref={hubRef} onScroll={handleScroll}>
-                {/* System Tab */}
-                <div className="wp-hub-page">
-                    <div className="wp-settings-list">
-                        <SettingItem
-                            label="ringtones+sounds"
-                            description="ringer, notifications"
-                            onClick={() => setCurrentView('sounds')}
-                        />
-                        <SettingItem
-                            label="theme"
-                            description="background, accent color"
-                            onClick={() => setCurrentView('theme')}
-                        />
-                        <SettingItem
-                            label="email+accounts"
-                            description="add, manage accounts"
-                            onClick={() => setCurrentView('accounts')}
-                        />
-                        <SettingItem
-                            label="lock screen"
-                            description="notifications, background"
-                            onClick={() => setCurrentView('lockscreen')}
-                        />
-                        <SettingItem
-                            label="Wi-Fi"
-                            description={wifi ? "connected" : "off"}
-                            onClick={() => setCurrentView('wifi')}
-                        />
-                        <SettingItem
-                            label="Bluetooth"
-                            description={bluetooth ? "on" : "off"}
-                            onClick={() => setCurrentView('bluetooth')}
-                        />
-                        <SettingItem
-                            label="tap+send"
-                            description="NFC sharing"
-                            onClick={() => setCurrentView('nfc')}
-                        />
-                        <SettingItem
-                            label="airplane mode"
-                            description={airplane ? "on" : "off"}
-                            onClick={() => setCurrentView('airplane')}
-                        />
-                        <SettingItem
-                            label="cellular"
-                            description="data connection, SIM"
-                            onClick={() => setCurrentView('cellular')}
-                        />
-                        <SettingItem
-                            label="VPN"
-                            description={vpn ? "connected" : "off"}
-                            onClick={() => setCurrentView('vpn')}
-                        />
-                        <SettingItem
-                            label="backup"
-                            description="save stuff to the cloud"
-                            onClick={() => setCurrentView('backup')}
-                        />
-                        <SettingItem
-                            label="sync my settings"
-                            description="use settings across devices"
-                            onClick={() => setCurrentView('sync')}
-                        />
-                        <SettingItem
-                            label="driving mode"
-                            description={drivingMode ? "on" : "set up"}
-                            onClick={() => setCurrentView('driving')}
-                        />
-                        <SettingItem
-                            label="quiet hours"
-                            description={quietHours ? "on" : "turned off"}
-                            onClick={() => setCurrentView('quiethours')}
-                        />
-                        <SettingItem
-                            label="location"
-                            description={location ? "turned on" : "turned off"}
-                            onClick={() => setCurrentView('location')}
-                        />
-                        <SettingItem
-                            label="advertising id"
-                            description="turned on"
-                            onClick={() => setCurrentView('advertising')}
-                        />
-                        <SettingItem
-                            label="date+time"
-                            description="(UTC+05:30) India Standard Time"
-                            onClick={() => setCurrentView('datetime')}
-                        />
-                        <SettingItem
-                            label="brightness"
-                            description="automatic"
-                            onClick={() => setCurrentView('brightness')}
-                        />
-                        <SettingItem
-                            label="rotation lock"
-                            description={autoRotate ? "off" : "on"}
-                            onClick={() => setCurrentView('rotation')}
-                        />
-                        <SettingItem
-                            label="battery saver"
-                            description={batterySaver ? "on" : "off"}
-                            onClick={() => setCurrentView('battery')}
-                        />
-                        <SettingItem
-                            label="keyboard"
-                            description="languages, suggestions"
-                            onClick={() => setCurrentView('keyboard')}
-                        />
-                        <SettingItem
-                            label="language"
-                            description="English (India)"
-                            onClick={() => setCurrentView('language')}
-                        />
-                        <SettingItem
-                            label="region"
-                            description="India"
-                            onClick={() => setCurrentView('region')}
-                        />
-                        <SettingItem
-                            label="speech"
-                            description="language, text-to-speech"
-                            onClick={() => setCurrentView('speech')}
-                        />
-                        <SettingItem
-                            label="ease of access"
-                            description="high contrast, screen magnifier"
-                            onClick={() => setCurrentView('accessibility')}
-                        />
-                        <SettingItem
-                            label="find my phone"
-                            description="locate, ring, erase"
-                            onClick={() => setCurrentView('findphone')}
-                        />
-                        <SettingItem
-                            label="kid's corner"
-                            description={kidCorner ? "on" : "off"}
-                            onClick={() => setCurrentView('kidcorner')}
-                        />
-                        <SettingItem
-                            label="phone update"
-                            description="check for updates"
-                            onClick={() => setCurrentView('update')}
-                        />
-                        <SettingItem
-                            label="about"
-                            description="info, credits"
-                            onClick={() => setCurrentView('about')}
-                        />
-                    </div>
-                </div>
+    // Define all settings linearly for search flatten, but structured for categories
+    const allSettings = useMemo(() => [
+        // System
+        { id: 'display', label: 'Display', description: 'Orientation, brightness', category: 'System', view: 'display' },
+        { id: 'notifications', label: 'Notifications & actions', description: 'Quick actions, alerts', category: 'System', view: 'notifications' },
+        { id: 'phone', label: 'Phone', description: 'Voicemail, SIM', category: 'System', view: 'phone' },
+        { id: 'messaging', label: 'Messaging', description: 'SMS settings', category: 'System', view: 'messaging' },
+        { id: 'battery', label: 'Battery Saver', description: 'Battery usage', category: 'System', view: 'battery' },
+        { id: 'storage', label: 'Storage', description: 'Device, SD card', category: 'System', view: 'storage' },
+        { id: 'maps', label: 'Offline maps', description: 'Download maps', category: 'System', view: 'maps' },
+        { id: 'about', label: 'About', description: 'Device info', category: 'System', view: 'about' },
 
-                {/* Applications Tab */}
-                <div className="wp-hub-page">
-                    <div className="wp-settings-list">
-                        <SettingItem
-                            label="background tasks"
-                            description="apps that run in the background"
-                            onClick={() => setCurrentView('background')}
-                        />
-                        <SettingItem
-                            label="photos+camera"
-                            description="settings, auto upload"
-                            onClick={() => setCurrentView('photos')}
-                        />
-                        <SettingItem
-                            label="people"
-                            description="filter contacts, import SIM"
-                            onClick={() => setCurrentView('people')}
-                        />
-                        <SettingItem
-                            label="phone"
-                            description="voicemail number, call settings"
-                            onClick={() => setCurrentView('phone')}
-                        />
-                        <SettingItem
-                            label="messaging"
-                            description="SMS delivery confirmation"
-                            onClick={() => setCurrentView('messaging')}
-                        />
-                        <SettingItem
-                            label="Internet Explorer"
-                            description="privacy, favorites"
-                            onClick={() => setCurrentView('ie')}
-                        />
-                        <SettingItem
-                            label="maps"
-                            description="download maps, location"
-                            onClick={() => setCurrentView('maps')}
-                        />
-                        <SettingItem
-                            label="calendar"
-                            description="week start, reminders"
-                            onClick={() => setCurrentView('calendar')}
-                        />
-                        <SettingItem
-                            label="music+videos"
-                            description="Xbox Music"
-                            onClick={() => setCurrentView('music')}
-                        />
-                        <SettingItem
-                            label="podcasts"
-                            description="download settings"
-                            onClick={() => setCurrentView('podcasts')}
-                        />
-                        <SettingItem
-                            label="games"
-                            description="Xbox, connect"
-                            onClick={() => setCurrentView('games')}
-                        />
-                        <SettingItem
-                            label="store"
-                            description="download, updates"
-                            onClick={() => setCurrentView('store')}
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+        // Devices
+        { id: 'bluetooth', label: 'Bluetooth', description: bluetooth ? 'On' : 'Off', category: 'Devices', view: 'bluetooth' },
+        { id: 'nfc', label: 'NFC', description: 'Tap to pay/send', category: 'Devices', view: 'nfc' },
+        { id: 'camera', label: 'Camera', description: 'Photos, video', category: 'Devices', view: 'photos' },
 
-    // Subpages
-    const renderSyncView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="sync my settings" onBack={() => setCurrentView('main')} />
+        // Network
+        { id: 'wifi', label: 'Wi-Fi', description: wifi ? 'Connected' : 'Off', category: 'Network & wireless', view: 'wifi' },
+        { id: 'cellular', label: 'Cellular & SIM', description: 'Data connection', category: 'Network & wireless', view: 'cellular' },
+        { id: 'airplane', label: 'Airplane mode', description: airplane ? 'On' : 'Off', category: 'Network & wireless', view: 'airplane' },
+        { id: 'vpn', label: 'VPN', description: 'Add a VPN connection', category: 'Network & wireless', view: 'vpn' },
 
-            <p className="wp-settings-intro">
-                Sync your settings so they're used across your Microsoft devices.
-            </p>
-            <a href="#" className="wp-settings-link">How does syncing work?</a>
+        // Personalization
+        { id: 'customization', label: 'Personalization', description: 'Background, lock screen, colors', category: 'Personalization', view: 'theme' },
+        { id: 'sounds', label: 'Sounds', description: 'Ringtones, system sounds', category: 'Personalization', view: 'sounds' },
 
-            <div className="wp-settings-list">
-                <SettingToggle
-                    label="Theme"
-                    description={syncSettings ? "On" : "Off"}
-                    active={syncSettings}
-                    onChange={setSyncSettings}
-                />
-                <SettingToggle
-                    label="App settings"
-                    description={appSettings ? "On" : "Off"}
-                    active={appSettings}
-                    onChange={setAppSettings}
-                />
-                <SettingToggle
-                    label="Internet Explorer"
-                    description={internetExplorer ? "On" : "Off"}
-                    active={internetExplorer}
-                    onChange={setInternetExplorer}
-                />
-                <SettingToggle
-                    label="Passwords"
-                    description={passwords ? "On" : "Off"}
-                    active={passwords}
-                    onChange={setPasswords}
-                />
-            </div>
-        </div>
-    );
+        // Accounts
+        { id: 'accounts', label: 'Email & app accounts', description: 'Add accounts', category: 'Accounts', view: 'accounts' },
+        { id: 'sync', label: 'Sync your settings', description: 'Theme, passwords', category: 'Accounts', view: 'sync' },
+        { id: 'kidcorner', label: 'Kid\'s Corner', description: 'Set up for kids', category: 'Accounts', view: 'kidcorner' },
+
+        // Time
+        { id: 'datetime', label: 'Date & time', description: 'Time zone, region', category: 'Time & language', view: 'datetime' },
+        { id: 'region', label: 'Region', description: 'Country/region', category: 'Time & language', view: 'region' },
+        { id: 'keyboard', label: 'Keyboard', description: 'Keyboards, typing', category: 'Time & language', view: 'keyboard' },
+        { id: 'speech', label: 'Speech', description: 'Voice, text-to-speech', category: 'Time & language', view: 'speech' },
+
+        // Ease of Access
+        { id: 'accessibility', label: 'Ease of Access', description: 'Narrator, magnifier, high contrast', category: 'Ease of Access', view: 'accessibility' },
+
+        // Privacy
+        { id: 'location', label: 'Location', description: location ? 'On' : 'Off', category: 'Privacy', view: 'location' },
+        { id: 'advertising', label: 'Advertising ID', description: 'Reset ID', category: 'Privacy', view: 'advertising' },
+
+        // Update
+        { id: 'update', label: 'Phone update', description: 'Check for updates', category: 'Update & security', view: 'update' },
+        { id: 'backup', label: 'Backup', description: 'Device, apps', category: 'Update & security', view: 'backup' },
+        { id: 'findphone', label: 'Find my phone', description: 'Locate, erase', category: 'Update & security', view: 'findphone' },
+
+    ], [wifi, bluetooth, airplane, location]);
+
+    const categories = [
+        { id: 'System', label: 'System', icon: Icons.System, description: 'Display, notifications, battery' },
+        { id: 'Devices', label: 'Devices', icon: Icons.Devices, description: 'Bluetooth, NFC, camera' },
+        { id: 'Network & wireless', label: 'Network & wireless', icon: Icons.Network, description: 'Wi-Fi, airplane mode, VPN' },
+        { id: 'Personalization', label: 'Personalization', icon: Icons.Personalization, description: 'Background, lock screen, colors' },
+        { id: 'Accounts', label: 'Accounts', icon: Icons.Accounts, description: 'Email, sync, user info' },
+        { id: 'Time & language', label: 'Time & language', icon: Icons.Time, description: 'Speech, region, date' },
+        { id: 'Ease of Access', label: 'Ease of Access', icon: Icons.Access, description: 'Narrator, magnifier, high contrast' },
+        { id: 'Privacy', label: 'Privacy', icon: Icons.Privacy, description: 'Location, camera' },
+        { id: 'Update & security', label: 'Update & security', icon: Icons.Update, description: 'Windows Update, backup' },
+    ];
+
+    // --- Detail Views ---
 
     const renderThemeView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="theme" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingItem label="Background" description="dark" />
-                <SettingItem label="Accent color" description="Choose your color" />
-
+        <div className="w10-subpage">
+            <PageHeader title="Personalization" />
+            <div className="w10-section-header">Colors</div>
+            <div className="w10-group">
                 <div className="wp-theme-picker">
                     {THEME_COLORS.map(color => (
                         <div
@@ -393,77 +195,22 @@ export function Settings() {
                         />
                     ))}
                 </div>
-            </div>
-        </div>
-    );
-
-    const renderAboutView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="about" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingItem label="phone name" description="Windows Phone" />
-                <SettingItem label="model" description="Lumia 925" />
-                <SettingItem label="total storage" description="32 GB" />
-                <SettingItem label="OS version" description="Windows Phone 8.1" />
-                <SettingItem label="firmware revision" description="8.10.15148.160" />
-                <SettingItem label="hardware revision" description="1.0.0.0" />
-                <SettingItem label="radio software version" description="3.2.04033.1" />
-                <SettingItem label="chip SOC version" description="8974" />
-            </div>
-
-            <div className="wp-credits-section">
-                <h3 className="wp-section-title">credits</h3>
-
-                <div className="wp-credits-card">
-                    <p className="wp-credits-intro">This Windows Phone Web Experience was created by:</p>
-
-                    <div className="wp-credits-developer">
-                        <h4>Mohit Yadav</h4>
-                        <span>Developer & Designer</span>
-                    </div>
-
-                    <div className="wp-credits-links">
-                        <a
-                            href="https://heygeeks.in/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="wp-credits-link"
-                        >
-                            <span className="wp-link-icon">🌐</span>
-                            heygeeks.in
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/mohitky2018/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="wp-credits-link"
-                        >
-                            <span className="wp-link-icon">💼</span>
-                            LinkedIn
-                        </a>
-                        <a
-                            href="https://github.com/HeyGeeks"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="wp-credits-link"
-                        >
-                            <span className="wp-link-icon">💻</span>
-                            GitHub
-                        </a>
-                    </div>
-
-                    <p className="wp-credits-footer">Made with ❤️ for Windows Phone fans</p>
+                <div className="w10-description-text">
+                    Choose your accent color. This color will appear on your Start screen and in apps.
                 </div>
+            </div>
+            <div className="w10-section-header">Lock Screen</div>
+            <div className="w10-group">
+                <SettingItem label="Background" description="My Picture" />
+                <SettingItem label="Choose an app to show detailed status" description="Calendar" />
             </div>
         </div>
     );
 
     const renderWifiView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="Wi-Fi" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
+        <div className="w10-subpage">
+            <PageHeader title="Wi-Fi" />
+            <div className="w10-group">
                 <SettingToggle
                     label="Wi-Fi networking"
                     description={wifi ? "On" : "Off"}
@@ -471,14 +218,13 @@ export function Settings() {
                     onChange={setWifi}
                 />
             </div>
-
             {wifi && (
                 <>
-                    <h3 className="wp-section-title">available networks</h3>
-                    <div className="wp-settings-list">
-                        <SettingItem label="Home Network" description="connected" />
-                        <SettingItem label="Office WiFi" description="secured" />
-                        <SettingItem label="Guest Network" description="open" />
+                    <div className="w10-section-header">Available networks</div>
+                    <div className="w10-group">
+                        <SettingItem label="Home Network" description="Connected, Secured" />
+                        <SettingItem label="Office WiFi" description="Secured" />
+                        <SettingItem label="Starbucks" description="Open" />
                     </div>
                 </>
             )}
@@ -486,238 +232,205 @@ export function Settings() {
     );
 
     const renderBluetoothView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="Bluetooth" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
+        <div className="w10-subpage">
+            <PageHeader title="Bluetooth" />
+            <div className="w10-group">
                 <SettingToggle
                     label="Status"
-                    description={bluetooth ? "On and searching" : "Off"}
+                    description={bluetooth ? "On" : "Off"}
                     active={bluetooth}
                     onChange={setBluetooth}
                 />
             </div>
-
-            <p className="wp-settings-info">
-                Bluetooth profiles supported: A2DP, AVRCP, HFP, HSP, PBAP.
-                Connect headphones, car kits, and speakers.
-            </p>
-
-            {bluetooth && (
-                <>
-                    <h3 className="wp-section-title">paired devices</h3>
-                    <div className="wp-settings-list">
-                        <SettingItem label="My Headphones" description="audio" />
-                        <SettingItem label="Car Kit" description="hands-free" />
-                    </div>
-                </>
-            )}
-        </div>
-    );
-
-    const renderLocationView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="location" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingToggle
-                    label="Location services"
-                    description={location ? "On" : "Off"}
-                    active={location}
-                    onChange={setLocation}
-                />
+            <div className="w10-description-text">
+                Bluetooth is {bluetooth ? 'searching for devices...' : 'off'}.
             </div>
-
-            <p className="wp-settings-info">
-                When location is on, apps that have permission can use your location.
-            </p>
-        </div>
-    );
-
-    const renderQuietHoursView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="quiet hours" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingToggle
-                    label="Quiet hours"
-                    description={quietHours ? "On" : "Off"}
-                    active={quietHours}
-                    onChange={setQuietHours}
-                />
-            </div>
-
-            {quietHours && (
-                <div className="wp-settings-list">
-                    <SettingItem label="Start time" description="11:00 PM" />
-                    <SettingItem label="End time" description="7:00 AM" />
-                    <SettingItem label="Allow calls from" description="inner circle only" />
-                </div>
-            )}
         </div>
     );
 
     const renderBatteryView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="battery saver" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-battery-display">
-                <span className="wp-battery-percent">78%</span>
-                <span className="wp-battery-time">estimated 14 hours remaining</span>
+        <div className="w10-subpage">
+            <PageHeader title="Battery Saver" />
+            <div className="w10-battery-status">
+                <div className="w10-battery-percent">78%</div>
+                <div className="w10-battery-detail">Estimated 14 hours remaining</div>
             </div>
-
-            <div className="wp-settings-list">
+            <div className="w10-group">
                 <SettingToggle
-                    label="Battery saver"
-                    description={batterySaver ? "On now" : "Off"}
+                    label="Battery Saver status"
+                    description={batterySaver ? "On" : "Off"}
                     active={batterySaver}
                     onChange={setBatterySaver}
                 />
-                <SettingItem
-                    label="Turn on when battery is below"
-                    description="20%"
-                />
             </div>
         </div>
     );
 
-    const renderAccessibilityView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="ease of access" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingToggle
-                    label="Screen magnifier"
-                    description={screenMagnifier ? "On" : "Off"}
-                    active={screenMagnifier}
-                    onChange={setScreenMagnifier}
-                />
-                <SettingToggle
-                    label="High contrast"
-                    description={highContrast ? "On" : "Off"}
-                    active={highContrast}
-                    onChange={setHighContrast}
-                />
-                <SettingItem label="Text size" description="100%" />
+    const renderAboutView = () => (
+        <div className="w10-subpage">
+            <PageHeader title="About" />
+            <div className="w10-group">
+                <SettingItem label="Device name" description="Windows Phone" />
+                <SettingItem label="Model" description="Lumia 950 XL" />
+                <SettingItem label="Version" description="1709" />
+                <SettingItem label="OS build" description="10.0.15254.1" />
+                <SettingItem label="RAM" description="3 GB" />
+            </div>
+            <div className="w10-credits">
+                <h3>Credits</h3>
+                <p>Developed by Mohit Yadav</p>
+                <div className="w10-links">
+                    <a href="https://heygeeks.in/" target="_blank">heygeeks.in</a>
+                    <a href="https://github.com/HeyGeeks" target="_blank">GitHub</a>
+                </div>
             </div>
         </div>
     );
 
-    const renderAccountsView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="email+accounts" onBack={() => setCurrentView('main')} />
-
-            <h3 className="wp-section-title">your accounts</h3>
-            <div className="wp-settings-list">
-                <SettingItem label="Microsoft account" description="user@outlook.com" />
+    const renderSyncView = () => (
+        <div className="w10-subpage">
+            <PageHeader title="Sync your settings" />
+            <div className="w10-description-text">
+                Sync settings across your Windows devices using your Microsoft account.
             </div>
-
-            <h3 className="wp-section-title">add an account</h3>
-            <div className="wp-settings-list">
-                <SettingItem label="Outlook.com" description="email, calendar, contacts" />
-                <SettingItem label="Exchange" description="work email" />
-                <SettingItem label="Google" description="email, calendar, contacts" />
-                <SettingItem label="iCloud" description="email, contacts" />
+            <div className="w10-group">
+                <SettingToggle label="Sync settings" description={syncSettings ? "On" : "Off"} active={syncSettings} onChange={setSyncSettings} />
+                <SettingToggle label="Theme" description={appSettingsState ? "On" : "Off"} active={appSettingsState} onChange={setAppSettings} />
+                <SettingToggle label="Passwords" description={passwords ? "On" : "Off"} active={passwords} onChange={setPasswords} />
             </div>
         </div>
     );
 
-    const renderLockScreenView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="lock screen" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingItem label="Background" description="photo" />
-                <SettingItem label="Show artist on lock screen" description="on" />
-
-                <h3 className="wp-section-title">choose an app to show quick status</h3>
-                <SettingItem label="Position 1" description="Phone" />
-                <SettingItem label="Position 2" description="Messaging" />
-                <SettingItem label="Position 3" description="Mail" />
-                <SettingItem label="Position 4" description="Calendar" />
-                <SettingItem label="Position 5" description="none" />
-
-                <h3 className="wp-section-title">choose an app to show detailed status</h3>
-                <SettingItem label="Detailed status" description="Calendar" />
-            </div>
-        </div>
-    );
-
-    const renderFindPhoneView = () => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title="find my phone" onBack={() => setCurrentView('main')} />
-
-            <div className="wp-settings-list">
-                <SettingToggle
-                    label="Find my phone"
-                    description="locate, ring, erase"
-                    active={location}
-                    onChange={setLocation}
-                />
-            </div>
-
-            <p className="wp-settings-info">
-                When enabled, you can locate your phone at windowsphone.com, make it ring, lock it, or erase it remotely.
-            </p>
-        </div>
-    );
-
-    // Simple placeholder views for remaining items
-    const renderSimpleView = (title, settings = []) => (
-        <div className="wp-settings-subpage">
-            <SubPageHeader title={title} onBack={() => setCurrentView('main')} />
-            <div className="wp-settings-list">
-                {settings.map((s, i) => (
-                    <SettingItem key={i} label={s.label} description={s.description} />
+    // Generic simple view for implemented placeholders
+    const SimpleView = ({ title, items = [] }) => (
+        <div className="w10-subpage">
+            <PageHeader title={title} />
+            <div className="w10-group">
+                {items.map((item, i) => (
+                    item.type === 'toggle'
+                        ? <SettingToggle key={i} label={item.label} description={item.desc} active={item.val} onChange={item.set} />
+                        : <SettingItem key={i} label={item.label} description={item.desc} />
                 ))}
             </div>
         </div>
     );
 
-    const renderView = () => {
+    // Dynamic renderer
+    const renderContent = () => {
+        if (currentView === 'main') {
+            const filteredSettings = searchQuery
+                ? allSettings.filter(s =>
+                    s.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    s.category.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                : [];
+
+            if (searchQuery) {
+                return (
+                    <div className="w10-home">
+                        <div className="w10-home-header">Settings</div>
+                        <SearchBar />
+                        <div className="w10-search-results-list">
+                            {filteredSettings.length > 0 ? (
+                                filteredSettings.map(setting => (
+                                    <div key={setting.id} className="w10-category-item" onClick={() => navigateTo(setting.view)}>
+                                        <div className="w10-category-icon-small">
+                                            {categories.find(c => c.label === setting.category)?.icon() || <Icons.System />}
+                                        </div>
+                                        <div className="w10-category-text">
+                                            <div className="w10-cat-title">{setting.label}</div>
+                                            <div className="w10-cat-desc">{setting.category}</div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="w10-no-results">No results for "{searchQuery}"</div>
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="w10-home">
+                    <div className="w10-home-header">Settings</div>
+                    <SearchBar />
+                    <div className="w10-categories-list">
+                        {categories.map(cat => (
+                            <div key={cat.id} className="w10-category-item" onClick={() => navigateTo(`CAT:${cat.id}`)}>
+                                <div className="w10-category-icon">
+                                    <cat.icon />
+                                </div>
+                                <div className="w10-category-text">
+                                    <div className="w10-cat-title">{cat.label}</div>
+                                    <div className="w10-cat-desc">{cat.description}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Handle Category Views (CAT:Prefix)
+        if (currentView.startsWith('CAT:')) {
+            const catId = currentView.split(':')[1];
+            const catSettings = allSettings.filter(s => s.category === catId);
+
+            return (
+                <div className="w10-subpage">
+                    <PageHeader title={catId} />
+                    <div className="w10-group">
+                        {catSettings.map(s => (
+                            <SettingItem
+                                key={s.id}
+                                label={s.label}
+                                description={s.description}
+                                onClick={() => navigateTo(s.view)}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Handle Leaf Views
         switch (currentView) {
-            case 'sync': return renderSyncView();
             case 'theme': return renderThemeView();
-            case 'about': return renderAboutView();
             case 'wifi': return renderWifiView();
             case 'bluetooth': return renderBluetoothView();
-            case 'location': return renderLocationView();
-            case 'quiethours': return renderQuietHoursView();
             case 'battery': return renderBatteryView();
-            case 'accessibility': return renderAccessibilityView();
-            case 'accounts': return renderAccountsView();
-            case 'lockscreen': return renderLockScreenView();
-            case 'findphone': return renderFindPhoneView();
-            case 'sounds': return renderSimpleView('ringtones+sounds', [
-                { label: 'Ringer', description: 'on' },
-                { label: 'Vibrate', description: 'on' },
-                { label: 'Ringtone', description: 'Windows Phone' },
-                { label: 'Text tone', description: 'default' }
-            ]);
-            case 'airplane': return renderSimpleView('airplane mode', [
-                { label: 'Status', description: airplane ? 'on' : 'off' }
-            ]);
-            case 'cellular': return renderSimpleView('cellular', [
-                { label: 'Data connection', description: 'on' },
-                { label: 'Data roaming options', description: 'don\'t roam' },
-                { label: 'SIM security', description: 'off' }
-            ]);
-            case 'datetime': return renderSimpleView('date+time', [
-                { label: 'Set automatically', description: 'on' },
-                { label: 'Time zone', description: '(UTC+05:30) India Standard Time' },
-                { label: '24-hour clock', description: 'off' }
-            ]);
-            case 'brightness': return renderSimpleView('brightness', [
-                { label: 'Automatically adjust', description: 'on' },
-                { label: 'Level', description: 'medium' }
-            ]);
-            default: return renderMainView();
+            case 'about': return renderAboutView();
+            case 'sync': return renderSyncView();
+            case 'airplane': return <SimpleView title="Airplane Mode" items={[
+                { type: 'toggle', label: 'Airplane Mode', desc: airplane ? "On" : "Off", val: airplane, set: setAirplane }
+            ]} />;
+            case 'location': return <SimpleView title="Location" items={[
+                { type: 'toggle', label: 'Location service', desc: location ? "On" : "Off", val: location, set: setLocation }
+            ]} />;
+            case 'display': return <SimpleView title="Display" items={[
+                { label: 'Brightness level', desc: `${brightness}%` },
+                { type: 'toggle', label: 'Rotation lock', desc: autoRotate ? "On" : "Off", val: autoRotate, set: setAutoRotate }
+            ]} />;
+            case 'notifications': return <SimpleView title="Notifications" items={[
+                { label: 'Show notifications on lock screen', desc: 'On' },
+                { label: 'Show clear all button', desc: 'On' }
+            ]} />;
+            case 'accessibility': return <SimpleView title="Ease of Access" items={[
+                { type: 'toggle', label: 'High Contrast', desc: highContrast ? "On" : "Off", val: highContrast, set: setHighContrast },
+                { type: 'toggle', label: 'Screen Magnifier', desc: screenMagnifier ? "On" : "Off", val: screenMagnifier, set: setScreenMagnifier },
+                { label: 'Text size', desc: '100%' }
+            ]} />;
+            // Default fallthrough for views not explicitly built yet
+            default: return <SimpleView title="Settings" items={[{ label: 'Setting detail', desc: 'Not implemented yet' }]} />;
         }
     };
 
     return (
-        <AppShell title="settings" hideTitle={currentView === 'main'}>
-            {renderView()}
+        <AppShell title="settings" hideTitle={true}>
+            <div className="w10-settings-root">
+                {renderContent()}
+            </div>
         </AppShell>
     );
 }

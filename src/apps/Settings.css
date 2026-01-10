@@ -1,353 +1,319 @@
-/* Windows Phone 8.1 Authentic Settings Styles */
+/* Windows 10 Mobile Settings Styles */
 
-/* Hub Container */
-.wp-settings-hub {
+.w10-settings-root {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* Hub Tabs - Horizontal navigation like "system applications" */
-.wp-hub-tabs {
-    display: flex;
-    gap: 15px;
-    padding: 0;
-    margin-bottom: 20px;
-    flex-shrink: 0;
-}
-
-.wp-hub-tab {
-    font-size: clamp(36px, 10vw, 48px);
-    font-weight: 200;
-    color: var(--text-secondary);
-    text-transform: lowercase;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    letter-spacing: -1px;
-    white-space: nowrap;
-}
-
-.wp-hub-tab.active {
-    color: var(--text-color);
-}
-
-.wp-hub-tab:hover:not(.active) {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Hub Pages Container */
-.wp-hub-pages {
-    display: flex;
-    flex: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
-
-.wp-hub-pages::-webkit-scrollbar {
-    display: none;
-}
-
-/* Individual Hub Page */
-.wp-hub-page {
-    min-width: 100%;
-    flex-shrink: 0;
-    scroll-snap-align: start;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 20px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 15px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeIn 0.3s ease-out;
 }
 
-/* Settings List */
-.wp-settings-list {
-    display: flex;
-    flex-direction: column;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Individual Setting Item */
-.wp-setting-item {
-    display: flex;
-    flex-direction: column;
-    padding: 14px 0;
-    cursor: pointer;
-    transition: background 0.1s ease;
-    border-left: 0px solid transparent;
-    padding-left: 0;
-}
-
-.wp-setting-item:active {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 3px solid var(--accent-color);
-    padding-left: 10px;
-}
-
-/* Setting with toggle - horizontal layout */
-.wp-setting-with-toggle {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.wp-setting-with-toggle .wp-setting-info {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-/* Setting Label */
-.wp-setting-label {
-    font-size: clamp(20px, 5vw, 26px);
+/* Home View */
+.w10-home-header {
+    font-size: 24px;
     font-weight: 300;
-    color: var(--text-color);
-    text-transform: lowercase;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
+    margin-bottom: 10px;
 }
 
-/* Setting Description */
-.wp-setting-description {
-    font-size: clamp(13px, 3vw, 15px);
-    font-weight: 400;
-    color: var(--text-secondary);
-    margin-top: 2px;
-    text-transform: lowercase;
-}
-
-/* Subpage Styles */
-.wp-settings-subpage {
-    padding-right: 20px;
-}
-
-.wp-subpage-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 25px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.wp-subpage-header:hover {
-    opacity: 0.7;
-}
-
-.wp-subpage-header svg {
-    fill: var(--text-color);
-    flex-shrink: 0;
-}
-
-.wp-subpage-title {
-    font-size: clamp(36px, 10vw, 48px);
-    font-weight: 200;
-    color: var(--text-color);
-    text-transform: lowercase;
-    letter-spacing: -1px;
-}
-
-/* Section Title */
-.wp-section-title {
-    font-size: clamp(16px, 4vw, 18px);
-    font-weight: 400;
-    color: var(--accent-color);
-    text-transform: lowercase;
-    margin: 25px 0 10px;
-    padding-top: 10px;
-}
-
-/* Settings Intro Text */
-.wp-settings-intro {
-    font-size: clamp(14px, 3.5vw, 16px);
-    color: var(--text-color);
-    line-height: 1.5;
+/* Search Bar */
+.w10-search-container {
     margin-bottom: 15px;
 }
 
-/* Settings Link */
-.wp-settings-link {
-    font-size: clamp(14px, 3.5vw, 16px);
-    color: var(--accent-color);
-    text-decoration: underline;
-    margin-bottom: 25px;
-    display: inline-block;
+.w10-search-box {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    /* Dark search box */
+    border: 2px solid transparent;
+    height: 32px;
 }
 
-.wp-settings-link:hover {
-    color: var(--text-color);
+.w10-search-box:focus-within {
+    background-color: #fff;
+    /* Active search box becomes white */
+    border-color: var(--accent-color, #0078d7);
 }
 
-/* Settings Info Text */
-.wp-settings-info {
-    font-size: clamp(13px, 3vw, 14px);
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 2px solid var(--accent-color);
+.w10-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 0 10px;
+    font-size: 15px;
+    height: 100%;
+    outline: none;
 }
 
-/* Theme Picker */
+.w10-search-box:focus-within .w10-search-input {
+    color: #000;
+}
+
+.w10-search-icon {
+    padding: 0 10px;
+    color: #999;
+}
+
+.w10-search-box:focus-within .w10-search-icon {
+    color: #000;
+}
+
+/* Categories List */
+.w10-categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.w10-category-item {
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    /* padding: 5px 0; */
+}
+
+.w10-category-item:active {
+    opacity: 0.7;
+    transform: scale(0.99);
+}
+
+.w10-category-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: flex-start;
+    /* Align with top text roughly */
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.w10-category-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.w10-category-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.w10-cat-title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.w10-cat-desc {
+    font-size: 13px;
+    color: #999;
+    font-weight: 300;
+    margin-top: 2px;
+}
+
+/* Subpage & Navigation header */
+.w10-page-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.w10-back-button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    /* Touch target */
+    margin-left: -8px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.w10-back-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.w10-back-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.w10-page-title {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Settings Items / List in Subpage */
+.w10-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Section Header in Subpage */
+.w10-section-header {
+    font-size: 15px;
+    color: var(--accent-color, #0078d7);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.w10-setting-item {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.w10-setting-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 -15px;
+    padding: 10px 15px;
+}
+
+.w10-setting-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.w10-setting-with-toggle {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.w10-setting-label {
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.w10-setting-description {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.w10-description-text {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Theme Picker Reuse */
 .wp-theme-picker {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
     gap: 8px;
-    margin: 20px 0;
+    margin-bottom: 15px;
 }
 
 .wp-theme-color {
     aspect-ratio: 1;
     cursor: pointer;
-    transition: transform 0.15s ease, outline 0.15s ease;
-    outline: 3px solid transparent;
-}
-
-.wp-theme-color:hover {
-    transform: scale(1.1);
+    border: 2px solid transparent;
 }
 
 .wp-theme-color.active {
-    outline: 3px solid var(--text-color);
+    border-color: #fff;
 }
 
-/* Battery Display */
-.wp-battery-display {
+/* Battery View Specifics */
+.w10-battery-status {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 30px 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-.wp-battery-percent {
-    font-size: 72px;
+.w10-battery-percent {
+    font-size: 48px;
     font-weight: 200;
-    color: var(--text-color);
-    line-height: 1;
 }
 
-.wp-battery-time {
+.w10-battery-detail {
     font-size: 14px;
-    color: var(--text-secondary);
+    color: #999;
+}
+
+/* Credits */
+.w10-credits {
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.w10-credits h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.w10-credits p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.w10-links {
+    display: flex;
+    gap: 15px;
     margin-top: 10px;
 }
 
-/* Credits Section */
-.wp-credits-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.wp-credits-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    padding: 25px;
-    margin-top: 15px;
-}
-
-.wp-credits-intro {
+.w10-links a {
+    color: var(--accent-color, #0078d7);
+    text-decoration: none;
     font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
 }
 
-.wp-credits-developer {
-    text-align: center;
-    margin-bottom: 25px;
+.w10-links a:hover {
+    text-decoration: underline;
 }
 
-.wp-credits-developer h4 {
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--text-color);
-    margin: 0 0 5px;
-}
-
-.wp-credits-developer span {
-    font-size: 14px;
-    color: var(--accent-color);
-}
-
-.wp-credits-links {
+/* Search Results */
+.w10-search-results-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 15px;
 }
 
-.wp-credits-link {
+.w10-category-icon-small {
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 15px;
-    transition: all 0.15s ease;
+    justify-content: center;
+    color: #999;
 }
 
-.wp-credits-link:hover {
-    background: var(--accent-color);
+.w10-category-icon-small svg {
+    width: 20px;
+    height: 20px;
 }
 
-.wp-link-icon {
-    font-size: 18px;
-}
-
-.wp-credits-footer {
-    font-size: 13px;
-    color: var(--text-secondary);
+.w10-no-results {
+    color: #999;
+    font-style: italic;
+    margin-top: 20px;
     text-align: center;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 374px) {
-    .wp-hub-tab {
-        font-size: 28px;
-    }
-
-    .wp-subpage-title {
-        font-size: 28px;
-    }
-
-    .wp-setting-label {
-        font-size: 18px;
-    }
-}
-
-@media (min-width: 768px) {
-    .wp-hub-pages {
-        overflow-x: hidden;
-    }
-
-    .wp-hub-page {
-        min-width: 50%;
-    }
-
-    .wp-credits-links {
-        flex-direction: row;
-    }
-
-    .wp-credits-link {
-        flex: 1;
-        justify-content: center;
-    }
-}
-
-@media (min-width: 1024px) {
-    .wp-hub-page {
-        min-width: 50%;
-        max-width: 50%;
-    }
-
-    .wp-theme-picker {
-        grid-template-columns: repeat(10, 50px);
-    }
 }
