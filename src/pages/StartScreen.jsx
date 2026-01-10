@@ -4,14 +4,15 @@ import { Tile } from '../components/Tile';
 import { Icon } from '../components/Icons';
 
 const TILES = [
-    { id: 'phone', icon: 'phone', label: 'Phone', size: 'medium', color: '#00ABA9' },
-    { id: 'messages', icon: 'message', label: 'Messages', size: 'medium', color: '#1BA1E2', live: true, notification: 3 },
+    { id: 'phone', icon: 'phone', label: 'Phone', size: 'medium', color: '#00ABA9', route: '/phone' },
+    { id: 'messages', icon: 'message', label: 'Messages', size: 'medium', color: '#1BA1E2', live: true, notification: 3, route: '/messages' },
     { id: 'email', icon: 'email', label: 'Outlook Mail', size: 'wide', color: '#0050EF', live: true, notification: 12 },
     { id: 'calendar', icon: 'calendar', label: 'Calendar', size: 'small', color: '#A4C400', route: '/calendar' },
     { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', color: '#D80073', live: true, route: '/photos' },
     { id: 'camera', icon: 'camera', label: 'Camera', size: 'small', color: '#1a1a1a' },
     { id: 'settings', icon: 'settings', label: 'Settings', size: 'small', color: '#6D8764', route: '/settings' },
     { id: 'music', icon: 'music', label: 'Groove Music', size: 'medium', color: '#F0A30A', route: '/music' },
+    { id: 'youtube', icon: 'play', label: 'YouTube', size: 'small', color: '#FF0000', route: '/youtube' },
     { id: 'calculator', icon: 'calculator', label: 'Calculator', size: 'small', color: '#1BA1E2', route: '/calculator' },
     { id: 'weather', icon: 'weather', label: 'Weather', size: 'medium', color: '#0050EF', live: true, route: '/weather' },
     { id: 'clock', icon: 'alarm', label: 'Alarms & Clock', size: 'small', color: '#A4C400', route: '/clock' },
@@ -29,16 +30,17 @@ const APPS = [
     { name: 'Games', icon: 'games', route: null },
     { name: 'Groove Music', icon: 'music', route: '/music' },
     { name: 'Maps', icon: 'map', route: null },
-    { name: 'Messaging', icon: 'message', route: null },
+    { name: 'Messaging', icon: 'message', route: '/messages' },
     { name: 'Microsoft Edge', icon: 'browser', route: '/browser' },
     { name: 'OneNote', icon: 'notes', route: '/notes' },
     { name: 'Outlook Mail', icon: 'email', route: null },
     { name: 'People', icon: 'contacts', route: null },
-    { name: 'Phone', icon: 'phone', route: null },
+    { name: 'Phone', icon: 'phone', route: '/phone' },
     { name: 'Photos', icon: 'photo', route: '/photos' },
     { name: 'Settings', icon: 'settings', route: '/settings' },
     { name: 'Store', icon: 'store', route: null },
     { name: 'Weather', icon: 'weather', route: '/weather' },
+    { name: 'YouTube', icon: 'play', route: '/youtube' },
 ];
 
 export function StartScreen() {

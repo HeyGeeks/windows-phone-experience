@@ -1,0 +1,115 @@
+.phone-app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.phone-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-weight: 200;
+    padding: 10px;
+    text-transform: lowercase;
+}
+
+.phone-tab.active {
+    color: var(--text-color);
+}
+
+.keypad-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+.number-display {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 200;
+    min-height: 70px;
+    margin-bottom: 20px;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.keypad-btn {
+    background: transparent;
+    border: 2px solid transparent;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 28px;
+    transition: all 0.1s;
+}
+
+.keypad-btn:active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.call-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.call-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn {
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.delete-btn:disabled {
+    opacity: 0;
+}
+
+.history-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-type {
+    font-size: 12px;
+    color: var(--text-secondary);
+}

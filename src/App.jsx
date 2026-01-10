@@ -12,6 +12,9 @@ import { Photos } from './apps/Photos';
 import { Music } from './apps/Music';
 import { Settings } from './apps/Settings';
 import { Browser } from './apps/Browser';
+import { YouTube } from './apps/YouTube';
+import { Phone } from './apps/Phone';
+import { Messages } from './apps/Messages';
 import './styles/index.css';
 
 function App() {
@@ -35,6 +38,9 @@ function App() {
               <Route path="/music" element={<Music />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/browser" element={<Browser />} />
+              <Route path="/youtube" element={<YouTube />} />
+              <Route path="/phone" element={<Phone />} />
+              <Route path="/messages" element={<Messages />} />
             </Routes>
           </div>
           <BottomNav />
