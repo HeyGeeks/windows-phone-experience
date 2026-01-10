@@ -1,9 +1,61 @@
+.youtube-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.yt-search-bar {
+    height: 50px;
+    background: #1f1f1f;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.yt-search-bar input {
+    flex: 1;
+    height: 36px;
+    background: #333;
+    border: none;
+    padding: 0 15px;
+    color: white;
+    border-radius: 4px;
+    /* Slightly rounded */
+    font-size: 14px;
+}
+
+.yt-search-bar button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yt-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+.yt-loading,
+.yt-no-results {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+}
+
 .youtube-home {
     padding-bottom: 20px;
 }
 
 .yt-video-item {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     cursor: pointer;
 }
 
@@ -12,7 +64,7 @@
     width: 100%;
     aspect-ratio: 16/9;
     background: #2a2a2a;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .yt-thumbnail img {
@@ -27,21 +79,22 @@
     right: 8px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 2px 4px;
+    padding: 3px 6px;
     font-size: 12px;
     border-radius: 2px;
+    font-weight: 500;
 }
 
 .yt-info {
     display: flex;
     gap: 12px;
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .yt-avatar {
-    width: 36px;
-    height: 36px;
-    background: #555;
+    width: 40px;
+    height: 40px;
+    background: url('https://picsum.photos/seed/yt/50/50') center/cover;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -53,9 +106,10 @@
 }
 
 .yt-title {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.3;
+    color: var(--text-color);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -63,7 +117,7 @@
 }
 
 .yt-meta {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
 }
 
@@ -71,7 +125,7 @@
 .youtube-player-view {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: #0f0f0f;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -83,7 +137,16 @@
     align-items: center;
     padding: 0 10px;
     gap: 15px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #1f1f1f;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.yt-header-title {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 15px;
 }
 
 .yt-back-btn {
@@ -91,60 +154,56 @@
     border: none;
     color: white;
     padding: 8px;
+    cursor: pointer;
 }
 
 .yt-video-container {
     width: 100%;
     aspect-ratio: 16/9;
-    background: #111;
+    background: #000;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.yt-video-placeholder {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.5;
-}
-
-.yt-play-overlay {
-    position: absolute;
-    color: white;
-}
-
 .yt-video-details {
     padding: 15px;
+    flex: 1;
+    /* Allow scrolling if text is long */
+    overflow-y: auto;
 }
 
 .yt-video-details h1 {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
 .yt-stats {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
 }
 
 .yt-actions {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
-    border-top: 1px solid #333;
-    margin-top: 20px;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1f1f1f;
+    flex-shrink: 0;
 }
 
 .yt-actions button {
     background: transparent;
     border: none;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    cursor: pointer;
+    min-width: 60px;
 }
