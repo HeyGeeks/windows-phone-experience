@@ -1,0 +1,117 @@
+.notes-container {
+    color: var(--text-color);
+}
+
+.add-note-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent-color);
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.add-note-btn:hover {
+    filter: brightness(1.1);
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.note-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.note-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.note-title {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.note-date {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.delete-btn:hover {
+    color: #A20025;
+}
+
+.note-editor {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.note-textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    resize: none;
+    padding: 10px 0;
+}
+
+.note-textarea:focus {
+    outline: none;
+}
+
+.note-textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+.note-actions {
+    display: flex;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.note-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.note-btn.save {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+.note-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}

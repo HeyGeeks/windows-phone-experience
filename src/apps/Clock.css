@@ -1,0 +1,90 @@
+.clock-container {
+    text-align: center;
+}
+
+.clock-time {
+    font-size: 64px;
+    font-weight: 200;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.clock-separator {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.clock-seconds {
+    font-size: 32px;
+    color: var(--accent-color);
+    margin-left: 5px;
+}
+
+.clock-date {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--accent-color);
+    text-transform: lowercase;
+    text-align: left;
+    margin: 30px 0 15px;
+}
+
+.alarm-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.alarm-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.alarm-time {
+    font-size: 28px;
+    font-weight: 200;
+    color: var(--text-color);
+}
+
+.alarm-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.city {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.city-time {
+    font-size: 18px;
+    color: var(--accent-color);
+}
