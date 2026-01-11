@@ -1,9 +1,12 @@
 /* Windows Phone 8.1 Internet Explorer */
 .wp-browser {
-    height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
-    margin: -20px -12px 0;
+    background: var(--bg-color);
+    flex: 1;
+    margin: 0 -12px -20px;
+    min-height: 0;
 }
 
 .wp-browser-bar {
@@ -11,6 +14,7 @@
     gap: 8px;
     padding: 8px 12px;
     background: #1a1a1a;
+    flex-shrink: 0;
 }
 
 .wp-url-input {
@@ -22,6 +26,7 @@
     font-size: 14px;
     color: #000;
     outline: none;
+    min-width: 0;
 }
 
 .wp-url-input::placeholder {
@@ -38,12 +43,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .wp-browser-loading {
     height: 3px;
     background: var(--accent-color);
     animation: loading 1.5s infinite;
+    flex-shrink: 0;
 }
 
 @keyframes loading {
@@ -56,12 +63,14 @@
     flex: 1;
     background: white;
     overflow: hidden;
+    min-height: 0;
 }
 
 .wp-browser-iframe {
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
 }
 
 .wp-browser-nav {
@@ -69,6 +78,7 @@
     justify-content: space-around;
     padding: 8px;
     background: #1a1a1a;
+    flex-shrink: 0;
 }
 
 .wp-nav-btn {

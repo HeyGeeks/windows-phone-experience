@@ -5,6 +5,7 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    padding: 12px;
 }
 
 .wp-music-bg {
@@ -18,7 +19,7 @@
 }
 
 .wp-music-title {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 200;
     margin-bottom: 8px;
     color: var(--text-color);
@@ -28,14 +29,16 @@
 
 .wp-pivot-header {
     display: flex;
-    gap: 24px;
-    margin-bottom: 20px;
+    gap: 20px;
+    margin-bottom: 16px;
     position: relative;
     z-index: 1;
+    overflow-x: auto;
+    padding-bottom: 4px;
 }
 
 .wp-pivot {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 300;
     color: var(--text-secondary);
     background: none;
@@ -43,6 +46,8 @@
     padding: 0;
     cursor: pointer;
     text-transform: lowercase;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .wp-pivot.active {
@@ -147,14 +152,16 @@
     align-items: center;
     position: relative;
     z-index: 1;
-    padding-top: 20px;
+    padding: 16px 0;
+    overflow-y: auto;
 }
 
 .wp-np-art {
-    width: 240px;
-    height: 240px;
-    margin-bottom: 24px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
 }
 
 .wp-np-art img {
@@ -165,56 +172,68 @@
 
 .wp-np-info {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    padding: 0 12px;
+    width: 100%;
 }
 
 .wp-np-title {
     display: block;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .wp-np-artist {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--text-secondary);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .wp-np-progress {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    max-width: 300px;
-    margin-bottom: 24px;
+    max-width: 280px;
+    margin-bottom: 20px;
+    padding: 0 12px;
 }
 
 .wp-np-progress span {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-secondary);
-    min-width: 36px;
+    min-width: 32px;
 }
 
 .wp-np-bar {
     flex: 1;
     height: 4px;
     background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
 }
 
 .wp-np-fill {
     height: 100%;
     background: var(--accent-color);
+    border-radius: 2px;
 }
 
 .wp-np-controls {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 }
 
 .wp-np-btn {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     background: transparent;
     border: 2px solid white;
     border-radius: 50%;
@@ -231,8 +250,8 @@
 }
 
 .wp-np-play {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
 }
 
 .wp-np-empty {

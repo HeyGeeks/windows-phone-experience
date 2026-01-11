@@ -253,6 +253,16 @@
     color: var(--text-color);
 }
 
+.wp-about-credits {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--text-secondary);
+}
+
+.wp-about-credits span:last-child {
+    color: var(--accent-color);
+}
+
 /* Battery Display */
 .wp-battery-display {
     text-align: center;

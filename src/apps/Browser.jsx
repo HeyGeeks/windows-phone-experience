@@ -3,12 +3,10 @@ import { AppShell } from '../components/AppShell';
 import { Icon } from '../components/Icons';
 import './Browser.css';
 
-const DEFAULT_URL = 'https://www.bing.com';
+const DEFAULT_URL = 'http://heygeeks.in/';
 const FAVORITES = [
-    { name: 'bing', url: 'https://www.bing.com', icon: '🔍' },
-    { name: 'msn', url: 'https://www.msn.com', icon: '📰' },
-    { name: 'wikipedia', url: 'https://www.wikipedia.org', icon: '📚' },
-    { name: 'github', url: 'https://github.com', icon: '💻' },
+    { name: 'HeyGeeks', url: 'http://heygeeks.in/', icon: '🚀' },
+    { name: 'Windows Phone', url: 'https://en.wikipedia.org/wiki/Windows_Phone', icon: '📱' },
 ];
 
 export function Browser() {
@@ -16,7 +14,7 @@ export function Browser() {
     const [inputUrl, setInputUrl] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [showTabs, setShowTabs] = useState(false);
-    const [tabs, setTabs] = useState([{ id: 1, url: DEFAULT_URL, title: 'bing' }]);
+    const [tabs, setTabs] = useState([{ id: 1, url: DEFAULT_URL, title: 'HeyGeeks' }]);
     const [activeTab, setActiveTab] = useState(1);
     const iframeRef = useRef(null);
 
@@ -103,6 +101,9 @@ export function Browser() {
                     </button>
                     <button className="wp-nav-btn" onClick={() => setShowTabs(!showTabs)}>
                         <span className="wp-tab-count">{tabs.length}</span>
+                    </button>
+                    <button className="wp-nav-btn" onClick={() => navigate('https://www.google.com')}>
+                        <Icon name="search" size={24} />
                     </button>
                     <button className="wp-nav-btn">
                         <Icon name="more" size={24} />

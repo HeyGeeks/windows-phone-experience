@@ -5,10 +5,6 @@ import './Games.css';
 
 const GAMES = [
     { id: 1, name: 'Tic Tac Toe', icon: '⭕', color: '#0078D7', achievements: 5, gamerscore: 100, playable: true },
-    { id: 2, name: 'Wordament', icon: '📝', color: '#107C10', achievements: 12, gamerscore: 200 },
-    { id: 3, name: 'Minesweeper', icon: '💣', color: '#5C2D91', achievements: 8, gamerscore: 150 },
-    { id: 4, name: 'Solitaire', icon: '🃏', color: '#D83B01', achievements: 15, gamerscore: 300 },
-    { id: 5, name: 'Mahjong', icon: '🀄', color: '#825A2C', achievements: 10, gamerscore: 180 },
 ];
 
 // Tic Tac Toe Component

@@ -27,6 +27,7 @@ export function WhatsApp() {
     const [messages, setMessages] = useState(CHAT_MESSAGES);
     const [inputText, setInputText] = useState('');
     const [inCall, setInCall] = useState(null);
+    const [showAttach, setShowAttach] = useState(false);
 
     const sendMessage = () => {
         if (!inputText.trim() || !activeChat) return;
@@ -128,24 +129,29 @@ export function WhatsApp() {
                         </div>
                     ))}
                 </div>
-                <div className="wa-attach-bar">
-                    <span className="wa-attach-label">ATTACH MEDIA</span>
-                    <div className="wa-attach-grid">
-                        <button className="wa-attach-btn"><Icon name="camera" size={24} /><span>Camera</span></button>
-                        <button className="wa-attach-btn"><Icon name="video" size={24} /><span>Camcorder</span></button>
-                        <button className="wa-attach-btn"><Icon name="contacts" size={24} /><span>Contact</span></button>
-                        <button className="wa-attach-btn"><Icon name="photo" size={24} /><span>Album</span></button>
-                        <button className="wa-attach-btn"><Icon name="music" size={24} /><span>Audio</span></button>
-                        <button className="wa-attach-btn"><Icon name="map" size={24} /><span>Location</span></button>
+                {showAttach && (
+                    <div className="wa-attach-bar">
+                        <span className="wa-attach-label">ATTACH MEDIA</span>
+                        <div className="wa-attach-grid">
+                            <button className="wa-attach-btn"><Icon name="camera" size={24} /><span>Camera</span></button>
+                            <button className="wa-attach-btn"><Icon name="video" size={24} /><span>Camcorder</span></button>
+                            <button className="wa-attach-btn"><Icon name="contacts" size={24} /><span>Contact</span></button>
+                            <button className="wa-attach-btn"><Icon name="photo" size={24} /><span>Album</span></button>
+                            <button className="wa-attach-btn"><Icon name="music" size={24} /><span>Audio</span></button>
+                            <button className="wa-attach-btn"><Icon name="map" size={24} /><span>Location</span></button>
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className="wa-input-bar">
+                    <button className="wa-attach-toggle" onClick={() => setShowAttach(!showAttach)}>
+                        <Icon name="attach" size={20} />
+                    </button>
                     <input
                         type="text"
                         placeholder="Type a message"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                     />
                     <button className="wa-send" onClick={sendMessage}>
                         <Icon name="forward" size={20} />

@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext({
     accentColor: '#1BA1E2',
     setAccentColor: () => { },
-    theme: 'dark',
+    theme: 'light',
     setTheme: () => { }
 });
 
@@ -36,7 +36,7 @@ export function ThemeProvider({ children }) {
         return localStorage.getItem('wp81_accent') || '#1BA1E2';
     });
     const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('wp81_theme') || 'dark';
+        return localStorage.getItem('wp81_theme') || 'light';
     });
 
     useEffect(() => {

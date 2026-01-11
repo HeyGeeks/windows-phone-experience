@@ -154,6 +154,7 @@ export function Settings() {
                 <div className="wp-about-item"><span>hardware revision</span><span>1.0.0.0</span></div>
                 <div className="wp-about-item"><span>total storage</span><span>32 GB</span></div>
                 <div className="wp-about-item"><span>available storage</span><span>24.5 GB</span></div>
+                <div className="wp-about-item wp-about-credits"><span>created by</span><span>Mohit Yadav - HeyGeeks</span></div>
             </div>
         </div>
     );
