@@ -4,16 +4,16 @@ import { Icon } from '../components/Icons';
 import './Phone.css';
 
 const CALL_HISTORY = [
-    { id: 1, name: 'mom', number: '+1 555-0101', time: 'yesterday', type: 'incoming', duration: '5:23' },
-    { id: 2, name: 'work', number: '+1 555-0102', time: 'monday', type: 'outgoing', duration: '12:45' },
-    { id: 3, name: 'unknown', number: '+1 555-0103', time: 'sunday', type: 'missed', duration: '' },
-    { id: 4, name: 'alex', number: '+1 555-0104', time: 'saturday', type: 'incoming', duration: '2:10' },
+    { id: 1, name: 'Mom', number: '+1 555-0101', time: 'Yesterday', type: 'incoming', duration: '5:23' },
+    { id: 2, name: 'Work', number: '+1 555-0102', time: 'Monday', type: 'outgoing', duration: '12:45' },
+    { id: 3, name: 'Unknown', number: '+1 555-0103', time: 'Sunday', type: 'missed', duration: '' },
+    { id: 4, name: 'Alex', number: '+1 555-0104', time: 'Saturday', type: 'incoming', duration: '2:10' },
 ];
 
 const SPEED_DIAL = [
-    { id: 1, name: 'mom', number: '+1 555-0101', photo: 'https://i.pravatar.cc/100?img=1' },
-    { id: 2, name: 'work', number: '+1 555-0102', photo: 'https://i.pravatar.cc/100?img=2' },
-    { id: 3, name: 'alex', number: '+1 555-0104', photo: 'https://i.pravatar.cc/100?img=3' },
+    { id: 1, name: 'Mom', number: '+1 555-0101', photo: 'https://i.pravatar.cc/100?img=1' },
+    { id: 2, name: 'Work', number: '+1 555-0102', photo: 'https://i.pravatar.cc/100?img=2' },
+    { id: 3, name: 'Alex', number: '+1 555-0104', photo: 'https://i.pravatar.cc/100?img=3' },
 ];
 
 export function Phone() {
@@ -50,7 +50,7 @@ export function Phone() {
     return (
         <AppShell title="phone" hideTitle>
             <div className="wp-phone">
-                <h1 className="wp-phone-title">phone</h1>
+                <h1 className="wp-phone-title">Phone</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'history' ? 'active' : ''}`} onClick={() => setPivot('history')}>history</button>
                     <button className={`wp-pivot ${pivot === 'speed' ? 'active' : ''}`} onClick={() => setPivot('speed')}>speed dial</button>

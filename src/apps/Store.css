@@ -7,7 +7,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-pivot-header {
@@ -41,7 +41,6 @@
     font-weight: 400;
     color: var(--accent-color);
     margin-bottom: 16px;
-    text-transform: lowercase;
 }
 
 /* Featured Apps */
@@ -82,7 +81,7 @@
 .wp-app-title {
     font-size: 14px;
     text-align: center;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Categories */
@@ -110,7 +109,7 @@
 
 .wp-category-name {
     font-size: 18px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Games List */
@@ -177,7 +176,6 @@
 .wp-app-category {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
     margin-bottom: 8px;
 }
 
@@ -193,7 +191,6 @@
     border: none;
     color: white;
     font-size: 18px;
-    text-transform: lowercase;
     cursor: pointer;
     margin-bottom: 24px;
 }
@@ -211,7 +208,6 @@
     font-weight: 400;
     color: var(--accent-color);
     margin-bottom: 8px;
-    text-transform: lowercase;
 }
 
 .wp-app-description p {
@@ -225,7 +221,6 @@
     font-weight: 400;
     color: var(--accent-color);
     margin-bottom: 12px;
-    text-transform: lowercase;
 }
 
 .wp-screenshots-scroll {

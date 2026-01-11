@@ -114,7 +114,7 @@
 .wp-tabs-header span {
     font-size: 24px;
     font-weight: 300;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-tabs-header button {
@@ -165,7 +165,7 @@
 
 .wp-tab-title {
     font-size: 12px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Favorites */
@@ -174,7 +174,6 @@
     font-weight: 300;
     color: var(--accent-color);
     margin-bottom: 16px;
-    text-transform: lowercase;
 }
 
 .wp-favorites-grid {
@@ -207,5 +206,5 @@
 
 .wp-favorite-name {
     font-size: 12px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }

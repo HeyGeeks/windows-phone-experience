@@ -9,7 +9,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 16px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-files-tabs {
@@ -104,5 +104,5 @@
 
 .wp-files-action span {
     font-size: 12px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }

@@ -67,7 +67,7 @@ export function People() {
     return (
         <AppShell title="people" hideTitle>
             <div className="wp-people">
-                <h1 className="wp-people-title">people</h1>
+                <h1 className="wp-people-title">People</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'all' ? 'active' : ''}`} onClick={() => setPivot('all')}>all</button>
                     <button className={`wp-pivot ${pivot === 'recent' ? 'active' : ''}`} onClick={() => setPivot('recent')}>recent</button>

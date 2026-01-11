@@ -29,7 +29,7 @@ export function Files() {
     return (
         <AppShell title="files" hideTitle>
             <div className="wp-files">
-                <h1 className="wp-files-title">files</h1>
+                <h1 className="wp-files-title">Files</h1>
 
                 <div className="wp-files-tabs">
                     <button

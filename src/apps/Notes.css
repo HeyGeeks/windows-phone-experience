@@ -7,7 +7,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 20px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-notes-grid {
@@ -38,14 +38,14 @@
 
 .wp-add-note span {
     font-size: 14px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-note-card-title {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-note-card-preview {
@@ -92,7 +92,6 @@
     font-weight: 200;
     color: var(--text-color);
     outline: none;
-    text-transform: lowercase;
 }
 
 .wp-note-title-input::placeholder {

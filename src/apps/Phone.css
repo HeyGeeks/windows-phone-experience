@@ -9,7 +9,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-pivot-header {
@@ -77,13 +77,12 @@
 
 .wp-history-name {
     font-size: 20px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-history-meta {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-history-duration {
@@ -119,7 +118,7 @@
 
 .wp-speed-name {
     font-size: 14px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Keypad */
@@ -241,14 +240,13 @@
     font-size: 18px;
     color: var(--text-secondary);
     margin-bottom: 16px;
-    text-transform: lowercase;
 }
 
 .wp-calling-name {
     font-size: 36px;
     font-weight: 300;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-calling-number {

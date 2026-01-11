@@ -73,7 +73,7 @@ export function Photos() {
     return (
         <AppShell title="photos" hideTitle>
             <div className="wp-photos">
-                <h1 className="wp-photos-title">photos</h1>
+                <h1 className="wp-photos-title">Photos</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`} onClick={() => setPivot('collection')}>collection</button>
                     <button className={`wp-pivot ${pivot === 'albums' ? 'active' : ''}`} onClick={() => setPivot('albums')}>albums</button>

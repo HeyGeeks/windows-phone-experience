@@ -84,7 +84,7 @@ export function Notes() {
     return (
         <AppShell title="onenote" hideTitle>
             <div className="wp-notes">
-                <h1 className="wp-notes-title">onenote</h1>
+                <h1 className="wp-notes-title">OneNote</h1>
                 <div className="wp-notes-grid">
                     <div className="wp-note-card wp-add-note" onClick={createNote}>
                         <Icon name="add" size={32} />

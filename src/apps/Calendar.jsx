@@ -53,7 +53,7 @@ export function Calendar() {
     return (
         <AppShell title="calendar" hideTitle>
             <div className="wp-calendar">
-                <h1 className="wp-calendar-title">calendar</h1>
+                <h1 className="wp-calendar-title">Calendar</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'day' ? 'active' : ''}`} onClick={() => setPivot('day')}>day</button>
                     <button className={`wp-pivot ${pivot === 'month' ? 'active' : ''}`} onClick={() => setPivot('month')}>month</button>

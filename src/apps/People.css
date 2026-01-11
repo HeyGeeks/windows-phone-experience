@@ -7,7 +7,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-pivot-header {
@@ -127,7 +127,7 @@
 .wp-contact-name {
     font-size: 32px;
     font-weight: 300;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-contact-actions {
@@ -150,7 +150,7 @@
 
 .wp-contact-action span {
     font-size: 14px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-contact-info-list {
@@ -178,7 +178,6 @@
 .wp-contact-info-label {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-contact-info-value {

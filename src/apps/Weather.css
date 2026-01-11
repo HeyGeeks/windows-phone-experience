@@ -10,14 +10,13 @@
 .wp-weather-location {
     font-size: 48px;
     font-weight: 200;
-    text-transform: lowercase;
+    color: var(--text-color);
     margin-bottom: 4px;
 }
 
 .wp-weather-date {
     font-size: 16px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-weather-current {
@@ -34,7 +33,6 @@
 .wp-weather-condition {
     font-size: 24px;
     color: var(--text-secondary);
-    text-transform: lowercase;
     margin: 8px 0;
 }
 
@@ -71,7 +69,6 @@
 .wp-detail-label {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-detail-value {
@@ -88,7 +85,6 @@
     font-weight: 400;
     color: var(--accent-color);
     margin-bottom: 16px;
-    text-transform: lowercase;
 }
 
 /* Hourly */
@@ -115,7 +111,6 @@
 .wp-hourly-time {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-hourly-icon {
@@ -142,7 +137,7 @@
 .wp-daily-day {
     flex: 1;
     font-size: 18px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-daily-icon {

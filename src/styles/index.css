@@ -56,8 +56,13 @@
     /* Core Colors - WP8.1 Dark Theme */
     --bg-color: #000000;
     --text-color: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.55);
-    --text-disabled: rgba(255, 255, 255, 0.3);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-disabled: rgba(255, 255, 255, 0.4);
+    
+    /* Light Theme Colors */
+    --bg-color-light: #FFFFFF;
+    --text-color-light: #000000;
+    --text-secondary-light: rgba(0, 0, 0, 0.6);
 
     /* Grid System - WP8.1 uses 12px base unit */
     --tile-gap: 12px;
@@ -144,14 +149,13 @@ body {
     min-height: 0;
 }
 
-/* Page Title - WP8.1 lowercase style */
+/* Page Title - WP8.1 style */
 .page-title {
     font-size: 46px;
     font-weight: var(--font-semilight);
     color: var(--text-color);
     margin: 8px 0 12px 0;
     letter-spacing: -0.5px;
-    text-transform: lowercase;
     line-height: 1.1;
 }
 
@@ -253,7 +257,6 @@ body {
 .tile-label {
     font-size: 14px;
     font-weight: var(--font-regular);
-    text-transform: lowercase;
     position: relative;
     z-index: 1;
     line-height: 1.2;
@@ -419,7 +422,6 @@ body {
     font-size: 26px;
     font-weight: var(--font-semilight);
     color: var(--text-color);
-    text-transform: lowercase;
 }
 
 /* App Shell - WP8.1 Turnstile Animation */

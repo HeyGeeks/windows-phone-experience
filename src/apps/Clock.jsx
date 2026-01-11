@@ -60,7 +60,7 @@ export function Clock() {
     return (
         <AppShell title="alarms" hideTitle>
             <div className="wp-clock">
-                <h1 className="wp-clock-title">alarms</h1>
+                <h1 className="wp-clock-title">Alarms</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'alarm' ? 'active' : ''}`} onClick={() => setPivot('alarm')}>alarm</button>
                     <button className={`wp-pivot ${pivot === 'world' ? 'active' : ''}`} onClick={() => setPivot('world')}>world clock</button>

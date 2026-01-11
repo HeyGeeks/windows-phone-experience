@@ -10,7 +10,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 20px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-threads-list {
@@ -67,7 +67,7 @@
 
 .wp-thread-name {
     font-size: 18px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-thread-name.unread {
@@ -77,7 +77,6 @@
 .wp-thread-time {
     font-size: 12px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-thread-preview {
@@ -152,7 +151,7 @@
 
 .wp-chat-name {
     font-size: 18px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-chat-messages {

@@ -4,10 +4,10 @@ import { Icon } from '../components/Icons';
 import './Messages.css';
 
 const CONVERSATIONS = [
-    { id: 1, name: 'microsoft', message: 'welcome to your new windows phone!', time: '10:00 am', unread: true, photo: null },
-    { id: 2, name: 'mom', message: 'call me when you can.', time: 'yesterday', unread: false, photo: 'https://i.pravatar.cc/100?img=1' },
-    { id: 3, name: 'alex', message: 'see you tomorrow!', time: 'monday', unread: false, photo: 'https://i.pravatar.cc/100?img=3' },
-    { id: 4, name: 'work group', message: 'meeting at 3pm', time: 'sunday', unread: true, photo: null },
+    { id: 1, name: 'Microsoft', message: 'Welcome to your new Windows Phone!', time: '10:00 AM', unread: true, photo: null },
+    { id: 2, name: 'Mom', message: 'Call me when you can.', time: 'Yesterday', unread: false, photo: 'https://i.pravatar.cc/100?img=1' },
+    { id: 3, name: 'Alex', message: 'See you tomorrow!', time: 'Monday', unread: false, photo: 'https://i.pravatar.cc/100?img=3' },
+    { id: 4, name: 'Work Group', message: 'Meeting at 3pm', time: 'Sunday', unread: true, photo: null },
 ];
 
 export function Messages() {
@@ -70,7 +70,7 @@ export function Messages() {
     return (
         <AppShell title="messaging" hideTitle>
             <div className="wp-messages">
-                <h1 className="wp-messages-title">messaging</h1>
+                <h1 className="wp-messages-title">Messaging</h1>
                 <div className="wp-threads-list">
                     {CONVERSATIONS.map(conv => (
                         <div key={conv.id} className="wp-thread-item" onClick={() => setActiveChat(conv)}>

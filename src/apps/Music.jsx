@@ -50,7 +50,7 @@ export function Music() {
         <AppShell title="music + videos" hideTitle>
             <div className="wp-music">
                 {currentSong && <div className="wp-music-bg" style={{ backgroundImage: `url(${currentSong.cover})` }} />}
-                <h1 className="wp-music-title">music + videos</h1>
+                <h1 className="wp-music-title">Music + Videos</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`} onClick={() => setPivot('collection')}>collection</button>
                     <button className={`wp-pivot ${pivot === 'now' ? 'active' : ''}`} onClick={() => setPivot('now')}>now playing</button>

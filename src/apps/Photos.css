@@ -7,7 +7,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-pivot-header {
@@ -85,7 +85,7 @@
 
 .wp-album-name {
     font-size: 20px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-album-count {
@@ -99,7 +99,6 @@
     font-weight: 300;
     color: var(--accent-color);
     margin-bottom: 12px;
-    text-transform: lowercase;
 }
 
 /* Photo Viewer */

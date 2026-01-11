@@ -61,7 +61,7 @@ export function Store() {
     return (
         <AppShell title="store" hideTitle>
             <div className="wp-store">
-                <h1 className="wp-store-title">store</h1>
+                <h1 className="wp-store-title">Store</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'apps' ? 'active' : ''}`} onClick={() => setPivot('apps')}>apps</button>
                     <button className={`wp-pivot ${pivot === 'games' ? 'active' : ''}`} onClick={() => setPivot('games')}>games</button>

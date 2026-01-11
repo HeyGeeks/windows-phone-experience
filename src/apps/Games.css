@@ -7,7 +7,7 @@
     font-size: 48px;
     font-weight: 200;
     margin-bottom: 8px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-pivot-header {
@@ -58,7 +58,7 @@
 
 .wp-game-tile-name {
     font-size: 16px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Xbox Profile */
@@ -118,7 +118,7 @@
 
 .wp-xbox-item span {
     font-size: 18px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Spotlight */
@@ -185,7 +185,7 @@
 .wp-game-name {
     font-size: 32px;
     font-weight: 300;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-play-btn {
@@ -221,7 +221,6 @@
 .wp-stat-label {
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-achievements-section h3 {
@@ -229,7 +228,6 @@
     font-weight: 400;
     color: var(--accent-color);
     margin-bottom: 16px;
-    text-transform: lowercase;
 }
 
 .wp-achievement-item {
@@ -268,4 +266,113 @@
 .wp-achievement-score {
     font-size: 14px;
     color: var(--accent-color);
+}
+
+/* Tic Tac Toe Game */
+.ttt-game {
+    padding-bottom: 40px;
+}
+
+.ttt-title {
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.ttt-scores {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.ttt-score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ttt-score-label {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.ttt-score-value {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+.ttt-status {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-bottom: 24px;
+}
+
+.ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 300px;
+    margin: 0 auto 32px;
+}
+
+.ttt-cell {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.ttt-cell:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.ttt-cell:disabled {
+    cursor: default;
+}
+
+.ttt-cell.winning {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.ttt-mark {
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.ttt-mark.x {
+    color: #E51400;
+}
+
+.ttt-mark.o {
+    color: #0078D7;
+}
+
+.ttt-play-again {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 16px;
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.ttt-play-again:active {
+    opacity: 0.8;
 }

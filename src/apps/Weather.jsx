@@ -26,7 +26,7 @@ const WEATHER_DATA = {
 };
 
 export function Weather() {
-    const [location] = useState('san francisco');
+    const [location] = useState('San Francisco');
 
     return (
         <AppShell title="weather" hideTitle>

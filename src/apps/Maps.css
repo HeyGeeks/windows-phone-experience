@@ -78,7 +78,6 @@
     transform: translateX(-50%);
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-maps-bar {
@@ -106,7 +105,7 @@
 
 .wp-maps-btn span {
     font-size: 12px;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 /* Directions Panel */
@@ -137,7 +136,7 @@
 .wp-directions-header span {
     font-size: 20px;
     font-weight: 300;
-    text-transform: lowercase;
+    color: var(--text-color);
 }
 
 .wp-directions-inputs {
@@ -157,7 +156,6 @@
     width: 40px;
     font-size: 14px;
     color: var(--text-secondary);
-    text-transform: lowercase;
 }
 
 .wp-direction-input input {

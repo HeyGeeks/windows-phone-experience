@@ -49,11 +49,13 @@ export function ThemeProvider({ children }) {
         if (theme === 'light') {
             document.documentElement.style.setProperty('--bg-color', '#FFFFFF');
             document.documentElement.style.setProperty('--text-color', '#000000');
-            document.documentElement.style.setProperty('--text-secondary', 'rgba(0, 0, 0, 0.5)');
+            document.documentElement.style.setProperty('--text-secondary', 'rgba(0, 0, 0, 0.6)');
+            document.documentElement.style.setProperty('--text-disabled', 'rgba(0, 0, 0, 0.4)');
         } else {
             document.documentElement.style.setProperty('--bg-color', '#000000');
             document.documentElement.style.setProperty('--text-color', '#FFFFFF');
-            document.documentElement.style.setProperty('--text-secondary', 'rgba(255, 255, 255, 0.5)');
+            document.documentElement.style.setProperty('--text-secondary', 'rgba(255, 255, 255, 0.7)');
+            document.documentElement.style.setProperty('--text-disabled', 'rgba(255, 255, 255, 0.4)');
         }
     }, [theme]);
 

@@ -8,6 +8,7 @@ const TILES = [
     { id: 'phone', icon: 'phone', label: 'Phone', size: 'medium', route: '/phone' },
     { id: 'people', icon: 'people', label: 'People', size: 'medium', route: '/people' },
     { id: 'messages', icon: 'message', label: 'Messaging', size: 'medium', live: true, notification: 3, route: '/messages' },
+    { id: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', size: 'medium', color: '#25D366', route: '/whatsapp' },
     { id: 'email', icon: 'email', label: 'Outlook', size: 'wide', live: true, notification: 12 },
     { id: 'calendar', icon: 'calendar', label: 'Calendar', size: 'small', route: '/calendar' },
     { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', live: true, route: '/photos' },
@@ -20,7 +21,7 @@ const TILES = [
     { id: 'weather', icon: 'weather', label: 'Weather', size: 'medium', live: true, route: '/weather' },
     { id: 'clock', icon: 'alarm', label: 'Alarms', size: 'small', route: '/clock' },
     { id: 'notes', icon: 'notes', label: 'OneNote', size: 'small', route: '/notes' },
-    { id: 'browser', icon: 'browser', label: 'Internet Explorer', size: 'medium', route: '/browser' },
+    { id: 'browser', icon: 'browser', label: 'IE', size: 'medium', route: '/browser' },
     { id: 'maps', icon: 'map', label: 'Maps', size: 'small', route: '/maps' },
     { id: 'wallet', icon: 'wallet', label: 'Wallet', size: 'small' },
 ];
@@ -44,6 +45,7 @@ const APPS = [
     { name: 'Settings', icon: 'settings', route: '/settings' },
     { name: 'Store', icon: 'store', route: '/store' },
     { name: 'Weather', icon: 'weather', route: '/weather' },
+    { name: 'WhatsApp', icon: 'whatsapp', route: '/whatsapp' },
 ];
 
 export function StartScreen() {

@@ -24,6 +24,7 @@ import { Store } from './apps/Store';
 import { Games } from './apps/Games';
 import { Maps } from './apps/Maps';
 import { Files } from './apps/Files';
+import { WhatsApp } from './apps/WhatsApp';
 import './styles/index.css';
 
 function AppContent() {
@@ -51,22 +52,23 @@ function AppContent() {
 
     const getAppData = (name) => {
         const apps = {
-            messages: { id: 'messages', name: 'messaging', icon: 'message', color: '#1BA1E2', preview: 'Recent conversations' },
-            browser: { id: 'browser', name: 'internet explorer', icon: 'browser', color: '#1BA1E2', preview: 'Web browsing' },
-            photos: { id: 'photos', name: 'photos', icon: 'photo', color: '#1BA1E2', preview: 'Camera Roll' },
-            settings: { id: 'settings', name: 'settings', icon: 'settings', color: '#1BA1E2', preview: 'system' },
-            calculator: { id: 'calculator', name: 'calculator', icon: 'calculator', color: '#1BA1E2', preview: '0' },
-            clock: { id: 'clock', name: 'alarms', icon: 'alarm', color: '#1BA1E2', preview: 'Alarms' },
-            weather: { id: 'weather', name: 'weather', icon: 'weather', color: '#1BA1E2', preview: 'Current conditions' },
-            calendar: { id: 'calendar', name: 'calendar', icon: 'calendar', color: '#1BA1E2', preview: 'Events' },
-            notes: { id: 'notes', name: 'onenote', icon: 'notes', color: '#1BA1E2', preview: 'Notes' },
-            music: { id: 'music', name: 'music + videos', icon: 'music', color: '#1BA1E2', preview: 'Now playing' },
-            phone: { id: 'phone', name: 'phone', icon: 'phone', color: '#1BA1E2', preview: 'Calls' },
-            people: { id: 'people', name: 'people', icon: 'people', color: '#1BA1E2', preview: 'Contacts' },
-            store: { id: 'store', name: 'store', icon: 'store', color: '#1BA1E2', preview: 'Apps' },
-            games: { id: 'games', name: 'games', icon: 'games', color: '#1BA1E2', preview: 'Xbox' },
-            maps: { id: 'maps', name: 'maps', icon: 'map', color: '#1BA1E2', preview: 'Navigation' },
-            files: { id: 'files', name: 'files', icon: 'folder', color: '#1BA1E2', preview: 'File manager' },
+            messages: { id: 'messages', name: 'Messaging', icon: 'message', color: '#1BA1E2', preview: 'Recent conversations' },
+            browser: { id: 'browser', name: 'Internet Explorer', icon: 'browser', color: '#1BA1E2', preview: 'Web browsing' },
+            photos: { id: 'photos', name: 'Photos', icon: 'photo', color: '#1BA1E2', preview: 'Camera Roll' },
+            settings: { id: 'settings', name: 'Settings', icon: 'settings', color: '#1BA1E2', preview: 'System' },
+            calculator: { id: 'calculator', name: 'Calculator', icon: 'calculator', color: '#1BA1E2', preview: '0' },
+            clock: { id: 'clock', name: 'Alarms', icon: 'alarm', color: '#1BA1E2', preview: 'Alarms' },
+            weather: { id: 'weather', name: 'Weather', icon: 'weather', color: '#1BA1E2', preview: 'Current conditions' },
+            calendar: { id: 'calendar', name: 'Calendar', icon: 'calendar', color: '#1BA1E2', preview: 'Events' },
+            notes: { id: 'notes', name: 'OneNote', icon: 'notes', color: '#1BA1E2', preview: 'Notes' },
+            music: { id: 'music', name: 'Music + Videos', icon: 'music', color: '#1BA1E2', preview: 'Now playing' },
+            phone: { id: 'phone', name: 'Phone', icon: 'phone', color: '#1BA1E2', preview: 'Calls' },
+            people: { id: 'people', name: 'People', icon: 'people', color: '#1BA1E2', preview: 'Contacts' },
+            store: { id: 'store', name: 'Store', icon: 'store', color: '#1BA1E2', preview: 'Apps' },
+            games: { id: 'games', name: 'Games', icon: 'games', color: '#1BA1E2', preview: 'Xbox' },
+            maps: { id: 'maps', name: 'Maps', icon: 'map', color: '#1BA1E2', preview: 'Navigation' },
+            files: { id: 'files', name: 'Files', icon: 'folder', color: '#1BA1E2', preview: 'File manager' },
+            whatsapp: { id: 'whatsapp', name: 'WhatsApp', icon: 'message', color: '#25D366', preview: 'Messages' },
         };
         return apps[name];
     };
@@ -141,6 +143,7 @@ function AppContent() {
                     <Route path="/games" element={<Games />} />
                     <Route path="/maps" element={<Maps />} />
                     <Route path="/files" element={<Files />} />
+                    <Route path="/whatsapp" element={<WhatsApp />} />
                 </Routes>
             </div>
             <BottomNav onRecentApps={() => setIsRecentAppsOpen(true)} />
