@@ -7,37 +7,64 @@ import './Settings.css';
 
 export function Settings() {
     const { accentColor, setAccentColor, theme, setTheme } = useTheme();
+    const [activeTab, setActiveTab] = useState('system');
     const [view, setView] = useState('main');
     const [wifi, setWifi] = useState(true);
     const [bluetooth, setBluetooth] = useState(false);
     const [airplane, setAirplane] = useState(false);
     const [location, setLocation] = useState(true);
-    const [brightness, setBrightness] = useState(70);
 
-    const settingsItems = [
-        { id: 'wifi', icon: 'wifi', label: 'wi-fi', desc: wifi ? 'connected' : 'off' },
-        { id: 'bluetooth', icon: 'bluetooth', label: 'bluetooth', desc: bluetooth ? 'on' : 'off' },
-        { id: 'airplane', icon: 'wifi', label: 'airplane mode', desc: airplane ? 'on' : 'off' },
-        { id: 'cellular', icon: 'wifi', label: 'cellular', desc: 'data connection' },
-        { id: 'theme', icon: 'settings', label: 'theme', desc: 'background, accent colour' },
-        { id: 'lock', icon: 'lock', label: 'lock screen', desc: 'notifications, background' },
-        { id: 'location', icon: 'location', label: 'location', desc: location ? 'on' : 'off' },
-        { id: 'battery', icon: 'battery', label: 'battery saver', desc: '78% remaining' },
-        { id: 'storage', icon: 'folder', label: 'storage sense', desc: 'phone, sd card' },
-        { id: 'about', icon: 'phone', label: 'about', desc: 'device info' },
+    const systemSettings = [
+        { id: 'actioncenter', label: 'action centre', desc: 'manage action centre' },
+        { id: 'wifi', label: 'WiFi', desc: wifi ? 'mtwifi, WiFi Sense turned on' : 'off' },
+        { id: 'airplane', label: 'flight mode', desc: airplane ? 'on' : 'turned off' },
+        { id: 'bluetooth', label: 'Bluetooth', desc: bluetooth ? 'on' : 'turned off' },
+        { id: 'cellular', label: 'mobile+SIM', desc: 'TDC' },
+        { id: 'sharing', label: 'internet sharing', desc: 'turned off' },
+        { id: 'vpn', label: 'VPN', desc: 'set up' },
+        { id: 'appscorner', label: 'apps corner', desc: 'set up' },
+        { id: 'workplace', label: 'workplace', desc: '' },
+        { id: 'battery', label: 'battery saver', desc: '78% remaining' },
+        { id: 'theme', label: 'start+theme', desc: 'background, accent colour' },
+        { id: 'lock', label: 'lock screen', desc: 'notifications, background' },
+        { id: 'location', label: 'location', desc: location ? 'on' : 'off' },
+        { id: 'storage', label: 'storage sense', desc: 'phone, sd card' },
+        { id: 'about', label: 'about', desc: 'device info' },
+    ];
+
+    const appSettings = [
+        { id: 'background', label: 'background tasks', desc: '' },
+        { id: 'photos', label: 'photos+camera', desc: '' },
+        { id: 'people', label: 'people', desc: '' },
+        { id: 'messaging', label: 'messaging', desc: '' },
+        { id: 'phone', label: 'phone', desc: '' },
+        { id: 'email', label: 'email+accounts', desc: '' },
     ];
 
     const renderMain = () => (
         <div className="wp-settings">
-            <h1 className="wp-settings-title">settings</h1>
+            <div className="wp-settings-header">
+                <span className="wp-settings-label">SETTINGS</span>
+                <div className="wp-pivot-tabs">
+                    <button 
+                        className={`wp-pivot-tab ${activeTab === 'system' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('system')}
+                    >
+                        system
+                    </button>
+                    <button 
+                        className={`wp-pivot-tab ${activeTab === 'applications' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('applications')}
+                    >
+                        applications
+                    </button>
+                </div>
+            </div>
             <div className="wp-settings-list">
-                {settingsItems.map(item => (
+                {(activeTab === 'system' ? systemSettings : appSettings).map(item => (
                     <div key={item.id} className="wp-settings-item" onClick={() => setView(item.id)}>
-                        <Icon name={item.icon} size={24} />
-                        <div className="wp-settings-item-text">
-                            <span className="wp-settings-item-label">{item.label}</span>
-                            <span className="wp-settings-item-desc">{item.desc}</span>
-                        </div>
+                        <span className="wp-settings-item-label">{item.label}</span>
+                        {item.desc && <span className="wp-settings-item-desc">{item.desc}</span>}
                     </div>
                 ))}
             </div>
@@ -49,16 +76,16 @@ export function Settings() {
             <button className="wp-back-btn" onClick={() => setView('main')}>
                 <Icon name="back" size={20} />
             </button>
-            <h2 className="wp-settings-page-title">theme</h2>
+            <h2 className="wp-settings-page-title">start+theme</h2>
             <div className="wp-settings-section">
-                <h3 className="wp-section-title">background</h3>
+                <h3 className="wp-section-title">Background</h3>
                 <div className="wp-theme-options">
                     <button className={`wp-theme-option ${theme === 'dark' ? 'active' : ''}`} onClick={() => setTheme('dark')}>dark</button>
                     <button className={`wp-theme-option ${theme === 'light' ? 'active' : ''}`} onClick={() => setTheme('light')}>light</button>
                 </div>
             </div>
             <div className="wp-settings-section">
-                <h3 className="wp-section-title">accent colour</h3>
+                <h3 className="wp-section-title">Accent colour</h3>
                 <div className="wp-accent-grid">
                     {THEME_COLORS.map(color => (
                         <button
@@ -77,9 +104,9 @@ export function Settings() {
     const renderWifi = () => (
         <div className="wp-settings-page">
             <button className="wp-back-btn" onClick={() => setView('main')}><Icon name="back" size={20} /></button>
-            <h2 className="wp-settings-page-title">wi-fi</h2>
+            <h2 className="wp-settings-page-title">WiFi</h2>
             <div className="wp-toggle-row">
-                <span>wi-fi networking</span>
+                <span>WiFi networking</span>
                 <Toggle active={wifi} onChange={setWifi} />
             </div>
             {wifi && (
@@ -98,13 +125,6 @@ export function Settings() {
                             <span className="wp-wifi-status">secured</span>
                         </div>
                     </div>
-                    <div className="wp-wifi-item">
-                        <Icon name="wifi" size={20} />
-                        <div className="wp-wifi-info">
-                            <span className="wp-wifi-name">Guest Network</span>
-                            <span className="wp-wifi-status">open</span>
-                        </div>
-                    </div>
                 </div>
             )}
         </div>
@@ -113,12 +133,12 @@ export function Settings() {
     const renderBluetooth = () => (
         <div className="wp-settings-page">
             <button className="wp-back-btn" onClick={() => setView('main')}><Icon name="back" size={20} /></button>
-            <h2 className="wp-settings-page-title">bluetooth</h2>
+            <h2 className="wp-settings-page-title">Bluetooth</h2>
             <div className="wp-toggle-row">
-                <span>status</span>
+                <span>Status</span>
                 <Toggle active={bluetooth} onChange={setBluetooth} />
             </div>
-            <p className="wp-settings-desc">{bluetooth ? 'searching for devices...' : 'turn on bluetooth to connect to devices'}</p>
+            <p className="wp-settings-desc">{bluetooth ? 'Searching for devices...' : 'Turn on Bluetooth to connect to devices'}</p>
         </div>
     );
 
@@ -135,10 +155,6 @@ export function Settings() {
                 <div className="wp-about-item"><span>total storage</span><span>32 GB</span></div>
                 <div className="wp-about-item"><span>available storage</span><span>24.5 GB</span></div>
             </div>
-            <div className="wp-credits">
-                <p>Windows Phone 8.1 Simulation</p>
-                <p>Developed by Mohit Yadav</p>
-            </div>
         </div>
     );
 
@@ -147,10 +163,10 @@ export function Settings() {
             <button className="wp-back-btn" onClick={() => setView('main')}><Icon name="back" size={20} /></button>
             <h2 className="wp-settings-page-title">location</h2>
             <div className="wp-toggle-row">
-                <span>location services</span>
+                <span>Location services</span>
                 <Toggle active={location} onChange={setLocation} />
             </div>
-            <p className="wp-settings-desc">apps that have asked for your location will appear here</p>
+            <p className="wp-settings-desc">Apps that have asked for your location will appear here</p>
         </div>
     );
 
@@ -168,6 +184,28 @@ export function Settings() {
         </div>
     );
 
-    const views = { main: renderMain, theme: renderTheme, wifi: renderWifi, bluetooth: renderBluetooth, about: renderAbout, location: renderLocation, battery: renderBattery };
+    const renderAirplane = () => (
+        <div className="wp-settings-page">
+            <button className="wp-back-btn" onClick={() => setView('main')}><Icon name="back" size={20} /></button>
+            <h2 className="wp-settings-page-title">flight mode</h2>
+            <div className="wp-toggle-row">
+                <span>Status</span>
+                <Toggle active={airplane} onChange={setAirplane} />
+            </div>
+            <p className="wp-settings-desc">Turn on flight mode to stop wireless communication</p>
+        </div>
+    );
+
+    const views = { 
+        main: renderMain, 
+        theme: renderTheme, 
+        wifi: renderWifi, 
+        bluetooth: renderBluetooth, 
+        about: renderAbout, 
+        location: renderLocation, 
+        battery: renderBattery,
+        airplane: renderAirplane
+    };
+    
     return <AppShell title="settings" hideTitle>{views[view] ? views[view]() : renderMain()}</AppShell>;
 }

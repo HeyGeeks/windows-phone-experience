@@ -1,0 +1,82 @@
+/* Windows Phone 8.1 Status Bar */
+.status-bar {
+    height: 26px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 400;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.status-left,
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Signal Bars - WP8.1 Style */
+.signal-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    height: 12px;
+}
+
+.signal-bars .bar {
+    width: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    transition: background 0.2s;
+}
+
+.signal-bars .bar-1 { height: 4px; }
+.signal-bars .bar-2 { height: 6px; }
+.signal-bars .bar-3 { height: 8px; }
+.signal-bars .bar-4 { height: 10px; }
+.signal-bars .bar-5 { height: 12px; }
+
+.signal-bars .bar.active {
+    background: var(--text-color);
+}
+
+/* Battery Indicator - WP8.1 Style */
+.battery-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.battery-body {
+    width: 18px;
+    height: 9px;
+    border: 1px solid var(--text-color);
+    border-radius: 1px;
+    padding: 1px;
+    position: relative;
+}
+
+.battery-level {
+    height: 100%;
+    background: var(--text-color);
+    border-radius: 0;
+}
+
+.battery-tip {
+    width: 2px;
+    height: 4px;
+    background: var(--text-color);
+    border-radius: 0 1px 1px 0;
+    margin-left: 1px;
+}
+
+/* Time */
+.status-time {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+}

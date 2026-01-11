@@ -1,0 +1,40 @@
+/* Windows Phone 8.1 Start Screen */
+.start-screen {
+    padding-top: 12px !important;
+    position: relative;
+}
+
+.start-screen .tile-grid {
+    padding-bottom: 100px;
+}
+
+/* Swipe Indicator */
+.swipe-indicator {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    animation: bounceDown 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes bounceDown {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateX(-50%) translateY(8px);
+        opacity: 0.7;
+    }
+}
+
+/* All Apps Page */
+.all-apps {
+    background: var(--bg-color);
+}
+
+.all-apps .app-list {
+    padding-top: 8px;
+}

@@ -1,0 +1,124 @@
+/* Windows Phone 8.1 Lock Screen */
+.lock-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.3s cubic-bezier(0.1, 0.9, 0.2, 1), opacity 0.3s ease;
+}
+
+.lock-screen:active {
+    cursor: grabbing;
+}
+
+.lock-screen-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, 
+        rgba(0, 50, 100, 0.8) 0%, 
+        rgba(0, 20, 40, 0.9) 50%,
+        rgba(0, 0, 0, 1) 100%
+    );
+    z-index: -1;
+}
+
+/* Status Bar */
+.lock-status-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+}
+
+.lock-status-icons {
+    display: flex;
+    gap: 4px;
+    color: #fff;
+}
+
+.lock-status-time {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+}
+
+/* Main Content */
+.lock-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 24px 80px;
+}
+
+.lock-time {
+    font-size: 96px;
+    font-weight: 200;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -4px;
+}
+
+.lock-date {
+    font-size: 24px;
+    font-weight: 300;
+    color: #fff;
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* Quick Status Icons */
+.lock-quick-status {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.lock-status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.lock-status-item span {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* Swipe Indicator */
+.lock-swipe-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    animation: pulseUp 2s ease-in-out infinite;
+}
+
+.lock-swipe-indicator span {
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+@keyframes pulseUp {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-8px);
+        opacity: 1;
+    }
+}

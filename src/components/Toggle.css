@@ -1,0 +1,50 @@
+/* Windows Phone 8.1 Toggle Switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggle-track {
+    width: 62px;
+    height: 32px;
+    background: transparent;
+    border: 2.5px solid var(--text-secondary);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.toggle-thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--text-secondary);
+    top: 4px;
+    left: 4px;
+    transition: all 0.2s ease;
+}
+
+.toggle-switch.active .toggle-track {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.toggle-switch.active .toggle-thumb {
+    background: white;
+    left: calc(100% - 24px);
+}
+
+.toggle-label {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+}
+
+.toggle-switch.active .toggle-label {
+    color: var(--text-color);
+}
