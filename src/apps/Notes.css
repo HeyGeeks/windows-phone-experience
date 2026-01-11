@@ -1,79 +1,105 @@
-.notes-container {
-    color: var(--text-color);
+/* Windows Phone 8.1 OneNote */
+.wp-notes {
+    padding-bottom: 40px;
 }
 
-.add-note-btn {
-    width: 100%;
-    padding: 15px;
-    background: var(--accent-color);
-    border: none;
-    color: var(--text-color);
-    font-size: 18px;
-    font-weight: 300;
-    cursor: pointer;
-    text-align: left;
+.wp-notes-title {
+    font-size: 48px;
+    font-weight: 200;
     margin-bottom: 20px;
+    text-transform: lowercase;
 }
 
-.add-note-btn:hover {
-    filter: brightness(1.1);
+.wp-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
-.notes-list {
+.wp-note-card {
+    aspect-ratio: 1;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-}
-
-.note-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: background 0.2s;
+    background: var(--accent-color);
 }
 
-.note-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+.wp-note-card:active {
+    transform: scale(0.97);
 }
 
-.note-info {
+.wp-add-note {
+    background: rgba(255, 255, 255, 0.1);
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.wp-add-note span {
+    font-size: 14px;
+    text-transform: lowercase;
+}
+
+.wp-note-card-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.wp-note-card-preview {
+    font-size: 12px;
+    opacity: 0.8;
+    flex: 1;
+    overflow: hidden;
+}
+
+.wp-note-card-date {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: auto;
+}
+
+/* Note Editor */
+.wp-note-editor {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 4px;
 }
 
-.note-title {
-    font-size: 18px;
-    font-weight: 400;
+.wp-note-editor-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
-.note-date {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-.delete-btn {
+.wp-back-btn {
     background: transparent;
     border: none;
-    color: var(--text-secondary);
-    font-size: 24px;
+    color: var(--text-color);
+    padding: 8px;
+    margin: -8px;
     cursor: pointer;
-    padding: 5px 10px;
 }
 
-.delete-btn:hover {
-    color: #A20025;
+.wp-note-title-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    font-weight: 200;
+    color: var(--text-color);
+    outline: none;
+    text-transform: lowercase;
 }
 
-.note-editor {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.wp-note-title-input::placeholder {
+    color: var(--text-secondary);
 }
 
-.note-textarea {
+.wp-note-textarea {
     flex: 1;
     background: transparent;
     border: none;
@@ -81,37 +107,37 @@
     font-family: var(--font-primary);
     font-size: 16px;
     resize: none;
-    padding: 10px 0;
-}
-
-.note-textarea:focus {
     outline: none;
+    line-height: 1.6;
 }
 
-.note-textarea::placeholder {
+.wp-note-textarea::placeholder {
     color: var(--text-secondary);
 }
 
-.note-actions {
+.wp-note-bar {
     display: flex;
-    gap: 10px;
-    padding: 20px 0;
+    justify-content: center;
+    gap: 32px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
 }
 
-.note-btn {
-    flex: 1;
-    padding: 15px;
-    border: none;
-    font-size: 16px;
+.wp-note-bar button {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    color: var(--text-color);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.note-btn.save {
-    background: var(--accent-color);
-    color: var(--text-color);
-}
-
-.note-btn.cancel {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
+.wp-note-bar button:active {
+    background: var(--text-color);
+    color: var(--bg-color);
 }

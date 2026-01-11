@@ -4,24 +4,20 @@ import { Icon } from '../components/Icons';
 import './Messages.css';
 
 const CONVERSATIONS = [
-    { id: 1, name: 'Microsoft', message: 'Welcome to your new Windows Phone!', time: '10:00 AM', unread: true },
-    { id: 2, name: 'Cortana', message: 'I can help you organized.', time: 'Yesterday', unread: false },
-    { id: 3, name: 'Mom', message: 'Call me when you can.', time: 'Mon', unread: false },
+    { id: 1, name: 'microsoft', message: 'welcome to your new windows phone!', time: '10:00 am', unread: true, photo: null },
+    { id: 2, name: 'mom', message: 'call me when you can.', time: 'yesterday', unread: false, photo: 'https://i.pravatar.cc/100?img=1' },
+    { id: 3, name: 'alex', message: 'see you tomorrow!', time: 'monday', unread: false, photo: 'https://i.pravatar.cc/100?img=3' },
+    { id: 4, name: 'work group', message: 'meeting at 3pm', time: 'sunday', unread: true, photo: null },
 ];
 
 export function Messages() {
     const [activeChat, setActiveChat] = useState(null);
-    const [messages, setMessages] = useState({}); // Map conversation ID to extra messages
+    const [messages, setMessages] = useState({});
     const [inputText, setInputText] = useState('');
-
-    const openChat = (conv) => {
-        setActiveChat(conv);
-    };
 
     const sendMessage = () => {
         if (!inputText.trim()) return;
-
-        const newMsg = { text: inputText, sender: 'me', time: 'Now' };
+        const newMsg = { text: inputText, sender: 'me', time: 'now' };
         setMessages(prev => ({
             ...prev,
             [activeChat.id]: [...(prev[activeChat.id] || []), newMsg]
@@ -29,36 +25,42 @@ export function Messages() {
         setInputText('');
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') sendMessage();
+    };
+
     if (activeChat) {
         return (
-            <div className="chat-view">
-                <div className="chat-header">
-                    <button className="chat-back" onClick={() => setActiveChat(null)}>
+            <div className="wp-chat">
+                <div className="wp-chat-header">
+                    <button className="wp-chat-back" onClick={() => setActiveChat(null)}>
                         <Icon name="back" size={20} />
                     </button>
-                    <span className="chat-contact">{activeChat.name}</span>
+                    {activeChat.photo && <img src={activeChat.photo} alt="" className="wp-chat-avatar" />}
+                    <span className="wp-chat-name">{activeChat.name}</span>
                 </div>
-                <div className="chat-messages">
-                    <div className="message received">
-                        <div className="bubble">{activeChat.message}</div>
-                        <span className="msg-time">{activeChat.time}</span>
+                <div className="wp-chat-messages">
+                    <div className="wp-message received">
+                        <div className="wp-bubble">{activeChat.message}</div>
+                        <span className="wp-msg-time">{activeChat.time}</span>
                     </div>
                     {messages[activeChat.id]?.map((msg, i) => (
-                        <div key={i} className="message sent">
-                            <div className="bubble">{msg.text}</div>
-                            <span className="msg-time">{msg.time}</span>
+                        <div key={i} className={`wp-message ${msg.sender === 'me' ? 'sent' : 'received'}`}>
+                            <div className="wp-bubble">{msg.text}</div>
+                            <span className="wp-msg-time">{msg.time}</span>
                         </div>
                     ))}
                 </div>
-                <div className="chat-input-area">
+                <div className="wp-chat-input">
                     <input
                         type="text"
-                        placeholder="Type a message"
+                        placeholder="type a message"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
+                        onKeyPress={handleKeyPress}
                     />
-                    <button className="send-btn" onClick={sendMessage}>
-                        <Icon name="message" size={20} />
+                    <button className="wp-send-btn" onClick={sendMessage}>
+                        <Icon name="forward" size={20} />
                     </button>
                 </div>
             </div>
@@ -66,20 +68,33 @@ export function Messages() {
     }
 
     return (
-        <AppShell title="Messaging">
-            <div className="messages-list">
-                {CONVERSATIONS.map(conv => (
-                    <div key={conv.id} className="thread-item" onClick={() => openChat(conv)}>
-                        <div className={`thread-status ${conv.unread ? 'unread' : ''}`} />
-                        <div className="thread-content">
-                            <div className="thread-header">
-                                <span className="thread-name">{conv.name}</span>
-                                <span className="thread-time">{conv.time}</span>
+        <AppShell title="messaging" hideTitle>
+            <div className="wp-messages">
+                <h1 className="wp-messages-title">messaging</h1>
+                <div className="wp-threads-list">
+                    {CONVERSATIONS.map(conv => (
+                        <div key={conv.id} className="wp-thread-item" onClick={() => setActiveChat(conv)}>
+                            <div className="wp-thread-avatar">
+                                {conv.photo ? (
+                                    <img src={conv.photo} alt="" />
+                                ) : (
+                                    <div className="wp-avatar-placeholder"><Icon name="contacts" size={24} /></div>
+                                )}
                             </div>
-                            <span className="thread-preview">{conv.message}</span>
+                            <div className="wp-thread-content">
+                                <div className="wp-thread-header">
+                                    <span className={`wp-thread-name ${conv.unread ? 'unread' : ''}`}>{conv.name}</span>
+                                    <span className="wp-thread-time">{conv.time}</span>
+                                </div>
+                                <span className="wp-thread-preview">{conv.message}</span>
+                            </div>
+                            {conv.unread && <div className="wp-unread-dot" />}
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <button className="wp-new-message">
+                    <Icon name="add" size={24} />
+                </button>
             </div>
         </AppShell>
     );

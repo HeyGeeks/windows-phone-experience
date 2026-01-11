@@ -1,350 +1,263 @@
-/* Xbox Music Container */
-.xm-container {
+/* Windows Phone 8.1 Music + Videos */
+.wp-music {
     height: 100%;
     display: flex;
     flex-direction: column;
-    color: white;
     position: relative;
     overflow: hidden;
 }
 
-/* Background blur effect */
-.xm-background {
+.wp-music-bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    filter: blur(30px) brightness(0.3);
-    transform: scale(1.2);
+    filter: blur(40px) brightness(0.3);
+    transform: scale(1.3);
     z-index: 0;
 }
 
-/* Header */
-.xm-header {
-    padding: 15px 20px 0;
-    z-index: 10;
-    flex-shrink: 0;
-}
-
-.xm-title {
+.wp-music-title {
     font-size: 48px;
-    font-weight: 100;
-    margin: 0;
-    line-height: 1;
-    letter-spacing: -1px;
+    font-weight: 200;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+    position: relative;
+    z-index: 1;
 }
 
-/* Pivots */
-.xm-pivots {
+.wp-pivot-header {
     display: flex;
-    gap: 25px;
-    padding: 15px 20px;
-    z-index: 10;
-    flex-shrink: 0;
+    gap: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
 
-.xm-pivot {
+.wp-pivot {
     font-size: 32px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.4);
-    background: transparent;
+    color: var(--text-secondary);
+    background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    transition: color 0.2s;
+    text-transform: lowercase;
 }
 
-.xm-pivot.active {
-    color: white;
+.wp-pivot.active {
+    color: var(--text-color);
 }
 
-/* Collection View */
-.xm-collection {
+/* Collection */
+.wp-music-collection {
     flex: 1;
     overflow-y: auto;
-    padding: 0 20px 20px;
-    z-index: 10;
+    position: relative;
+    z-index: 1;
 }
 
-/* Search */
-.xm-search {
+.wp-music-search {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 20px;
 }
 
-.xm-search input {
+.wp-music-search input {
     flex: 1;
-    height: 40px;
+    height: 44px;
     background: rgba(255, 255, 255, 0.15);
     border: none;
-    padding: 0 15px;
-    font-family: inherit;
+    padding: 0 16px;
     font-size: 16px;
     color: white;
 }
 
-.xm-search input::placeholder {
+.wp-music-search input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.xm-search button {
-    width: 40px;
-    height: 40px;
+.wp-music-search button {
+    width: 44px;
+    height: 44px;
     background: transparent;
     border: 2px solid white;
     border-radius: 50%;
+    color: white;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    cursor: pointer;
 }
 
-/* Sections */
-.xm-section {
-    margin-bottom: 20px;
+.wp-music-list {
+    display: flex;
+    flex-direction: column;
 }
 
-.xm-section-title {
-    font-size: 28px;
-    font-weight: 300;
-    margin-bottom: 15px;
-}
-
-/* Song Item */
-.xm-song-item {
+.wp-music-item {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     padding: 12px 0;
     cursor: pointer;
 }
 
-.xm-song-item:active {
+.wp-music-item:active {
     opacity: 0.7;
 }
 
-.xm-song-letter {
-    width: 40px;
-    height: 40px;
-    background: var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 300;
+.wp-music-thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
     flex-shrink: 0;
 }
 
-.xm-song-info {
-    flex: 1;
+.wp-music-info {
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
 
-.xm-song-title {
+.wp-music-song {
     font-size: 18px;
-    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.xm-song-artist {
+.wp-music-artist {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: var(--text-secondary);
 }
 
-.xm-download-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    opacity: 0.6;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.xm-loading,
-.xm-empty {
+.wp-music-loading,
+.wp-music-empty {
     text-align: center;
-    padding: 40px 20px;
-    color: rgba(255, 255, 255, 0.5);
+    padding: 40px;
+    color: var(--text-secondary);
 }
 
-/* Now Playing View */
-.xm-now-playing {
+/* Now Playing */
+.wp-now-playing {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 20px;
-    z-index: 10;
-    overflow-y: auto;
-}
-
-.xm-np-label {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 10px;
-}
-
-.xm-np-track-info {
-    margin-bottom: 20px;
-}
-
-.xm-np-title {
-    display: block;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 5px;
-}
-
-.xm-np-artist {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Album Art */
-.xm-np-art {
+    align-items: center;
     position: relative;
-    width: 100%;
-    max-width: 280px;
-    aspect-ratio: 1;
-    margin: 0 auto 20px;
+    z-index: 1;
+    padding-top: 20px;
+}
+
+.wp-np-art {
+    width: 240px;
+    height: 240px;
+    margin-bottom: 24px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-.xm-np-art img {
+.wp-np-art img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.xm-np-queue-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.wp-np-info {
+    text-align: center;
+    margin-bottom: 24px;
 }
 
-/* Progress */
-.xm-np-progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+.wp-np-title {
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 4px;
 }
 
-.xm-time {
+.wp-np-artist {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.wp-np-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 24px;
+}
+
+.wp-np-progress span {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
-    min-width: 40px;
+    color: var(--text-secondary);
+    min-width: 36px;
 }
 
-.xm-time:last-child {
-    text-align: right;
-}
-
-.xm-progress-track {
+.wp-np-bar {
     flex: 1;
     height: 4px;
     background: rgba(255, 255, 255, 0.2);
-    position: relative;
 }
 
-.xm-progress-fill {
+.wp-np-fill {
     height: 100%;
     background: var(--accent-color);
-    transition: width 0.1s linear;
 }
 
-/* Up Next */
-.xm-up-next {
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.xm-up-next-label {
-    color: rgba(255, 255, 255, 0.5);
-    margin-right: 5px;
-}
-
-.xm-up-next-song {
-    color: white;
-}
-
-/* Controls */
-.xm-controls {
+.wp-np-controls {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 30px;
-    margin-top: auto;
-    padding-bottom: 20px;
+    gap: 24px;
 }
 
-.xm-ctrl-btn {
+.wp-np-btn {
     width: 56px;
     height: 56px;
     background: transparent;
-    border: 3px solid white;
+    border: 2px solid white;
     border-radius: 50%;
+    color: white;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    cursor: pointer;
-    transition: all 0.1s;
 }
 
-.xm-ctrl-btn:active {
-    transform: scale(0.95);
+.wp-np-btn:active {
     background: white;
     color: black;
 }
 
-.xm-ctrl-play {
+.wp-np-play {
     width: 72px;
     height: 72px;
 }
 
-.xm-ctrl-btn svg {
-    fill: currentColor;
-}
-
-/* Empty Now Playing */
-.xm-np-empty {
+.wp-np-empty {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    color: rgba(255, 255, 255, 0.5);
+    gap: 16px;
+    color: var(--text-secondary);
 }
 
-.xm-np-empty button {
+.wp-np-empty button {
     background: transparent;
     border: 2px solid white;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* History */
+.wp-music-history {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
 }

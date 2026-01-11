@@ -1,115 +1,271 @@
-.phone-app {
+/* Windows Phone 8.1 Phone */
+.wp-phone {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.phone-tabs {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.phone-tab {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 24px;
+.wp-phone-title {
+    font-size: 48px;
     font-weight: 200;
-    padding: 10px;
+    margin-bottom: 8px;
     text-transform: lowercase;
 }
 
-.phone-tab.active {
+.wp-pivot-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.wp-pivot {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.wp-pivot.active {
     color: var(--text-color);
 }
 
-.keypad-view {
+/* History */
+.wp-history-list {
     flex: 1;
+    overflow-y: auto;
+}
+
+.wp-history-item {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 20px;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
 }
 
-.number-display {
-    text-align: center;
-    font-size: 48px;
-    font-weight: 200;
-    min-height: 70px;
-    margin-bottom: 20px;
+.wp-history-item:active {
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.keypad-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.keypad-btn {
-    background: transparent;
-    border: 2px solid transparent;
-    height: 60px;
+.wp-history-icon {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-secondary);
+}
+
+.wp-history-icon.incoming {
+    color: var(--accent-color);
+}
+
+.wp-history-icon.missed {
+    color: #E81123;
+}
+
+.wp-history-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-history-name {
+    font-size: 20px;
+    text-transform: lowercase;
+}
+
+.wp-history-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-history-duration {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Speed Dial */
+.wp-speed-dial {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.wp-speed-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.wp-speed-item:active {
+    opacity: 0.7;
+}
+
+.wp-speed-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.wp-speed-name {
+    font-size: 14px;
+    text-transform: lowercase;
+}
+
+/* Keypad */
+.wp-keypad-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-number-display {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 200;
+    min-height: 56px;
+    margin-bottom: 20px;
     color: var(--text-color);
-    font-size: 28px;
-    transition: all 0.1s;
 }
 
-.keypad-btn:active {
+.wp-number-display:empty::before {
+    content: 'enter number';
+    color: var(--text-secondary);
+}
+
+.wp-keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.wp-keypad-btn {
+    background: transparent;
+    border: none;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.wp-keypad-btn:active {
     background: var(--accent-color);
-    border-color: var(--accent-color);
 }
 
-.call-actions {
+.wp-digit {
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.wp-letters {
+    font-size: 10px;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+}
+
+.wp-call-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    margin-top: auto;
 }
 
-.call-btn {
-    width: 60px;
-    height: 60px;
+.wp-call-btn {
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: var(--accent-color);
+    background: #107C10;
     border: none;
+    color: white;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.delete-btn {
-    width: 60px;
-    height: 60px;
+.wp-call-btn:active {
+    opacity: 0.8;
+}
+
+.wp-delete-btn {
+    width: 56px;
+    height: 56px;
     background: transparent;
     border: none;
+    color: var(--text-color);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-color);
 }
 
-.delete-btn:disabled {
+.wp-delete-btn:disabled {
     opacity: 0;
 }
 
-.history-item {
-    display: flex;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.history-info {
+/* Calling Screen */
+.wp-calling {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
 }
 
-.history-type {
-    font-size: 12px;
+.wp-calling-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.wp-calling-label {
+    font-size: 18px;
     color: var(--text-secondary);
+    margin-bottom: 16px;
+    text-transform: lowercase;
+}
+
+.wp-calling-name {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.wp-calling-number {
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+.wp-end-call {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #E81123;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(135deg);
 }

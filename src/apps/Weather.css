@@ -1,116 +1,167 @@
-.weather-container {
-    color: var(--text-color);
+/* Windows Phone 8.1 Weather */
+.wp-weather {
+    padding-bottom: 40px;
 }
 
-.current-weather {
+.wp-weather-header {
+    margin-bottom: 24px;
+}
+
+.wp-weather-location {
+    font-size: 48px;
+    font-weight: 200;
+    text-transform: lowercase;
+    margin-bottom: 4px;
+}
+
+.wp-weather-date {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-weather-current {
     text-align: center;
-    padding: 20px 0 30px;
+    margin-bottom: 32px;
 }
 
-.weather-location {
-    font-size: 24px;
-    font-weight: 300;
-    margin-bottom: 10px;
-}
-
-.weather-temp {
-    font-size: 96px;
+.wp-weather-temp {
+    font-size: 120px;
     font-weight: 100;
     line-height: 1;
 }
 
-.weather-condition {
-    font-size: 18px;
+.wp-weather-condition {
+    font-size: 24px;
     color: var(--text-secondary);
-    margin: 10px 0;
+    text-transform: lowercase;
+    margin: 8px 0;
 }
 
-.weather-range {
-    font-size: 16px;
+.wp-weather-range {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 18px;
+}
+
+.wp-weather-range span:first-child {
     color: var(--accent-color);
 }
 
-.weather-details {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    margin-bottom: 20px;
-}
-
-.detail-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.detail-label {
-    font-size: 14px;
+.wp-weather-range span:last-child {
     color: var(--text-secondary);
 }
 
-.detail-value {
+.wp-weather-details {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 32px;
+}
+
+.wp-detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.wp-detail-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-detail-value {
     font-size: 20px;
     font-weight: 300;
 }
 
-.section-title {
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--accent-color);
-    text-transform: lowercase;
-    margin: 20px 0 15px;
+.wp-weather-section {
+    margin-bottom: 32px;
 }
 
-.hourly-scroll {
+.wp-section-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+    text-transform: lowercase;
+}
+
+/* Hourly */
+.wp-hourly-scroll {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
 }
 
-.hourly-item {
+.wp-hourly-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.wp-hourly-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    min-width: 50px;
+    min-width: 56px;
 }
 
-.hourly-time {
+.wp-hourly-time {
     font-size: 14px;
     color: var(--text-secondary);
+    text-transform: lowercase;
 }
 
-.hourly-temp {
+.wp-hourly-icon {
+    font-size: 24px;
+}
+
+.wp-hourly-temp {
     font-size: 18px;
 }
 
-.daily-item {
+/* Daily */
+.wp-daily-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-daily-item {
     display: flex;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.daily-day {
-    width: 60px;
+.wp-daily-day {
+    flex: 1;
     font-size: 18px;
+    text-transform: lowercase;
 }
 
-.daily-temps {
-    margin-left: auto;
+.wp-daily-icon {
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+.wp-daily-temps {
     display: flex;
-    gap: 15px;
+    gap: 16px;
+    min-width: 80px;
+    justify-content: flex-end;
 }
 
-.daily-high {
+.wp-daily-high {
     font-size: 18px;
 }
 
-.daily-low {
+.wp-daily-low {
     font-size: 18px;
     color: var(--text-secondary);
 }

@@ -1,319 +1,244 @@
-/* Windows 10 Mobile Settings Styles */
-
-.w10-settings-root {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: #000;
-    color: #fff;
-    padding: 10px 15px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    animation: fadeIn 0.3s ease-out;
+/* Windows Phone 8.1 Settings */
+.wp-settings {
+    padding-bottom: 40px;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Home View */
-.w10-home-header {
-    font-size: 24px;
-    font-weight: 300;
-    margin-bottom: 10px;
-}
-
-/* Search Bar */
-.w10-search-container {
-    margin-bottom: 15px;
-}
-
-.w10-search-box {
-    display: flex;
-    align-items: center;
-    background-color: #333;
-    /* Dark search box */
-    border: 2px solid transparent;
-    height: 32px;
-}
-
-.w10-search-box:focus-within {
-    background-color: #fff;
-    /* Active search box becomes white */
-    border-color: var(--accent-color, #0078d7);
-}
-
-.w10-search-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 0 10px;
-    font-size: 15px;
-    height: 100%;
-    outline: none;
-}
-
-.w10-search-box:focus-within .w10-search-input {
-    color: #000;
-}
-
-.w10-search-icon {
-    padding: 0 10px;
-    color: #999;
-}
-
-.w10-search-box:focus-within .w10-search-icon {
-    color: #000;
-}
-
-/* Categories List */
-.w10-categories-list {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-.w10-category-item {
-    display: flex;
-    gap: 15px;
-    cursor: pointer;
-    /* padding: 5px 0; */
-}
-
-.w10-category-item:active {
-    opacity: 0.7;
-    transform: scale(0.99);
-}
-
-.w10-category-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: flex-start;
-    /* Align with top text roughly */
-    justify-content: center;
-    color: #fff;
-    flex-shrink: 0;
-    margin-top: 2px;
-}
-
-.w10-category-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-.w10-category-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.w10-cat-title {
-    font-size: 18px;
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.2;
-}
-
-.w10-cat-desc {
-    font-size: 13px;
-    color: #999;
-    font-weight: 300;
-    margin-top: 2px;
-}
-
-/* Subpage & Navigation header */
-.w10-page-header {
-    display: flex;
-    align-items: center;
+.wp-settings-title {
+    font-size: 48px;
+    font-weight: 200;
     margin-bottom: 20px;
+    text-transform: lowercase;
 }
 
-.w10-back-button {
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 8px;
-    /* Touch target */
-    margin-left: -8px;
-    margin-right: 5px;
+.wp-settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-settings-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
     cursor: pointer;
-    border-radius: 50%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.w10-back-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.wp-settings-item:active {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 -12px;
+    padding: 16px 12px;
 }
 
-.w10-back-button svg {
-    width: 20px;
-    height: 20px;
+.wp-settings-item svg {
+    opacity: 0.7;
+    flex-shrink: 0;
 }
 
-.w10-page-title {
+.wp-settings-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wp-settings-item-label {
     font-size: 20px;
     font-weight: 300;
-    margin: 0;
+    text-transform: lowercase;
 }
 
-/* Settings Items / List in Subpage */
-.w10-group {
-    display: flex;
-    flex-direction: column;
+.wp-settings-item-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
 }
 
-/* Section Header in Subpage */
-.w10-section-header {
-    font-size: 15px;
-    color: var(--accent-color, #0078d7);
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-weight: 500;
+/* Settings Page */
+.wp-settings-page {
+    padding-bottom: 40px;
 }
 
-.w10-setting-item {
-    padding: 10px 0;
+.wp-back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 8px;
+    margin: -8px;
+    margin-bottom: 8px;
     cursor: pointer;
 }
 
-.w10-setting-item:active {
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0 -15px;
-    padding: 10px 15px;
+.wp-settings-page-title {
+    font-size: 48px;
+    font-weight: 200;
+    margin-bottom: 24px;
+    text-transform: lowercase;
 }
 
-.w10-setting-content {
+.wp-settings-section {
+    margin-bottom: 32px;
+}
+
+.wp-section-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+    text-transform: lowercase;
+}
+
+/* Theme Options */
+.wp-theme-options {
     display: flex;
-    flex-direction: column;
+    gap: 12px;
 }
 
-.w10-setting-with-toggle {
-    flex-direction: row;
+.wp-theme-option {
+    flex: 1;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    color: var(--text-color);
+    font-size: 18px;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+
+.wp-theme-option.active {
+    border-color: var(--accent-color);
+    background: var(--accent-color);
+}
+
+/* Accent Colors Grid */
+.wp-accent-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.wp-accent-color {
+    aspect-ratio: 1;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.wp-accent-color:active {
+    transform: scale(0.95);
+}
+
+.wp-accent-color.active {
+    border-color: white;
+}
+
+/* Toggle Row */
+.wp-toggle-row {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.w10-setting-label {
-    font-size: 16px;
+    padding: 16px 0;
+    font-size: 20px;
     font-weight: 300;
-    color: #fff;
-    margin-bottom: 2px;
+    text-transform: lowercase;
 }
 
-.w10-setting-description {
-    font-size: 12px;
-    color: #ccc;
+.wp-settings-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 8px;
 }
 
-.w10-description-text {
-    font-size: 13px;
-    color: #ccc;
-    margin-bottom: 15px;
-    line-height: 1.4;
+/* WiFi List */
+.wp-wifi-list {
+    margin-top: 24px;
 }
 
-/* Theme Picker Reuse */
-.wp-theme-picker {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.wp-theme-color {
-    aspect-ratio: 1;
+.wp-wifi-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
-    border: 2px solid transparent;
 }
 
-.wp-theme-color.active {
-    border-color: #fff;
+.wp-wifi-item:active {
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* Battery View Specifics */
-.w10-battery-status {
+.wp-wifi-info {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
 }
 
-.w10-battery-percent {
-    font-size: 48px;
+.wp-wifi-name {
+    font-size: 18px;
+}
+
+.wp-wifi-status {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-wifi-item.connected .wp-wifi-status {
+    color: var(--accent-color);
+}
+
+/* About */
+.wp-about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wp-about-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.wp-about-item span:first-child {
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-credits {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.wp-credits p {
+    margin: 4px 0;
+}
+
+/* Battery */
+.wp-battery-display {
+    text-align: center;
+    margin: 32px 0;
+}
+
+.wp-battery-percent {
+    font-size: 72px;
     font-weight: 200;
 }
 
-.w10-battery-detail {
-    font-size: 14px;
-    color: #999;
-}
-
-/* Credits */
-.w10-credits {
-    margin-top: 40px;
-    border-top: 1px solid #333;
-    padding-top: 20px;
-}
-
-.w10-credits h3 {
+.wp-battery-time {
     font-size: 16px;
-    margin-bottom: 10px;
+    color: var(--text-secondary);
 }
 
-.w10-credits p {
-    font-size: 14px;
-    color: #ccc;
+.wp-battery-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-top: 24px;
 }
 
-.w10-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.w10-links a {
-    color: var(--accent-color, #0078d7);
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.w10-links a:hover {
-    text-decoration: underline;
-}
-
-/* Search Results */
-.w10-search-results-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.w10-category-icon-small {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-}
-
-.w10-category-icon-small svg {
-    width: 20px;
-    height: 20px;
-}
-
-.w10-no-results {
-    color: #999;
-    font-style: italic;
-    margin-top: 20px;
-    text-align: center;
+.wp-battery-fill {
+    height: 100%;
+    background: var(--accent-color);
 }

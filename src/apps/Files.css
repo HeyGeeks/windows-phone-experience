@@ -1,0 +1,108 @@
+/* Windows Phone 8.1 File Manager */
+.wp-files {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-files-title {
+    font-size: 48px;
+    font-weight: 200;
+    margin-bottom: 16px;
+    text-transform: lowercase;
+}
+
+.wp-files-tabs {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.wp-files-tab {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.wp-files-tab.active {
+    color: var(--text-color);
+}
+
+.wp-files-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.wp-file-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.wp-file-item:active,
+.wp-file-item.selected {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 -12px;
+    padding: 16px 12px;
+}
+
+.wp-file-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-file-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-file-name {
+    font-size: 18px;
+}
+
+.wp-file-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.wp-files-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.wp-files-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px;
+}
+
+.wp-files-action:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.wp-files-action span {
+    font-size: 12px;
+    text-transform: lowercase;
+}

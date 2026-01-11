@@ -1,0 +1,189 @@
+/* Windows Phone 8.1 Maps */
+.wp-maps {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: -20px -12px;
+}
+
+.wp-maps-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 0 12px;
+    height: 48px;
+    margin: 12px;
+}
+
+.wp-maps-search svg {
+    color: #666;
+}
+
+.wp-maps-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: #000;
+    outline: none;
+}
+
+.wp-maps-view {
+    flex: 1;
+    position: relative;
+    background: #1a1a1a;
+    overflow: hidden;
+}
+
+.wp-map-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-map-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px;
+    opacity: 0.3;
+}
+
+.wp-map-tile {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+.wp-map-marker {
+    position: relative;
+    z-index: 1;
+    color: var(--accent-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.wp-map-label {
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-maps-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    background: #1a1a1a;
+}
+
+.wp-maps-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.wp-maps-btn:active {
+    opacity: 0.7;
+}
+
+.wp-maps-btn span {
+    font-size: 12px;
+    text-transform: lowercase;
+}
+
+/* Directions Panel */
+.wp-directions-panel {
+    position: absolute;
+    bottom: 72px;
+    left: 0;
+    right: 0;
+    background: var(--bg-color);
+    padding: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wp-directions-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.wp-directions-header button {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.wp-directions-header span {
+    font-size: 20px;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+.wp-directions-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.wp-direction-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wp-direction-label {
+    width: 40px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-direction-input input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.wp-transport-modes {
+    display: flex;
+    gap: 12px;
+}
+
+.wp-transport {
+    flex: 1;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.wp-transport.active {
+    border-color: var(--accent-color);
+    background: var(--accent-color);
+}

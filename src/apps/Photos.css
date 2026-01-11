@@ -1,58 +1,198 @@
-.photos-container {
+/* Windows Phone 8.1 Photos */
+.wp-photos {
+    padding-bottom: 40px;
+}
+
+.wp-photos-title {
+    font-size: 48px;
+    font-weight: 200;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.wp-pivot-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.wp-pivot {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.wp-pivot.active {
     color: var(--text-color);
 }
 
-.section-title {
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--accent-color);
-    text-transform: lowercase;
-    margin-bottom: 15px;
-}
-
-.photos-grid {
+/* Photos Grid */
+.wp-photos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
 }
 
-.photo-item {
+.wp-photo-item {
     aspect-ratio: 1;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.photo-item:hover {
-    transform: scale(1.02);
+.wp-photo-item:active {
+    opacity: 0.8;
 }
 
-.photo-item img {
+.wp-photo-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.photo-lightbox {
-    position: fixed;
-    inset: 0;
-    background: var(--bg-color);
+/* Albums */
+.wp-albums-list {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+}
+
+.wp-album-item {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 200;
+    gap: 16px;
     cursor: pointer;
 }
 
-.photo-lightbox img {
+.wp-album-item:active {
+    opacity: 0.8;
+}
+
+.wp-album-cover {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.wp-album-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-album-name {
+    font-size: 20px;
+    text-transform: lowercase;
+}
+
+.wp-album-count {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Date View */
+.wp-date-header {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+    text-transform: lowercase;
+}
+
+/* Photo Viewer */
+.wp-photo-viewer {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-photo-header {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 12px;
+}
+
+.wp-photo-close {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.wp-photo-title {
+    font-size: 18px;
+}
+
+.wp-photo-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.wp-photo-container img {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 100%;
     object-fit: contain;
 }
 
-.photo-title {
-    margin-top: 20px;
-    font-size: 18px;
-    color: var(--text-color);
+.wp-photo-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-photo-nav.prev {
+    left: 8px;
+}
+
+.wp-photo-nav.next {
+    right: 8px;
+}
+
+.wp-photo-bar {
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background: #1a1a1a;
+}
+
+.wp-photo-bar button {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-photo-bar button:active {
+    background: white;
+    color: black;
 }

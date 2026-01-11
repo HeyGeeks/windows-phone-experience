@@ -1,9 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import { Icon } from './Icons';
-
 export function AppShell({ title, children, hideTitle = false }) {
-    const navigate = useNavigate();
-
     return (
         <div className="app-shell" role="dialog" aria-label={title}>
             <header className="app-header">
@@ -12,7 +7,6 @@ export function AppShell({ title, children, hideTitle = false }) {
             <main className="app-content" role="main">
                 {children}
             </main>
-        </div >
+        </div>
     );
 }
-

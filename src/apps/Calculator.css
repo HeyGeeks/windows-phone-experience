@@ -1,43 +1,55 @@
-.calculator {
+/* Windows Phone 8.1 Calculator */
+.wp-calculator {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background: var(--bg-color);
 }
 
 .calc-display {
-    padding: 20px;
+    padding: 20px 16px;
     text-align: right;
-    margin-bottom: 10px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-.calc-display-value {
-    font-size: 48px;
+.calc-expression {
+    font-size: 20px;
+    color: var(--text-secondary);
+    min-height: 28px;
+}
+
+.calc-value {
+    font-size: 56px;
     font-weight: 200;
     color: var(--text-color);
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.1;
 }
 
 .calc-buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+    gap: 1px;
     flex: 1;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .calc-btn {
     background: #1a1a1a;
     border: none;
     color: var(--text-color);
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 300;
     cursor: pointer;
     transition: background 0.1s;
-    min-height: 60px;
-}
-
-.calc-btn:hover {
-    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
 }
 
 .calc-btn:active {
@@ -46,20 +58,16 @@
 
 .calc-btn.func {
     background: #2a2a2a;
+    font-size: 24px;
 }
 
 .calc-btn.op {
-    background: var(--accent-color);
-}
-
-.calc-btn.op:hover {
-    filter: brightness(1.1);
-}
-
-.calc-btn.zero {
-    grid-column: span 2;
+    background: #333;
+    color: var(--accent-color);
+    font-size: 32px;
 }
 
 .calc-btn.equals {
     background: var(--accent-color);
+    color: white;
 }

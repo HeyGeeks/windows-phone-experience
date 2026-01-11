@@ -1,0 +1,193 @@
+/* Windows Phone 8.1 People Hub */
+.wp-people {
+    padding-bottom: 40px;
+}
+
+.wp-people-title {
+    font-size: 48px;
+    font-weight: 200;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.wp-pivot-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.wp-pivot {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.wp-pivot.active {
+    color: var(--text-color);
+}
+
+/* Search */
+.wp-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 0 12px;
+    height: 44px;
+    margin-bottom: 20px;
+}
+
+.wp-search-box svg {
+    color: #666;
+}
+
+.wp-search-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: #000;
+    outline: none;
+}
+
+/* Contacts List */
+.wp-contacts-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-contact-letter {
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--accent-color);
+    padding: 8px 0;
+}
+
+.wp-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.wp-contact-item:active {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 -12px;
+    padding: 12px;
+}
+
+.wp-contact-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.wp-contact-item-name {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Contact Detail */
+.wp-contact-detail {
+    padding-bottom: 40px;
+}
+
+.wp-back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 8px;
+    margin: -8px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.wp-contact-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.wp-contact-photo-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+}
+
+.wp-contact-name {
+    font-size: 32px;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+.wp-contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.wp-contact-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.wp-contact-action span {
+    font-size: 14px;
+    text-transform: lowercase;
+}
+
+.wp-contact-info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wp-contact-info-item svg {
+    opacity: 0.5;
+}
+
+.wp-contact-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-contact-info-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.wp-contact-info-value {
+    font-size: 18px;
+}
+
+/* Empty State */
+.wp-empty-text {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px;
+}

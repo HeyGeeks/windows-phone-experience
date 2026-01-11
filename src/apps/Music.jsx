@@ -5,16 +5,7 @@ import { useMusic } from '../context/MusicContext';
 import './Music.css';
 
 export function Music() {
-    const {
-        isPlaying,
-        currentSong,
-        currentTime,
-        duration,
-        history,
-        playSong,
-        togglePlay
-    } = useMusic();
-
+    const { isPlaying, currentSong, currentTime, duration, history, playSong, togglePlay } = useMusic();
     const [songs, setSongs] = useState([]);
     const [query, setQuery] = useState('');
     const [pivot, setPivot] = useState('collection');
@@ -23,12 +14,11 @@ export function Music() {
     const searchMusic = async (e) => {
         e.preventDefault();
         if (!query.trim()) return;
-
         setLoading(true);
         try {
             const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=20`);
             const data = await res.json();
-            const mappedSongs = data.results.map(item => ({
+            setSongs(data.results.map(item => ({
                 id: item.trackId,
                 title: item.trackName,
                 artist: item.artistName,
@@ -36,9 +26,7 @@ export function Music() {
                 cover: item.artworkUrl100.replace('100x100', '400x400'),
                 previewUrl: item.previewUrl,
                 duration: 30
-            }));
-
-            setSongs(mappedSongs);
+            })));
         } catch (error) {
             console.error('Search failed:', error);
         } finally {
@@ -48,7 +36,7 @@ export function Music() {
 
     const handlePlaySong = (song) => {
         playSong(song);
-        setPivot('nowPlaying');
+        setPivot('now');
     };
 
     const formatTime = (time) => {
@@ -58,180 +46,86 @@ export function Music() {
         return `${m}:${s.toString().padStart(2, '0')}`;
     };
 
-    const formatRemaining = (curr, total) => {
-        if (!total || isNaN(total)) return '-0:00';
-        const left = total - curr;
-        const m = Math.floor(left / 60);
-        const s = Math.floor(left % 60);
-        return `-${m}:${s.toString().padStart(2, '0')}`;
-    };
-
-    const getNextSong = () => {
-        if (!currentSong || songs.length === 0) return null;
-        const currentIndex = songs.findIndex(s => s.id === currentSong.id);
-        if (currentIndex >= 0 && currentIndex < songs.length - 1) {
-            return songs[currentIndex + 1];
-        }
-        return null;
-    };
-
-    const nextSong = getNextSong();
-
     return (
-        <AppShell title="xbox music" hideTitle>
-            <div className="xm-container">
-                {currentSong && (
-                    <div
-                        className="xm-background"
-                        style={{ backgroundImage: `url(${currentSong.cover})` }}
-                    />
-                )}
-
-                <div className="xm-header">
-                    <h1 className="xm-title">xbox music</h1>
-                </div>
-
-                <div className="xm-pivots">
-                    <button
-                        className={`xm-pivot ${pivot === 'collection' ? 'active' : ''}`}
-                        onClick={() => setPivot('collection')}
-                    >
-                        collection
-                    </button>
-                    <button
-                        className={`xm-pivot ${pivot === 'nowPlaying' ? 'active' : ''}`}
-                        onClick={() => setPivot('nowPlaying')}
-                    >
-                        now playing
-                    </button>
+        <AppShell title="music + videos" hideTitle>
+            <div className="wp-music">
+                {currentSong && <div className="wp-music-bg" style={{ backgroundImage: `url(${currentSong.cover})` }} />}
+                <h1 className="wp-music-title">music + videos</h1>
+                <div className="wp-pivot-header">
+                    <button className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`} onClick={() => setPivot('collection')}>collection</button>
+                    <button className={`wp-pivot ${pivot === 'now' ? 'active' : ''}`} onClick={() => setPivot('now')}>now playing</button>
+                    <button className={`wp-pivot ${pivot === 'history' ? 'active' : ''}`} onClick={() => setPivot('history')}>history</button>
                 </div>
 
                 {pivot === 'collection' && (
-                    <div className="xm-collection">
-                        <form className="xm-search" onSubmit={searchMusic}>
-                            <input
-                                type="text"
-                                placeholder="search"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                            <button type="submit">
-                                <Icon name="search" size={20} />
-                            </button>
+                    <div className="wp-music-collection">
+                        <form className="wp-music-search" onSubmit={searchMusic}>
+                            <input type="text" placeholder="search music" value={query} onChange={(e) => setQuery(e.target.value)} />
+                            <button type="submit"><Icon name="search" size={20} /></button>
                         </form>
-
-                        {history.length > 0 && songs.length === 0 && (
-                            <div className="xm-section">
-                                <div className="xm-section-title">recently played</div>
-                                {history.map(song => (
-                                    <div
-                                        key={song.id}
-                                        className="xm-song-item"
-                                        onClick={() => handlePlaySong(song)}
-                                    >
-                                        <div className="xm-song-letter">
-                                            {song.title[0].toLowerCase()}
-                                        </div>
-                                        <div className="xm-song-info">
-                                            <span className="xm-song-title">{song.title}</span>
-                                            <span className="xm-song-artist">
-                                                <Icon name="music" size={12} /> {song.artist}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        {loading && <div className="xm-loading">Searching...</div>}
-
+                        {loading && <div className="wp-music-loading">searching...</div>}
                         {songs.length > 0 && (
-                            <div className="xm-section">
-                                <div className="xm-section-title">songs</div>
+                            <div className="wp-music-list">
                                 {songs.map(song => (
-                                    <div
-                                        key={song.id}
-                                        className="xm-song-item"
-                                        onClick={() => handlePlaySong(song)}
-                                    >
-                                        <div className="xm-song-letter">
-                                            {song.title[0].toLowerCase()}
+                                    <div key={song.id} className="wp-music-item" onClick={() => handlePlaySong(song)}>
+                                        <img src={song.cover} alt={song.title} className="wp-music-thumb" />
+                                        <div className="wp-music-info">
+                                            <span className="wp-music-song">{song.title}</span>
+                                            <span className="wp-music-artist">{song.artist}</span>
                                         </div>
-                                        <div className="xm-song-info">
-                                            <span className="xm-song-title">{song.title}</span>
-                                            <span className="xm-song-artist">
-                                                <Icon name="music" size={12} /> {song.artist} • {song.album}
-                                            </span>
-                                        </div>
-                                        <button className="xm-download-btn">
-                                            <Icon name="download" size={20} />
-                                        </button>
                                     </div>
                                 ))}
                             </div>
                         )}
+                        {!loading && songs.length === 0 && <p className="wp-music-empty">search for music above</p>}
+                    </div>
+                )}
 
-                        {history.length === 0 && songs.length === 0 && !loading && (
-                            <div className="xm-empty">
-                                <p>Search for music above</p>
+                {pivot === 'now' && (
+                    <div className="wp-now-playing">
+                        {currentSong ? (
+                            <>
+                                <div className="wp-np-art"><img src={currentSong.cover} alt={currentSong.title} /></div>
+                                <div className="wp-np-info">
+                                    <span className="wp-np-title">{currentSong.title}</span>
+                                    <span className="wp-np-artist">{currentSong.artist}</span>
+                                </div>
+                                <div className="wp-np-progress">
+                                    <span>{formatTime(currentTime)}</span>
+                                    <div className="wp-np-bar"><div className="wp-np-fill" style={{ width: `${(currentTime / duration) * 100}%` }} /></div>
+                                    <span>{formatTime(duration)}</span>
+                                </div>
+                                <div className="wp-np-controls">
+                                    <button className="wp-np-btn"><Icon name="skip_prev" size={32} /></button>
+                                    <button className="wp-np-btn wp-np-play" onClick={togglePlay}><Icon name={isPlaying ? 'pause' : 'play'} size={40} /></button>
+                                    <button className="wp-np-btn"><Icon name="skip_next" size={32} /></button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="wp-np-empty">
+                                <p>no song playing</p>
+                                <button onClick={() => setPivot('collection')}>browse collection</button>
                             </div>
                         )}
                     </div>
                 )}
 
-                {pivot === 'nowPlaying' && (
-                    <div className="xm-now-playing">
-                        {currentSong ? (
-                            <>
-                                <div className="xm-np-label">NOW PLAYING</div>
-
-                                <div className="xm-np-track-info">
-                                    <span className="xm-np-title">{currentSong.title}</span>
-                                    <span className="xm-np-artist">by {currentSong.artist}</span>
-                                </div>
-
-                                <div className="xm-np-art">
-                                    <img src={currentSong.cover} alt={currentSong.title} />
-                                    <button className="xm-np-queue-btn">
-                                        <Icon name="menu" size={24} />
-                                    </button>
-                                </div>
-
-                                <div className="xm-np-progress">
-                                    <span className="xm-time">{formatTime(currentTime)}</span>
-                                    <div className="xm-progress-track">
-                                        <div
-                                            className="xm-progress-fill"
-                                            style={{ width: `${(currentTime / duration) * 100}%` }}
-                                        />
+                {pivot === 'history' && (
+                    <div className="wp-music-history">
+                        {history.length > 0 ? (
+                            <div className="wp-music-list">
+                                {history.map(song => (
+                                    <div key={song.id} className="wp-music-item" onClick={() => handlePlaySong(song)}>
+                                        <img src={song.cover} alt={song.title} className="wp-music-thumb" />
+                                        <div className="wp-music-info">
+                                            <span className="wp-music-song">{song.title}</span>
+                                            <span className="wp-music-artist">{song.artist}</span>
+                                        </div>
                                     </div>
-                                    <span className="xm-time">{formatRemaining(currentTime, duration)}</span>
-                                </div>
-
-                                {nextSong && (
-                                    <div className="xm-up-next">
-                                        <span className="xm-up-next-label">Up next:</span>
-                                        <span className="xm-up-next-song">{nextSong.title} - From "{nextSong.album}" by...</span>
-                                    </div>
-                                )}
-
-                                <div className="xm-controls">
-                                    <button className="xm-ctrl-btn">
-                                        <Icon name="skip_prev" size={28} />
-                                    </button>
-                                    <button className="xm-ctrl-btn xm-ctrl-play" onClick={togglePlay}>
-                                        <Icon name={isPlaying ? 'pause' : 'play'} size={36} />
-                                    </button>
-                                    <button className="xm-ctrl-btn">
-                                        <Icon name="skip_next" size={28} />
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <div className="xm-np-empty">
-                                <p>No song playing</p>
-                                <button onClick={() => setPivot('collection')}>Browse collection</button>
+                                ))}
                             </div>
+                        ) : (
+                            <p className="wp-music-empty">no recently played songs</p>
                         )}
                     </div>
                 )}
