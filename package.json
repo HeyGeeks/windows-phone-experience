@@ -1,8 +1,32 @@
 {
-  "name": "exp-windows",
+  "name": "windows-phone-experience",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Windows Phone Experience - Web-based Lumia UI simulator with live tiles, Metro design, and classic Nokia Lumia aesthetics. Try Windows Phone online without a device.",
+  "keywords": [
+    "windows-phone",
+    "lumia",
+    "nokia-lumia",
+    "windows-phone-simulator",
+    "windows-phone-emulator",
+    "metro-ui",
+    "live-tiles",
+    "windows-phone-experience",
+    "lumia-experience",
+    "retro-tech",
+    "nostalgia",
+    "ui-clone",
+    "web-simulation",
+    "pwa"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://yoursite.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/windows-phone-experience"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

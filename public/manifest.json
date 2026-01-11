@@ -1,51 +1,62 @@
 {
-    "name": "Windows Phone",
-    "short_name": "WinPhone",
-    "description": "Windows Phone Metro UI Experience - A responsive web app with Metro design language",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#1BA1E2",
-    "orientation": "any",
-    "icons": [
-        {
-            "src": "/icons/icon-72x72.svg",
-            "sizes": "72x72",
-            "type": "image/svg+xml",
-            "purpose": "any"
-        },
-        {
-            "src": "/icons/icon-512x512.svg",
-            "sizes": "512x512",
-            "type": "image/svg+xml",
-            "purpose": "any"
-        },
-        {
-            "src": "/icons/icon-512x512.svg",
-            "sizes": "any",
-            "type": "image/svg+xml",
-            "purpose": "maskable"
-        }
-    ],
-    "categories": [
-        "utilities",
-        "entertainment"
-    ],
-    "shortcuts": [
-        {
-            "name": "Calculator",
-            "url": "/calculator",
-            "description": "Open Calculator"
-        },
-        {
-            "name": "Settings",
-            "url": "/settings",
-            "description": "Open Settings"
-        },
-        {
-            "name": "Browser",
-            "url": "/browser",
-            "description": "Open Browser"
-        }
-    ]
+  "name": "Windows Phone Experience – A Tribute to Lumia",
+  "short_name": "WinPhone",
+  "description": "A heartfelt tribute to Windows Phone OS. Experience Windows Phone and Nokia Lumia UI in your browser. Relive the magic of live tiles, Metro design, and the Lumia legacy—gone but never forgotten.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1BA1E2",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.svg",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "utilities",
+    "entertainment",
+    "simulation",
+    "nostalgia"
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculator",
+      "url": "/calculator",
+      "description": "Open Calculator App"
+    },
+    {
+      "name": "Settings",
+      "url": "/settings",
+      "description": "Open Settings App"
+    },
+    {
+      "name": "Browser",
+      "url": "/browser",
+      "description": "Open Internet Explorer"
+    },
+    {
+      "name": "Calendar",
+      "url": "/calendar",
+      "description": "Open Calendar App"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "lang": "en-US",
+  "dir": "ltr"
 }
