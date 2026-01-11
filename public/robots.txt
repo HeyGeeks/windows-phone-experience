@@ -1,0 +1,22 @@
+# Windows Phone Experience - Robots.txt
+# Allow only homepage, block all app routes
+
+User-agent: *
+Allow: /$
+Disallow: /settings
+Disallow: /calculator
+Disallow: /calendar
+Disallow: /clock
+Disallow: /browser
+Disallow: /files
+Disallow: /games
+Disallow: /maps
+Disallow: /messages
+Disallow: /music
+Disallow: /notes
+Disallow: /people
+Disallow: /phone
+Disallow: /photos
+Disallow: /store
+Disallow: /weather
+Disallow: /whatsapp

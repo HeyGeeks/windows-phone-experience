@@ -1,0 +1,50 @@
+# Windows Phone Experience
+
+> Windows Phone Experience is a web-based simulator that recreates the iconic Windows Phone and Nokia Lumia UI in your browser. Built with React 19 and Vite, it features live tiles, Metro design language, and classic Lumia aesthetics as a PWA.
+
+Important notes:
+- This is a UI simulation/tribute project, not an actual Windows Phone emulator
+- Built with React 19, Vite 7, and React Router 7
+- PWA-ready for installation on any device
+- Preserves the memory of Windows Phone OS (2010-2017)
+
+## Docs
+
+- [GitHub Repository](https://github.com/heygeeks/windows-phone-experience.git): Source code and contributions
+- [Creator - Mohit Yadav](https://heygeeks.in/): Project creator
+
+## Apps
+
+The simulator includes 17 recreated Windows Phone apps:
+
+- [Calculator](src/apps/Calculator.jsx): Basic calculator
+- [Calendar](src/apps/Calendar.jsx): Calendar app
+- [Clock](src/apps/Clock.jsx): Alarms and world clock
+- [Browser](src/apps/Browser.jsx): Internet Explorer simulation
+- [Files](src/apps/Files.jsx): File manager
+- [Games](src/apps/Games.jsx): Xbox Games hub
+- [Maps](src/apps/Maps.jsx): Maps and navigation
+- [Messages](src/apps/Messages.jsx): SMS messaging
+- [Music](src/apps/Music.jsx): Music + Videos player
+- [Notes](src/apps/Notes.jsx): OneNote-style notes
+- [People](src/apps/People.jsx): Contacts hub
+- [Phone](src/apps/Phone.jsx): Phone dialer
+- [Photos](src/apps/Photos.jsx): Photo gallery
+- [Settings](src/apps/Settings.jsx): System settings
+- [Store](src/apps/Store.jsx): Windows Phone Store
+- [Weather](src/apps/Weather.jsx): Weather app
+- [WhatsApp](src/apps/WhatsApp.jsx): WhatsApp messaging
+
+## Tech Stack
+
+- React 19 with functional components and hooks
+- Vite 7 for development and building
+- React Router 7 for client-side routing
+- CSS3 with Metro-inspired styling
+- PWA with service worker for offline support
+
+## Optional
+
+- [ESLint Config](eslint.config.js): Code linting configuration
+- [Vite Config](vite.config.js): Build tool configuration
+- [Service Worker](public/sw.js): PWA offline caching
