@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppShell } from '../components/AppShell';
 import { Icon } from '../components/Icons';
 import { useMusic } from '../context/MusicContext';
 import './Music.css';
+
+// Default Bollywood songs to show on load
+const defaultBollywoodSongs = [
+    { id: 1, title: 'Kesariya', artist: 'Arijit Singh', album: 'Brahmastra', cover: 'https://i.scdn.co/image/ab67616d0000b273c08202c50371e234d20caf62', previewUrl: '', duration: 30 },
+    { id: 2, title: 'Apna Bana Le', artist: 'Arijit Singh', album: 'Bhediya', cover: 'https://i.scdn.co/image/ab67616d0000b273a0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 3, title: 'Tere Vaaste', artist: 'Varun Jain, Sachin-Jigar', album: 'Zara Hatke Zara Bachke', cover: 'https://i.scdn.co/image/ab67616d0000b273b0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 4, title: 'Chaleya', artist: 'Arijit Singh, Shilpa Rao', album: 'Jawan', cover: 'https://i.scdn.co/image/ab67616d0000b273d0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 5, title: 'Tera Ban Jaunga', artist: 'Akhil Sachdeva, Tulsi Kumar', album: 'Kabir Singh', cover: 'https://i.scdn.co/image/ab67616d0000b273e0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 6, title: 'Raataan Lambiyan', artist: 'Jubin Nautiyal, Asees Kaur', album: 'Shershaah', cover: 'https://i.scdn.co/image/ab67616d0000b273f0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 7, title: 'Pasoori', artist: 'Ali Sethi, Shae Gill', album: 'Coke Studio', cover: 'https://i.scdn.co/image/ab67616d0000b27310e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+    { id: 8, title: 'Besharam Rang', artist: 'Shilpa Rao, Caralisa Monteiro', album: 'Pathaan', cover: 'https://i.scdn.co/image/ab67616d0000b27320e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
+];
 
 export function Music() {
     const { isPlaying, currentSong, currentTime, duration, history, playSong, togglePlay } = useMusic();
@@ -11,6 +23,37 @@ export function Music() {
     const [pivot, setPivot] = useState('collection');
     const [loading, setLoading] = useState(false);
 
+    // Load Bollywood songs on mount
+    useEffect(() => {
+        loadBollywoodSongs();
+    }, []);
+
+    const loadBollywoodSongs = async () => {
+        setLoading(true);
+        try {
+            const res = await fetch(`https://itunes.apple.com/search?term=bollywood+hindi+songs+2024&media=music&entity=song&limit=20`);
+            const data = await res.json();
+            if (data.results && data.results.length > 0) {
+                setSongs(data.results.map(item => ({
+                    id: item.trackId,
+                    title: item.trackName,
+                    artist: item.artistName,
+                    album: item.collectionName,
+                    cover: item.artworkUrl100 ? item.artworkUrl100.replace('100x100', '400x400') : 'https://via.placeholder.com/400',
+                    previewUrl: item.previewUrl || '',
+                    duration: 30
+                })));
+            } else {
+                setSongs(defaultBollywoodSongs);
+            }
+        } catch (error) {
+            console.error('Failed to load songs:', error);
+            setSongs(defaultBollywoodSongs);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const searchMusic = async (e) => {
         e.preventDefault();
         if (!query.trim()) return;
@@ -18,17 +61,22 @@ export function Music() {
         try {
             const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=20`);
             const data = await res.json();
-            setSongs(data.results.map(item => ({
-                id: item.trackId,
-                title: item.trackName,
-                artist: item.artistName,
-                album: item.collectionName,
-                cover: item.artworkUrl100.replace('100x100', '400x400'),
-                previewUrl: item.previewUrl,
-                duration: 30
-            })));
+            if (data.results && data.results.length > 0) {
+                setSongs(data.results.map(item => ({
+                    id: item.trackId,
+                    title: item.trackName,
+                    artist: item.artistName,
+                    album: item.collectionName,
+                    cover: item.artworkUrl100 ? item.artworkUrl100.replace('100x100', '400x400') : 'https://via.placeholder.com/400',
+                    previewUrl: item.previewUrl || '',
+                    duration: 30
+                })));
+            } else {
+                setSongs([]);
+            }
         } catch (error) {
             console.error('Search failed:', error);
+            setSongs([]);
         } finally {
             setLoading(false);
         }
@@ -49,7 +97,6 @@ export function Music() {
     return (
         <AppShell title="music + videos" hideTitle>
             <div className="wp-music">
-                {currentSong && <div className="wp-music-bg" style={{ backgroundImage: `url(${currentSong.cover})` }} />}
                 <h1 className="wp-music-title">Music + Videos</h1>
                 <div className="wp-pivot-header">
                     <button className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`} onClick={() => setPivot('collection')}>collection</button>
@@ -77,7 +124,7 @@ export function Music() {
                                 ))}
                             </div>
                         )}
-                        {!loading && songs.length === 0 && <p className="wp-music-empty">search for music above</p>}
+                        {!loading && songs.length === 0 && <p className="wp-music-empty">no results found, try another search</p>}
                     </div>
                 )}
 

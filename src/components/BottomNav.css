@@ -1,14 +1,15 @@
 /* Windows Phone 8.1 Bottom Navigation */
 .bottom-nav {
-    height: 72px;
+    height: calc(72px + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: center;
     gap: 48px;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 12px;
     background: var(--bg-color);
     flex-shrink: 0;
     border-top: none;
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .nav-btn {
