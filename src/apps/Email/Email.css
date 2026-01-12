@@ -1,0 +1,417 @@
+/* Email App - Windows Phone 8.1 Metro Style */
+
+.email-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 12px;
+}
+
+.email-title {
+    font-size: 20px;
+    font-weight: var(--font-semilight, 300);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px 0;
+    color: var(--text-color, #fff);
+    font-family: var(--font-primary, 'Segoe WP', 'Segoe UI', sans-serif);
+}
+
+/* Email List Styles */
+.email-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.email-list-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    text-align: center;
+}
+
+.email-list-empty-icon {
+    opacity: 0.4;
+    margin-bottom: 16px;
+}
+
+.email-list-empty-text {
+    font-size: 18px;
+    font-weight: var(--font-semilight, 300);
+}
+
+.email-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.email-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.email-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color, #0078D7);
+}
+
+.email-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.email-avatar-placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.email-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.email-sender {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.email-item.unread .email-sender {
+    font-weight: 700;
+}
+
+.email-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.email-time {
+    font-size: 13px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    white-space: nowrap;
+}
+
+.email-flag {
+    color: var(--accent-color, #0078D7);
+}
+
+.email-attachment {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+.email-subject {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-color, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.email-item.unread .email-subject {
+    font-weight: 600;
+}
+
+.email-preview {
+    font-size: 14px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.email-unread-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-color, #0078D7);
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+/* Email Detail Styles */
+.email-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.email-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.email-detail-back {
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    padding: 8px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-detail-title {
+    font-size: 20px;
+    font-weight: var(--font-semilight, 300);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.email-detail-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 12px;
+}
+
+.email-detail-sender {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.email-detail-sender-info {
+    flex: 1;
+}
+
+.email-detail-sender-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    margin-bottom: 2px;
+}
+
+.email-detail-sender-email {
+    font-size: 14px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+.email-detail-subject {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.email-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    margin-bottom: 20px;
+}
+
+.email-detail-body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-color, #fff);
+    white-space: pre-wrap;
+}
+
+.email-detail-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.email-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    padding: 8px 16px;
+    opacity: 0.9;
+    transition: opacity 0.15s ease;
+}
+
+.email-action-btn:active {
+    opacity: 0.6;
+}
+
+.email-action-btn span {
+    font-size: 11px;
+    text-transform: lowercase;
+}
+
+.email-action-btn.flagged {
+    color: var(--accent-color, #0078D7);
+}
+
+/* Compose Email Styles */
+.compose-email {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.compose-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.compose-back {
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    padding: 8px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compose-title {
+    font-size: 20px;
+    font-weight: var(--font-semilight, 300);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex: 1;
+}
+
+.compose-send {
+    background: none;
+    border: none;
+    color: var(--accent-color, #0078D7);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compose-send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.compose-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.compose-field {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.compose-label {
+    font-size: 15px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.compose-input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    font-size: 15px;
+    font-family: var(--font-primary, 'Segoe WP', 'Segoe UI', sans-serif);
+    outline: none;
+}
+
+.compose-input::placeholder {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.4));
+}
+
+.compose-body-container {
+    flex: 1;
+    padding: 12px;
+    overflow: hidden;
+}
+
+.compose-body {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    font-size: 15px;
+    font-family: var(--font-primary, 'Segoe WP', 'Segoe UI', sans-serif);
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+}
+
+.compose-body::placeholder {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.4));
+}
+
+/* New Email FAB */
+.email-fab {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--accent-color, #0078D7);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.email-fab:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

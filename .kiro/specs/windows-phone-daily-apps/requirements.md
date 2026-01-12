@@ -136,7 +136,20 @@ This feature adds essential day-to-day use applications to the Windows Phone 8.1
 4. THE Sports_App SHALL display live score updates on its Live_Tile
 5. WHEN viewing news, THE Sports_App SHALL display sports headlines with images
 
-### Requirement 11: App Integration
+### Requirement 11: Ringtones App
+
+**User Story:** As a user, I want to browse and play ringtones, so that I can preview and select ringtones with the authentic Windows Phone ringtone experience.
+
+#### Acceptance Criteria
+
+1. WHEN the user opens the Ringtones section in Settings, THE Ringtones_UI SHALL display a list of available ringtones with play buttons
+2. WHEN the user taps a ringtone, THE Ringtones_UI SHALL play the ringtone audio with a visual indicator showing playback
+3. WHEN a ringtone is playing and the user taps it again, THE Ringtones_UI SHALL stop playback
+4. WHEN the user selects a ringtone, THE Ringtones_UI SHALL highlight the selected ringtone with the accent color checkmark
+5. THE Ringtones_UI SHALL categorize ringtones into sections (Nokia, Windows, Custom) with Metro-styled headers
+6. WHEN scrolling through ringtones, THE Ringtones_UI SHALL display ringtone name and duration in the Windows Phone list style
+
+### Requirement 12: App Integration
 
 **User Story:** As a developer, I want all new apps properly integrated, so that they work seamlessly within the Windows Phone simulation.
 

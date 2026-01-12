@@ -3,6 +3,7 @@ import { AppShell } from '../components/AppShell';
 import { Toggle } from '../components/Toggle';
 import { Icon } from '../components/Icons';
 import { useTheme, THEME_COLORS } from '../context/ThemeContext';
+import { Ringtones } from './Settings/components/Ringtones';
 import './Settings.css';
 
 const defaultSettings = {
@@ -20,7 +21,7 @@ const defaultSettings = {
     contactSync: true, contactFacebook: false,
     notifyMessaging: true, notifyPhone: true, notifyStore: true, notifyMail: true,
     ringerVibrate: true, notificationSounds: true, keyboardSounds: false,
-    bgCalendar: true, bgMail: true, bgWeather: true
+    ringtone: 'Nokia Tune'
 };
 
 export function Settings() {
@@ -460,9 +461,31 @@ export function Settings() {
         <div className="wp-settings-page">
             <BackButton />
             <h2 className="wp-settings-page-title">ringtones+sounds</h2>
+            <div className="wp-settings-item" onClick={() => setView('ringtoneSelection')}>
+                <span className="wp-settings-item-label">Ringtone</span>
+                <span className="wp-settings-item-desc">{settings.ringtone}</span>
+            </div>
             <ToggleRow label="Vibrate" value={settings.ringerVibrate} onChange={() => toggle('ringerVibrate')} />
             <ToggleRow label="Notification sounds" value={settings.notificationSounds} onChange={() => toggle('notificationSounds')} />
             <ToggleRow label="Key press sounds" value={settings.keyboardSounds} onChange={() => toggle('keyboardSounds')} />
+        </div>
+    );
+
+    const renderRingtoneSelection = () => (
+        <div className="wp-settings-page">
+            <button className="wp-back-btn" onClick={() => {
+                setView('ringtones');
+            }}>
+                <Icon name="back" size={20} />
+            </button>
+            <h2 className="wp-settings-page-title">ringtone</h2>
+            <Ringtones
+                selectedRingtone={settings.ringtone}
+                onSelectRingtone={(name) => {
+                    setSettings(s => ({ ...s, ringtone: name }));
+                }}
+                onBack={() => setView('ringtones')}
+            />
         </div>
     );
 
@@ -526,7 +549,7 @@ export function Settings() {
         theme: renderTheme, lock: renderLock, notifications: renderNotifications, location: renderLocation,
         storage: renderStorage, datetime: renderDatetime, about: renderAbout,
         background: renderBackground, photos: renderPhotos, people: renderPeople, messaging: renderMessaging,
-        phone: renderPhone, email: renderEmail, ringtones: renderRingtones, keyboard: renderKeyboard,
+        phone: renderPhone, email: renderEmail, ringtones: renderRingtones, ringtoneSelection: renderRingtoneSelection, keyboard: renderKeyboard,
         speech: renderSpeech, ease: renderEase, sync: renderSync, store: renderStore
     };
 

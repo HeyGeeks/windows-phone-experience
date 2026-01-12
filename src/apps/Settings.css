@@ -604,3 +604,84 @@
     font-size: 14px;
     color: var(--text-secondary);
 }
+
+/* Selection List */
+.wp-list-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-list-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s;
+    min-height: 56px;
+    /* Ensure hit target size */
+}
+
+.wp-list-option:active {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 -12px;
+    padding: 12px 12px;
+}
+
+.wp-list-option.selected .wp-list-label {
+    color: var(--accent-color);
+}
+
+.wp-list-label {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-color);
+    display: block;
+    line-height: 1.2;
+}
+
+.wp-list-check {
+    color: var(--accent-color);
+    font-size: 18px;
+    margin-left: 12px;
+}
+
+/* Play Button - WP8.1 Style */
+.wp-play-btn {
+    background: transparent;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    width: 32px;
+    /* Fixed width */
+    height: 32px;
+    /* Fixed height */
+    min-width: 32px;
+    /* Prevent shrinking */
+    min-height: 32px;
+    flex: 0 0 32px;
+    /* Flex shorthand for grow/shrink/basis */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    cursor: pointer;
+    margin-right: 16px;
+    padding: 0;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    /* Ensure border is included in size */
+}
+
+.wp-play-btn:active,
+.wp-play-btn.playing {
+    background: var(--text-color);
+    color: var(--bg-color);
+    /* Invert colors */
+    border-color: var(--text-color);
+}
+
+.wp-list-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}

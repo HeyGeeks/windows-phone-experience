@@ -25,6 +25,12 @@ import { Games } from './apps/Games';
 import { Maps } from './apps/Maps';
 import { Files } from './apps/Files';
 import { WhatsApp } from './apps/WhatsApp/WhatsApp';
+import { Email } from './apps/Email/Email';
+import { Camera } from './apps/Camera/Camera';
+import { Podcast } from './apps/Podcast/Podcast';
+import { Office } from './apps/Office/Office';
+import { Health } from './apps/Health/Health';
+import { News } from './apps/News/News';
 import './styles/index.css';
 
 function AppContent() {
@@ -69,6 +75,12 @@ function AppContent() {
             maps: { id: 'maps', name: 'Maps', icon: 'map', color: '#1BA1E2', preview: 'Navigation' },
             files: { id: 'files', name: 'Files', icon: 'folder', color: '#1BA1E2', preview: 'File manager' },
             whatsapp: { id: 'whatsapp', name: 'WhatsApp', icon: 'message', color: '#25D366', preview: 'Messages' },
+            email: { id: 'email', name: 'Outlook', icon: 'inbox', color: '#0078D4', preview: 'Inbox' },
+            camera: { id: 'camera', name: 'Camera', icon: 'camera', color: '#1BA1E2', preview: 'Take photos' },
+            podcast: { id: 'podcast', name: 'Podcasts', icon: 'podcast', color: '#8E44AD', preview: 'Episodes' },
+            office: { id: 'office', name: 'Office', icon: 'word', color: '#D24726', preview: 'Documents' },
+            health: { id: 'health', name: 'Health', icon: 'heart', color: '#60A917', preview: 'Fitness' },
+            news: { id: 'news', name: 'News', icon: 'newspaper', color: '#1BA1E2', preview: 'Headlines' },
         };
         return apps[name];
     };
@@ -144,6 +156,12 @@ function AppContent() {
                     <Route path="/maps" element={<Maps />} />
                     <Route path="/files" element={<Files />} />
                     <Route path="/whatsapp" element={<WhatsApp />} />
+                    <Route path="/email" element={<Email />} />
+                    <Route path="/camera" element={<Camera />} />
+                    <Route path="/podcast" element={<Podcast />} />
+                    <Route path="/office" element={<Office />} />
+                    <Route path="/health" element={<Health />} />
+                    <Route path="/news" element={<News />} />
                 </Routes>
             </div>
             <BottomNav onRecentApps={() => setIsRecentAppsOpen(true)} />

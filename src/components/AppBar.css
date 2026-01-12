@@ -1,0 +1,195 @@
+/* AppBar - Windows Phone 8.1 Metro Style */
+
+.app-bar-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.app-bar {
+    height: 72px;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.app-bar-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+}
+
+.app-bar-btn {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 2.5px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    padding: 0;
+}
+
+.app-bar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.app-bar-btn:active {
+    background: white;
+    color: black;
+}
+
+.app-bar-btn:focus {
+    outline: none;
+}
+
+.app-bar-btn:focus-visible {
+    outline: 2px solid var(--accent-color, #0078D7);
+    outline-offset: 2px;
+}
+
+.app-bar-btn svg {
+    fill: currentColor;
+}
+
+.app-bar-more {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+}
+
+.app-bar-more:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.app-bar-more:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.app-bar-more:focus {
+    outline: none;
+}
+
+.app-bar-more:focus-visible {
+    outline: 2px solid var(--accent-color, #0078D7);
+    outline-offset: 2px;
+}
+
+.app-bar-more svg {
+    fill: currentColor;
+}
+
+/* Menu overlay */
+.app-bar-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 99;
+}
+
+/* Menu */
+.app-bar-menu {
+    position: absolute;
+    bottom: 72px;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    animation: menuSlideUp 0.15s ease-out;
+}
+
+@keyframes menuSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-bar-menu-item {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: var(--font-primary, 'Segoe WP', 'Segoe UI', sans-serif);
+    font-size: 18px;
+    font-weight: var(--font-regular, 400);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.1s ease;
+}
+
+.app-bar-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.app-bar-menu-item:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.app-bar-menu-item:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.app-bar-menu-item:focus-visible {
+    outline: 2px solid var(--accent-color, #0078D7);
+    outline-offset: -2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 374px) {
+    .app-bar {
+        height: 64px;
+    }
+    
+    .app-bar-actions {
+        gap: 16px;
+    }
+    
+    .app-bar-btn {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .app-bar-more {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .app-bar-menu {
+        bottom: 64px;
+    }
+    
+    .app-bar-menu-item {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .app-bar-menu {
+        animation: none;
+    }
+}

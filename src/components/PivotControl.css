@@ -1,0 +1,99 @@
+/* PivotControl - Windows Phone 8.1 Metro Style */
+
+.pivot-control {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.pivot-header {
+    display: flex;
+    gap: 24px;
+    padding: 4px 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+}
+
+.pivot-header::-webkit-scrollbar {
+    display: none;
+}
+
+.pivot-item {
+    font-size: 46px;
+    font-weight: var(--font-semilight, 300);
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    text-transform: lowercase;
+    padding: 0;
+    transition: color 0.2s ease;
+    line-height: 1.1;
+    font-family: var(--font-primary, 'Segoe WP', 'Segoe UI', sans-serif);
+}
+
+.pivot-item:focus {
+    outline: none;
+}
+
+.pivot-item:focus-visible {
+    outline: 2px solid var(--accent-color, #0078D7);
+    outline-offset: 4px;
+}
+
+.pivot-item.active {
+    color: var(--text-color, #FFFFFF);
+}
+
+.pivot-item:hover:not(.active) {
+    color: var(--text-color, #FFFFFF);
+    opacity: 0.8;
+}
+
+.pivot-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
+}
+
+/* Animation for content transition */
+.pivot-content > * {
+    animation: pivotFadeIn 0.2s ease-out;
+}
+
+@keyframes pivotFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 374px) {
+    .pivot-item {
+        font-size: 38px;
+    }
+    
+    .pivot-header {
+        gap: 18px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 479px) {
+    .pivot-item {
+        font-size: 42px;
+    }
+    
+    .pivot-header {
+        gap: 20px;
+    }
+}

@@ -1,0 +1,440 @@
+/* Podcast App - Windows Phone 8.1 Metro Style */
+
+.podcast-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+/* Episode List Styles */
+.episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.episode-list-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    text-align: center;
+}
+
+.episode-list-empty-icon {
+    opacity: 0.4;
+    margin-bottom: 16px;
+}
+
+.episode-list-empty-text {
+    font-size: 18px;
+    font-weight: var(--font-semilight, 300);
+}
+
+/* Episode Item */
+.episode-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.episode-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.episode-artwork {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.episode-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.episode-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.episode-podcast-title {
+    font-size: 12px;
+    color: var(--accent-color, #0078D7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.episode-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.episode-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+.episode-duration {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.episode-date {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.episode-meta-separator {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: var(--text-secondary, rgba(255, 255, 255, 0.4));
+}
+
+/* Download Status */
+.episode-download-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.episode-download-icon {
+    color: var(--accent-color, #0078D7);
+}
+
+.episode-download-icon.not-downloaded {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.4));
+}
+
+.episode-download-text {
+    font-size: 12px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+.episode-download-text.downloaded {
+    color: var(--accent-color, #0078D7);
+}
+
+/* Download Progress Bar */
+.episode-download-progress {
+    flex: 1;
+    max-width: 100px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.episode-download-progress-fill {
+    height: 100%;
+    background-color: var(--accent-color, #0078D7);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Playback Progress Indicator */
+.episode-playback-progress {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1.5px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.episode-playback-progress-fill {
+    height: 100%;
+    background-color: var(--accent-color, #0078D7);
+    border-radius: 1.5px;
+}
+
+/* Episode Actions */
+.episode-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.episode-play-btn,
+.episode-download-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--text-color, #fff);
+    background: transparent;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.episode-play-btn:active,
+.episode-download-btn:active {
+    background-color: var(--text-color, #fff);
+    color: var(--bg-color, #000);
+}
+
+.episode-download-btn.downloading {
+    border-color: var(--accent-color, #0078D7);
+    color: var(--accent-color, #0078D7);
+}
+
+/* Podcast Player Overlay */
+.podcast-player-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-color, #000);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.podcast-player-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.podcast-player-back {
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    padding: 8px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.podcast-player-title {
+    font-size: 20px;
+    font-weight: var(--font-semilight, 300);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.podcast-player-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.podcast-player-artwork {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.podcast-player-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.podcast-player-info {
+    text-align: center;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.podcast-player-episode-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.podcast-player-podcast-title {
+    font-size: 14px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+/* Player Progress */
+.podcast-player-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 24px;
+}
+
+.podcast-player-time {
+    font-size: 12px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    min-width: 40px;
+    text-align: center;
+}
+
+.podcast-player-progress-bar {
+    flex: 1;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.podcast-player-progress-fill {
+    height: 100%;
+    background-color: var(--accent-color, #0078D7);
+    border-radius: 2px;
+    transition: width 0.1s linear;
+}
+
+/* Player Controls */
+.podcast-player-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.podcast-player-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--text-color, #fff);
+    background: transparent;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.podcast-player-btn:active {
+    background-color: var(--text-color, #fff);
+    color: var(--bg-color, #000);
+}
+
+.podcast-player-btn.play-pause {
+    width: 64px;
+    height: 64px;
+}
+
+.podcast-player-btn.skip {
+    width: 40px;
+    height: 40px;
+    border-width: 1.5px;
+}
+
+/* Live Tile Preview */
+.podcast-tile-preview {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.podcast-tile-artwork {
+    width: 48px;
+    height: 48px;
+}
+
+.podcast-tile-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.podcast-tile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.podcast-tile-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.podcast-tile-progress {
+    font-size: 12px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+/* Responsive adjustments */
+@media (max-width: 374px) {
+    .episode-artwork {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .episode-title {
+        font-size: 15px;
+    }
+    
+    .podcast-player-artwork {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .podcast-player-overlay {
+        animation: none;
+    }
+    
+    .episode-download-progress-fill,
+    .podcast-player-progress-fill {
+        transition: none;
+    }
+}
