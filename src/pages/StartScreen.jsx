@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tile } from '../components/Tile';
+import { WidgetTile } from '../components/WidgetTile';
 import { Icon } from '../components/Icons';
 import './StartScreen.css';
 
@@ -8,18 +9,18 @@ const TILES = [
     { id: 'phone', icon: 'phone', label: 'Phone', size: 'medium', route: '/phone' },
     { id: 'people', icon: 'people', label: 'People', size: 'medium', route: '/people' },
     { id: 'messages', icon: 'message', label: 'Messaging', size: 'medium', live: true, notification: 3, route: '/messages' },
+    { id: 'calendar-widget', type: 'calendar', size: 'medium', route: '/calendar' },
     { id: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', size: 'medium', color: '#25D366', route: '/whatsapp' },
     { id: 'email', icon: 'inbox', label: 'Outlook', size: 'wide', live: true, notification: 12, route: '/email' },
-    { id: 'calendar', icon: 'calendar', label: 'Calendar', size: 'small', route: '/calendar' },
-    { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', live: true, route: '/photos' },
     { id: 'camera', icon: 'camera', label: 'Camera', size: 'small', route: '/camera' },
+    { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', live: true, route: '/photos' },
+    { id: 'clock-widget', type: 'clock', size: 'small', route: '/clock' },
     { id: 'settings', icon: 'settings', label: 'Settings', size: 'small', route: '/settings' },
     { id: 'music', icon: 'music', label: 'Music', size: 'medium', route: '/music' },
     { id: 'store', icon: 'store', label: 'Store', size: 'small', route: '/store' },
     { id: 'games', icon: 'games', label: 'Games', size: 'small', route: '/games' },
     { id: 'calculator', icon: 'calculator', label: 'Calculator', size: 'small', route: '/calculator' },
-    { id: 'weather', icon: 'weather', label: 'Weather', size: 'medium', live: true, route: '/weather' },
-    { id: 'clock', icon: 'alarm', label: 'Alarms', size: 'small', route: '/clock' },
+    { id: 'weather-widget', type: 'weather', size: 'medium', route: '/weather' },
     { id: 'notes', icon: 'notes', label: 'OneNote', size: 'small', route: '/notes' },
     { id: 'browser', icon: 'browser', label: 'IE', size: 'medium', route: '/browser' },
     { id: 'maps', icon: 'map', label: 'Maps', size: 'small', route: '/maps' },
@@ -88,12 +89,22 @@ export function StartScreen() {
             <div className="hub-page start-screen">
                 <div className="tile-grid">
                     {TILES.map((tile, index) => (
-                        <Tile 
-                            key={tile.id} 
-                            {...tile} 
-                            flipped={flippedTiles[tile.id]} 
-                            delay={index} 
-                        />
+                        tile.type ? (
+                            <WidgetTile 
+                                key={tile.id}
+                                type={tile.type}
+                                size={tile.size}
+                                route={tile.route}
+                                delay={index}
+                            />
+                        ) : (
+                            <Tile 
+                                key={tile.id} 
+                                {...tile} 
+                                flipped={flippedTiles[tile.id]} 
+                                delay={index} 
+                            />
+                        )
                     ))}
                 </div>
                 {/* Arrow indicator to swipe for app list */}

@@ -8,6 +8,10 @@ const QUICK_ACTIONS = [
     { id: 'bluetooth', icon: 'bluetooth', label: 'Bluetooth', active: false },
     { id: 'airplane', icon: 'airplane', label: 'Airplane mode', active: false },
     { id: 'rotation', icon: 'rotation', label: 'Rotation lock', active: false },
+    { id: 'location', icon: 'location', label: 'Location', active: true },
+    { id: 'flashlight', icon: 'flash', label: 'Flashlight', active: false },
+    { id: 'battery', icon: 'battery', label: 'Battery saver', active: false },
+    { id: 'quiet', icon: 'mute', label: 'Quiet hours', active: false },
 ];
 
 const NOTIFICATIONS = [
@@ -29,12 +33,22 @@ const NOTIFICATIONS = [
             { sender: '', subject: '1 app has been updated', time: '7:54a' },
         ]
     },
+    {
+        id: 3,
+        app: 'Messaging',
+        icon: 'message',
+        items: [
+            { sender: 'John Smith', subject: 'Hey, are you free tonight?', time: '2:30p' },
+        ]
+    },
 ];
 
 export function ActionCenter({ isOpen, onClose, onOpenSettings }) {
     const { accentColor } = useTheme();
     const [quickActions, setQuickActions] = useState(QUICK_ACTIONS);
     const [notifications, setNotifications] = useState(NOTIFICATIONS);
+    const [brightness, setBrightness] = useState(80);
+    const [expanded, setExpanded] = useState(false);
 
     const toggleQuickAction = (id) => {
         setQuickActions(prev => prev.map(action => 
@@ -53,9 +67,9 @@ export function ActionCenter({ isOpen, onClose, onOpenSettings }) {
     return (
         <div className={`action-center ${isOpen ? 'open' : ''}`} onClick={onClose}>
             <div className="action-center-content" onClick={e => e.stopPropagation()}>
-                {/* Quick Actions */}
+                {/* Quick Actions - First row always visible */}
                 <div className="quick-actions">
-                    {quickActions.map(action => (
+                    {quickActions.slice(0, 4).map(action => (
                         <button
                             key={action.id}
                             className={`quick-action ${action.active ? 'active' : ''}`}
@@ -66,6 +80,42 @@ export function ActionCenter({ isOpen, onClose, onOpenSettings }) {
                             <span className="quick-action-label">{action.label}</span>
                         </button>
                     ))}
+                </div>
+                
+                {/* Second row - expandable */}
+                <div className={`quick-actions quick-actions-row2 ${expanded ? 'expanded' : ''}`}>
+                    {quickActions.slice(4, 8).map(action => (
+                        <button
+                            key={action.id}
+                            className={`quick-action ${action.active ? 'active' : ''}`}
+                            onClick={() => toggleQuickAction(action.id)}
+                            style={{ background: action.active ? accentColor : 'transparent' }}
+                        >
+                            <Icon name={action.icon} size={24} />
+                            <span className="quick-action-label">{action.label}</span>
+                        </button>
+                    ))}
+                </div>
+
+                {/* Expand/Collapse button */}
+                <button className="expand-btn" onClick={() => setExpanded(!expanded)}>
+                    <Icon name={expanded ? 'chevronUp' : 'chevronDown'} size={20} />
+                    <span>{expanded ? 'Collapse' : 'Expand'}</span>
+                </button>
+
+                {/* Brightness Slider */}
+                <div className="brightness-control">
+                    <Icon name="sunLow" size={18} className="brightness-icon" />
+                    <input
+                        type="range"
+                        min="10"
+                        max="100"
+                        value={brightness}
+                        onChange={(e) => setBrightness(e.target.value)}
+                        className="brightness-slider"
+                        style={{ '--slider-progress': `${brightness}%`, '--accent': accentColor }}
+                    />
+                    <Icon name="sun" size={22} className="brightness-icon" />
                 </div>
 
                 {/* Action Bar */}
