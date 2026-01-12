@@ -1,7 +1,7 @@
 {
-  "name": "Windows Phone Experience – A Tribute to Lumia",
+  "name": "Windows Phone Experience",
   "short_name": "WinPhone",
-  "description": "A heartfelt tribute to Windows Phone OS. Experience Windows Phone and Nokia Lumia UI in your browser. Relive the magic of live tiles, Metro design, and the Lumia legacy—gone but never forgotten.",
+  "description": "Experience Windows Phone and Nokia Lumia UI in your browser. Relive the magic of live tiles, Metro design, and the Lumia legacy.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
