@@ -1,182 +1,203 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AppShell } from '../components/AppShell';
-import { Icon } from '../components/Icons';
 import { useMusic } from '../context/MusicContext';
+import {
+  CollectionView,
+  ArtistDetailView,
+  AlbumDetailView,
+  NowPlayingView,
+  QueueView,
+  MiniPlayer,
+  HistoryView
+} from './Music/components';
 import './Music.css';
 
-// Default Bollywood songs to show on load
-const defaultBollywoodSongs = [
-    { id: 1, title: 'Kesariya', artist: 'Arijit Singh', album: 'Brahmastra', cover: 'https://i.scdn.co/image/ab67616d0000b273c08202c50371e234d20caf62', previewUrl: '', duration: 30 },
-    { id: 2, title: 'Apna Bana Le', artist: 'Arijit Singh', album: 'Bhediya', cover: 'https://i.scdn.co/image/ab67616d0000b273a0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 3, title: 'Tere Vaaste', artist: 'Varun Jain, Sachin-Jigar', album: 'Zara Hatke Zara Bachke', cover: 'https://i.scdn.co/image/ab67616d0000b273b0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 4, title: 'Chaleya', artist: 'Arijit Singh, Shilpa Rao', album: 'Jawan', cover: 'https://i.scdn.co/image/ab67616d0000b273d0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 5, title: 'Tera Ban Jaunga', artist: 'Akhil Sachdeva, Tulsi Kumar', album: 'Kabir Singh', cover: 'https://i.scdn.co/image/ab67616d0000b273e0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 6, title: 'Raataan Lambiyan', artist: 'Jubin Nautiyal, Asees Kaur', album: 'Shershaah', cover: 'https://i.scdn.co/image/ab67616d0000b273f0e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 7, title: 'Pasoori', artist: 'Ali Sethi, Shae Gill', album: 'Coke Studio', cover: 'https://i.scdn.co/image/ab67616d0000b27310e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-    { id: 8, title: 'Besharam Rang', artist: 'Shilpa Rao, Caralisa Monteiro', album: 'Pathaan', cover: 'https://i.scdn.co/image/ab67616d0000b27320e1bd6d8e1d2e1c8e1d2e1c', previewUrl: '', duration: 30 },
-];
-
+/**
+ * Music App - Windows Phone 8.1 Style Music Player
+ * Main container component managing pivot navigation and view rendering.
+ * Requirements: 1.1, 1.2, 1.3
+ */
 export function Music() {
-    const { isPlaying, currentSong, currentTime, duration, history, playSong, togglePlay } = useMusic();
-    const [songs, setSongs] = useState([]);
-    const [query, setQuery] = useState('');
-    const [pivot, setPivot] = useState('collection');
-    const [loading, setLoading] = useState(false);
+  const { currentSong, playQueue, playSong } = useMusic();
+  
+  // Navigation state
+  const [pivot, setPivot] = useState('collection');
+  
+  // Detail view state for artist/album navigation
+  const [selectedArtist, setSelectedArtist] = useState(null);
+  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  
+  // Queue overlay state
+  const [showQueue, setShowQueue] = useState(false);
 
-    // Load Bollywood songs on mount
-    useEffect(() => {
-        loadBollywoodSongs();
-    }, []);
+  // Handle artist selection from collection view
+  const handleArtistSelect = (artist) => {
+    setSelectedArtist(artist);
+    setSelectedAlbum(null);
+  };
 
-    const loadBollywoodSongs = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch(`https://itunes.apple.com/search?term=bollywood+hindi+songs+2024&media=music&entity=song&limit=20`);
-            const data = await res.json();
-            if (data.results && data.results.length > 0) {
-                setSongs(data.results.map(item => ({
-                    id: item.trackId,
-                    title: item.trackName,
-                    artist: item.artistName,
-                    album: item.collectionName,
-                    cover: item.artworkUrl100 ? item.artworkUrl100.replace('100x100', '400x400') : 'https://via.placeholder.com/400',
-                    previewUrl: item.previewUrl || '',
-                    duration: 30
-                })));
-            } else {
-                setSongs(defaultBollywoodSongs);
-            }
-        } catch (error) {
-            console.error('Failed to load songs:', error);
-            setSongs(defaultBollywoodSongs);
-        } finally {
-            setLoading(false);
-        }
-    };
+  // Handle album selection from collection or artist view
+  const handleAlbumSelect = (album) => {
+    setSelectedAlbum(album);
+  };
 
-    const searchMusic = async (e) => {
-        e.preventDefault();
-        if (!query.trim()) return;
-        setLoading(true);
-        try {
-            const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=20`);
-            const data = await res.json();
-            if (data.results && data.results.length > 0) {
-                setSongs(data.results.map(item => ({
-                    id: item.trackId,
-                    title: item.trackName,
-                    artist: item.artistName,
-                    album: item.collectionName,
-                    cover: item.artworkUrl100 ? item.artworkUrl100.replace('100x100', '400x400') : 'https://via.placeholder.com/400',
-                    previewUrl: item.previewUrl || '',
-                    duration: 30
-                })));
-            } else {
-                setSongs([]);
-            }
-        } catch (error) {
-            console.error('Search failed:', error);
-            setSongs([]);
-        } finally {
-            setLoading(false);
-        }
-    };
+  // Handle back navigation from detail views
+  const handleBackFromArtist = () => {
+    setSelectedArtist(null);
+  };
 
-    const handlePlaySong = (song) => {
-        playSong(song);
-        setPivot('now');
-    };
+  const handleBackFromAlbum = () => {
+    // If we came from artist view, go back to artist
+    // Otherwise go back to collection
+    if (selectedArtist) {
+      setSelectedAlbum(null);
+    } else {
+      setSelectedAlbum(null);
+    }
+  };
 
-    const formatTime = (time) => {
-        if (!time || isNaN(time)) return '0:00';
-        const m = Math.floor(time / 60);
-        const s = Math.floor(time % 60);
-        return `${m}:${s.toString().padStart(2, '0')}`;
-    };
+  // Handle song play from collection/history
+  const handleSongPlay = (song, allSongs) => {
+    if (allSongs && allSongs.length > 0) {
+      const songIndex = allSongs.findIndex(s => s.id === song.id);
+      playQueue(allSongs, songIndex >= 0 ? songIndex : 0);
+    } else {
+      playSong(song);
+    }
+    setPivot('now');
+  };
 
-    return (
-        <AppShell title="music + videos" hideTitle>
-            <div className="wp-music">
-                <h1 className="wp-music-title">Music + Videos</h1>
-                <div className="wp-pivot-header">
-                    <button className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`} onClick={() => setPivot('collection')}>collection</button>
-                    <button className={`wp-pivot ${pivot === 'now' ? 'active' : ''}`} onClick={() => setPivot('now')}>now playing</button>
-                    <button className={`wp-pivot ${pivot === 'history' ? 'active' : ''}`} onClick={() => setPivot('history')}>history</button>
-                </div>
+  // Handle single song play from history
+  const handleHistorySongPlay = (song) => {
+    playSong(song);
+    setPivot('now');
+  };
 
-                {pivot === 'collection' && (
-                    <div className="wp-music-collection">
-                        <form className="wp-music-search" onSubmit={searchMusic}>
-                            <input type="text" placeholder="search music" value={query} onChange={(e) => setQuery(e.target.value)} />
-                            <button type="submit"><Icon name="search" size={20} /></button>
-                        </form>
-                        {loading && <div className="wp-music-loading">searching...</div>}
-                        {songs.length > 0 && (
-                            <div className="wp-music-list">
-                                {songs.map(song => (
-                                    <div key={song.id} className="wp-music-item" onClick={() => handlePlaySong(song)}>
-                                        <img src={song.cover} alt={song.title} className="wp-music-thumb" />
-                                        <div className="wp-music-info">
-                                            <span className="wp-music-song">{song.title}</span>
-                                            <span className="wp-music-artist">{song.artist}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        {!loading && songs.length === 0 && <p className="wp-music-empty">no results found, try another search</p>}
-                    </div>
-                )}
+  // Handle browse collection from empty now playing
+  const handleBrowseCollection = () => {
+    setPivot('collection');
+    setSelectedArtist(null);
+    setSelectedAlbum(null);
+  };
 
-                {pivot === 'now' && (
-                    <div className="wp-now-playing">
-                        {currentSong ? (
-                            <>
-                                <div className="wp-np-art"><img src={currentSong.cover} alt={currentSong.title} /></div>
-                                <div className="wp-np-info">
-                                    <span className="wp-np-title">{currentSong.title}</span>
-                                    <span className="wp-np-artist">{currentSong.artist}</span>
-                                </div>
-                                <div className="wp-np-progress">
-                                    <span>{formatTime(currentTime)}</span>
-                                    <div className="wp-np-bar"><div className="wp-np-fill" style={{ width: `${(currentTime / duration) * 100}%` }} /></div>
-                                    <span>{formatTime(duration)}</span>
-                                </div>
-                                <div className="wp-np-controls">
-                                    <button className="wp-np-btn"><Icon name="skip_prev" size={32} /></button>
-                                    <button className="wp-np-btn wp-np-play" onClick={togglePlay}><Icon name={isPlaying ? 'pause' : 'play'} size={40} /></button>
-                                    <button className="wp-np-btn"><Icon name="skip_next" size={32} /></button>
-                                </div>
-                            </>
-                        ) : (
-                            <div className="wp-np-empty">
-                                <p>no song playing</p>
-                                <button onClick={() => setPivot('collection')}>browse collection</button>
-                            </div>
-                        )}
-                    </div>
-                )}
+  // Handle mini player expand
+  const handleMiniPlayerExpand = () => {
+    setPivot('now');
+  };
 
-                {pivot === 'history' && (
-                    <div className="wp-music-history">
-                        {history.length > 0 ? (
-                            <div className="wp-music-list">
-                                {history.map(song => (
-                                    <div key={song.id} className="wp-music-item" onClick={() => handlePlaySong(song)}>
-                                        <img src={song.cover} alt={song.title} className="wp-music-thumb" />
-                                        <div className="wp-music-info">
-                                            <span className="wp-music-song">{song.title}</span>
-                                            <span className="wp-music-artist">{song.artist}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="wp-music-empty">no recently played songs</p>
-                        )}
-                    </div>
-                )}
-            </div>
-        </AppShell>
-    );
+  // Handle queue open/close
+  const handleOpenQueue = () => {
+    setShowQueue(true);
+  };
+
+  const handleCloseQueue = () => {
+    setShowQueue(false);
+  };
+
+  // Determine if mini player should be shown
+  const showMiniPlayer = currentSong && pivot !== 'now' && !showQueue;
+
+  // Render the appropriate content based on navigation state
+  const renderContent = () => {
+    // Queue overlay takes precedence
+    if (showQueue) {
+      return <QueueView onClose={handleCloseQueue} />;
+    }
+
+    // Album detail view
+    if (selectedAlbum) {
+      return (
+        <AlbumDetailView
+          album={selectedAlbum}
+          onBack={handleBackFromAlbum}
+        />
+      );
+    }
+
+    // Artist detail view
+    if (selectedArtist) {
+      return (
+        <ArtistDetailView
+          artist={selectedArtist}
+          onBack={handleBackFromArtist}
+          onAlbumSelect={handleAlbumSelect}
+        />
+      );
+    }
+
+    // Main pivot views
+    switch (pivot) {
+      case 'collection':
+        return (
+          <CollectionView
+            onArtistSelect={handleArtistSelect}
+            onAlbumSelect={handleAlbumSelect}
+            onSongPlay={handleSongPlay}
+          />
+        );
+      case 'now':
+        return (
+          <NowPlayingView
+            onOpenQueue={handleOpenQueue}
+            onBrowse={handleBrowseCollection}
+          />
+        );
+      case 'history':
+        return (
+          <HistoryView
+            onSongPlay={handleHistorySongPlay}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  // Determine if pivot header should be shown
+  const showPivotHeader = !selectedArtist && !selectedAlbum && !showQueue;
+
+  return (
+    <AppShell title="music" hideTitle>
+      <div className="wp-music">
+        {/* App Title - Requirement 1.4 */}
+        {showPivotHeader && (
+          <h1 className="wp-music-title">music</h1>
+        )}
+
+        {/* Pivot Navigation - Requirements 1.1, 1.2, 1.3 */}
+        {showPivotHeader && (
+          <div className="wp-pivot-header">
+            <button
+              className={`wp-pivot ${pivot === 'collection' ? 'active' : ''}`}
+              onClick={() => setPivot('collection')}
+            >
+              collection
+            </button>
+            <button
+              className={`wp-pivot ${pivot === 'now' ? 'active' : ''}`}
+              onClick={() => setPivot('now')}
+            >
+              now playing
+            </button>
+            <button
+              className={`wp-pivot ${pivot === 'history' ? 'active' : ''}`}
+              onClick={() => setPivot('history')}
+            >
+              history
+            </button>
+          </div>
+        )}
+
+        {/* Main Content Area */}
+        <div className="wp-music-content">
+          {renderContent()}
+        </div>
+
+        {/* Mini Player - Requirement 7.1 */}
+        {showMiniPlayer && (
+          <MiniPlayer onExpand={handleMiniPlayerExpand} />
+        )}
+      </div>
+    </AppShell>
+  );
 }

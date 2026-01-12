@@ -1,0 +1,272 @@
+/* NowPlayingView Styles - Windows Phone 8.1 Style */
+
+.now-playing-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blurred background - Requirement 5.8 */
+.now-playing-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(40px) brightness(0.4);
+  transform: scale(1.3);
+  z-index: 0;
+}
+
+/* Content container */
+.now-playing-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Album artwork - Requirement 5.1 */
+.now-playing-artwork {
+  width: 70%;
+  max-width: 280px;
+  aspect-ratio: 1;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.now-playing-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Song info - Requirement 5.2 */
+.now-playing-info {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.now-playing-title {
+  display: block;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-color);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.now-playing-artist {
+  display: block;
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.now-playing-album {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Progress bar - Requirement 5.3 */
+.now-playing-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 28px;
+}
+
+.now-playing-time {
+  font-size: 12px;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: center;
+}
+
+.now-playing-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  /* Increase touch target */
+  padding: 10px 0;
+  margin: -10px 0;
+  background-clip: content-box;
+}
+
+.now-playing-progress-fill {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 4px;
+  background: var(--accent-color);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.now-playing-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.now-playing-progress-bar:hover .now-playing-progress-thumb,
+.now-playing-progress-bar:active .now-playing-progress-thumb {
+  opacity: 1;
+}
+
+/* Playback controls - Requirement 5.4 */
+.now-playing-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.now-playing-control-btn {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.now-playing-control-btn:active {
+  transform: scale(0.95);
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* Play/Pause button - larger */
+.now-playing-play-btn {
+  width: 64px;
+  height: 64px;
+}
+
+/* Shuffle and Repeat buttons - smaller */
+.now-playing-shuffle,
+.now-playing-repeat {
+  width: 40px;
+  height: 40px;
+  border-width: 1.5px;
+  opacity: 0.6;
+}
+
+/* Active state for shuffle/repeat - Requirement 5.6 */
+.now-playing-shuffle.active,
+.now-playing-repeat.active {
+  opacity: 1;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Repeat one indicator */
+.repeat-one-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* Queue button - Requirement 6.1 */
+.now-playing-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.now-playing-queue-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.now-playing-queue-btn:hover,
+.now-playing-queue-btn:active {
+  color: var(--text-color);
+}
+
+/* Empty state */
+.now-playing-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-secondary);
+  padding: 40px;
+}
+
+.now-playing-empty-icon {
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+
+.now-playing-empty p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.now-playing-browse-btn {
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.15s ease;
+}
+
+.now-playing-browse-btn:active {
+  background: var(--text-color);
+  color: var(--bg-color);
+}

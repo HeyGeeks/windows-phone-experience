@@ -1,0 +1,194 @@
+/* QueueView Styles - Windows Phone 8.1 Style */
+
+.queue-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-color);
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+}
+
+/* Header */
+.queue-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.queue-close-btn {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: opacity 0.15s ease;
+}
+
+.queue-close-btn:active {
+  opacity: 0.7;
+}
+
+.queue-title {
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text-color);
+  text-transform: lowercase;
+  margin: 0;
+  flex: 1;
+}
+
+.queue-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Content */
+.queue-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Queue list */
+.queue-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.queue-item:active {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+/* Highlight currently playing song - Requirement 6.3 */
+.queue-item.playing {
+  background: rgba(var(--accent-color-rgb, 0, 120, 215), 0.15);
+}
+
+.queue-item.playing .queue-item-title {
+  color: var(--accent-color);
+}
+
+.queue-item.playing .queue-item-position {
+  color: var(--accent-color);
+}
+
+/* Queue position number */
+.queue-item-position {
+  width: 28px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Song thumbnail */
+.queue-item-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: rgba(128, 128, 128, 0.2);
+}
+
+/* Song info */
+.queue-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.queue-item-title {
+  font-size: 16px;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.queue-item-artist {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Duration */
+.queue-item-duration {
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* Empty state */
+.queue-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+  color: var(--text-secondary);
+  padding: 40px;
+}
+
+.queue-empty svg {
+  opacity: 0.5;
+}
+
+.queue-empty p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Now playing indicator at bottom */
+.queue-now-playing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(128, 128, 128, 0.1);
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  flex-shrink: 0;
+}
+
+.queue-now-playing-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.queue-now-playing-title {
+  font-size: 14px;
+  color: var(--accent-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
