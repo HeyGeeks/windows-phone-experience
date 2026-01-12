@@ -24,7 +24,7 @@ import { Store } from './apps/Store';
 import { Games } from './apps/Games';
 import { Maps } from './apps/Maps';
 import { Files } from './apps/Files';
-import { WhatsApp } from './apps/WhatsApp';
+import { WhatsApp } from './apps/WhatsApp/WhatsApp';
 import './styles/index.css';
 
 function AppContent() {
@@ -81,7 +81,7 @@ function AppContent() {
     const handleTouchEnd = (e) => {
         const touchEndY = e.changedTouches[0].clientY;
         const diff = touchEndY - touchStartY.current;
-        
+
         // Swipe down from top to open Action Center
         if (touchStartY.current < 50 && diff > 100 && !isLocked) {
             setIsActionCenterOpen(true);
@@ -98,31 +98,31 @@ function AppContent() {
     };
 
     return (
-        <div 
+        <div
             className="phone-container"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
             <a href="#main-content" className="skip-link">Skip to main content</a>
-            
+
             {/* Lock Screen */}
             <LockScreen isLocked={isLocked} onUnlock={() => setIsLocked(false)} />
-            
+
             {/* Action Center */}
-            <ActionCenter 
-                isOpen={isActionCenterOpen} 
+            <ActionCenter
+                isOpen={isActionCenterOpen}
                 onClose={() => setIsActionCenterOpen(false)}
                 onOpenSettings={handleOpenSettings}
             />
-            
+
             {/* Recent Apps */}
-            <RecentApps 
+            <RecentApps
                 isOpen={isRecentAppsOpen}
                 onClose={() => setIsRecentAppsOpen(false)}
                 onSelectApp={handleSelectRecentApp}
                 recentApps={recentApps}
             />
-            
+
             <StatusBar onActionCenter={() => setIsActionCenterOpen(true)} />
             <div id="main-content">
                 <Routes>
