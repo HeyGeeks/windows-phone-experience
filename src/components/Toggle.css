@@ -1,50 +1,55 @@
-/* Windows Phone 8.1 Toggle Switch */
+/* Windows Phone 8.1 Authentic Toggle Switch */
 .toggle-switch {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.toggle-track {
-    width: 62px;
-    height: 32px;
+    display: inline-flex;
+    position: relative;
+    width: 50px;
+    height: 24px;
     background: transparent;
     border: 2.5px solid var(--text-secondary);
-    position: relative;
-    transition: all 0.2s ease;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+    box-sizing: border-box;
+    /* Ensure border acts inside/outside correctly */
+    vertical-align: middle;
 }
 
+/* Off State (Default) */
 .toggle-thumb {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 13px;
+    /* visual balance */
     background: var(--text-secondary);
-    top: 4px;
-    left: 4px;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease-out;
+    display: block;
 }
 
-.toggle-switch.active .toggle-track {
+/* Active State */
+.toggle-switch.active {
     background: var(--accent-color);
     border-color: var(--accent-color);
 }
 
 .toggle-switch.active .toggle-thumb {
     background: white;
-    left: calc(100% - 24px);
+    /* In WP8.1, thumb turns white on accent background */
+    left: calc(100% - 15px);
+    /* Position at the end */
 }
 
+/* Hide label inside the component structure if not used visually in this specific way,
+   but good to keep for accessibility or if we want the side text. 
+   Authentic WP toggle usually has text label OUTSIDE the switch.
+*/
 .toggle-label {
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text-secondary);
-    text-transform: capitalize;
+    display: none;
 }
 
-.toggle-switch.active .toggle-label {
-    color: var(--text-color);
+/* High Contrast / Accessibility Focus */
+.toggle-switch:focus {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
 }

@@ -85,6 +85,8 @@
 /* Settings Page */
 .wp-settings-page {
     padding: 0;
+    overflow-y: auto;
+    height: 100%;
 }
 
 .wp-back-btn {
@@ -115,25 +117,65 @@
     margin-bottom: 16px;
 }
 
-/* Toggle Row */
+.wp-section-header {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--accent-color);
+    margin: 24px 0 16px 0;
+    text-transform: lowercase;
+}
+
+/* Toggle Section - Enhanced WP8.1 Style */
+.wp-toggle-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .wp-toggle-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px 0;
+    gap: 16px;
 }
 
-.wp-toggle-row span {
+.wp-toggle-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.wp-toggle-label {
     font-size: 22px;
     font-weight: 300;
     color: var(--text-color);
+}
+
+.wp-toggle-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.wp-toggle-state {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wp-toggle-value {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-color);
+    min-width: 30px;
 }
 
 .wp-settings-desc {
     font-size: 16px;
     font-weight: 300;
     color: var(--text-secondary);
-    margin-top: 8px;
+    margin: 8px 0 16px 0;
+    line-height: 1.4;
 }
 
 /* Theme Options */
@@ -229,6 +271,169 @@
     color: var(--accent-color);
 }
 
+/* Device List - Enhanced WP8.1 Style */
+.wp-device-list {
+    margin-top: 8px;
+}
+
+.wp-device-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.wp-device-item:active {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 -12px;
+    padding: 14px 12px;
+}
+
+.wp-device-icon {
+    font-size: 28px;
+    width: 40px;
+    text-align: center;
+}
+
+.wp-device-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.wp-device-name {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.wp-device-status {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--accent-color);
+}
+
+/* Searching Animation - WP8.1 Style */
+.wp-searching {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 0;
+    color: var(--text-secondary);
+}
+
+.wp-searching-text {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.wp-searching-dots {
+    display: flex;
+    gap: 2px;
+}
+
+.wp-searching-dots span {
+    font-size: 24px;
+    font-weight: 400;
+    animation: wp-dot-pulse 1.5s infinite;
+}
+
+.wp-searching-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.wp-searching-dots span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.wp-searching-dots span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.wp-searching-dots span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.wp-searching-dots span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes wp-dot-pulse {
+
+    0%,
+    60%,
+    100% {
+        opacity: 0.3;
+    }
+
+    30% {
+        opacity: 1;
+    }
+}
+
+/* WiFi Signal Indicator */
+.wp-wifi-signal {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.wp-wifi-item.connected .wp-wifi-signal {
+    color: var(--accent-color);
+}
+
+/* Info Section */
+.wp-info-section {
+    margin-top: 16px;
+}
+
+.wp-info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wp-info-item span:first-child {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.wp-info-item span:last-child {
+    font-size: 18px;
+    color: var(--text-color);
+    margin-top: 4px;
+}
+
+/* Action Button */
+.wp-action-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    margin: 8px 0;
+    background: transparent;
+    border: 2px solid var(--text-secondary);
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 300;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.wp-action-btn:hover {
+    border-color: var(--accent-color);
+}
+
+.wp-action-btn:active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
 /* About Info */
 .wp-about-info {
     display: flex;
@@ -284,10 +489,118 @@
 .wp-battery-bar {
     height: 8px;
     background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 24px;
 }
 
 .wp-battery-fill {
     height: 100%;
     background: var(--accent-color);
     transition: width 0.3s;
+}
+
+/* Usage List */
+.wp-usage-list {
+    margin-top: 8px;
+}
+
+.wp-usage-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.wp-usage-item span:last-child {
+    color: var(--text-secondary);
+}
+
+/* Storage Display */
+.wp-storage-display {
+    margin-bottom: 24px;
+}
+
+.wp-storage-header {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.wp-storage-bar {
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 8px;
+}
+
+.wp-storage-used {
+    height: 100%;
+    background: var(--accent-color);
+}
+
+.wp-storage-info {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Notification Slots */
+.wp-notification-slots {
+    margin-top: 16px;
+}
+
+.wp-notification-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.wp-slot-icon {
+    font-size: 24px;
+    color: var(--accent-color);
+}
+
+/* Account List */
+.wp-account-list {
+    margin: 16px 0;
+}
+
+.wp-account-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.wp-account-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.wp-account-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-account-info span:first-child {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.wp-account-info span:last-child {
+    font-size: 14px;
+    color: var(--text-secondary);
 }

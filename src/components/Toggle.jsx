@@ -1,19 +1,17 @@
 import './Toggle.css';
 
-export function Toggle({ active, onChange, label = 'Toggle' }) {
+export function Toggle({ active, onChange, label = 'Toggle', disabled = false }) {
     return (
         <button
             className={`toggle-switch ${active ? 'active' : ''}`}
-            onClick={() => onChange(!active)}
+            onClick={() => !disabled && onChange(!active)}
             role="switch"
             aria-checked={active}
             aria-label={label}
+            disabled={disabled}
             type="button"
         >
-            <span className="toggle-track">
-                <span className="toggle-thumb" />
-            </span>
-            <span className="toggle-label">{active ? 'On' : 'Off'}</span>
+            <span className="toggle-thumb" />
         </button>
     );
 }
