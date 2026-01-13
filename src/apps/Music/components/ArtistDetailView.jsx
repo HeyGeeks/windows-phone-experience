@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import { Icon } from '../../../components/Icons';
 import { useMusic } from '../../../context/MusicContext';
-import { getAlbumsByArtist, getSongsByArtist } from '../data';
+import { lookupArtist } from '../api';
 
 /**
  * ArtistDetailView - Shows artist's complete discography
@@ -10,6 +11,25 @@ import { getAlbumsByArtist, getSongsByArtist } from '../data';
  */
 export function ArtistDetailView({ artist, onBack, onAlbumSelect }) {
   const { playQueue } = useMusic();
+  const [albums, setAlbums] = useState([]);
+  const [allSongs, setAllSongs] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (artist?.id) {
+      loadArtistDetails();
+    }
+  }, [artist]);
+
+  const loadArtistDetails = async () => {
+    setLoading(true);
+    const data = await lookupArtist(artist.id);
+    if (data) {
+      setAlbums(data.albums);
+      setAllSongs(data.songs);
+    }
+    setLoading(false);
+  };
 
   if (!artist) {
     return (
@@ -19,10 +39,6 @@ export function ArtistDetailView({ artist, onBack, onAlbumSelect }) {
       </div>
     );
   }
-
-  // Get all albums and songs for this artist
-  const albums = getAlbumsByArtist(artist.id);
-  const allSongs = getSongsByArtist(artist.id);
 
   const handlePlayAll = () => {
     if (allSongs.length > 0) {
@@ -46,9 +62,9 @@ export function ArtistDetailView({ artist, onBack, onAlbumSelect }) {
 
       {/* Artist Header */}
       <div className="artist-detail-header">
-        <img 
-          src={artist.image} 
-          alt={artist.name} 
+        <img
+          src={artist.image || 'https://via.placeholder.com/200?text=♪'}
+          alt={artist.name}
           className="artist-detail-image"
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/200?text=♪';
@@ -56,7 +72,7 @@ export function ArtistDetailView({ artist, onBack, onAlbumSelect }) {
         />
         <h1 className="artist-detail-name">{artist.name}</h1>
         <span className="artist-detail-stats">
-          {albums.length} {albums.length === 1 ? 'album' : 'albums'} • {allSongs.length} {allSongs.length === 1 ? 'song' : 'songs'}
+          {albums.length} {albums.length === 1 ? 'album' : 'albums'}
         </span>
       </div>
 
@@ -71,17 +87,19 @@ export function ArtistDetailView({ artist, onBack, onAlbumSelect }) {
       {/* Albums List */}
       <div className="artist-detail-albums">
         <h2 className="artist-detail-section-title">albums</h2>
-        {albums.length > 0 ? (
+        {loading ? (
+          <div style={{ padding: '20px', textAlign: 'center' }}>loading albums...</div>
+        ) : albums.length > 0 ? (
           <div className="artist-albums-grid">
             {albums.map((album) => (
-              <div 
-                key={album.id} 
+              <div
+                key={album.id}
                 className="artist-album-item"
                 onClick={() => handleAlbumClick(album)}
               >
-                <img 
-                  src={album.cover} 
-                  alt={album.title} 
+                <img
+                  src={album.cover}
+                  alt={album.title}
                   className="artist-album-cover"
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/150?text=♪';

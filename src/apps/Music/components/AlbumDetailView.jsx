@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import { Icon } from '../../../components/Icons';
 import { useMusic } from '../../../context/MusicContext';
-import { getSongsByAlbum, formatDuration } from '../data';
+import { lookupAlbum } from '../api';
 
 /**
  * AlbumDetailView - Shows album track listing with song details
@@ -11,6 +12,23 @@ import { getSongsByAlbum, formatDuration } from '../data';
  */
 export function AlbumDetailView({ album, onBack }) {
   const { playQueue, currentSong, isPlaying } = useMusic();
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (album?.id) {
+      loadAlbumDetails();
+    }
+  }, [album]);
+
+  const loadAlbumDetails = async () => {
+    setLoading(true);
+    const data = await lookupAlbum(album.id);
+    if (data && data.songs) {
+      setTracks(data.songs);
+    }
+    setLoading(false);
+  };
 
   if (!album) {
     return (
@@ -20,9 +38,6 @@ export function AlbumDetailView({ album, onBack }) {
       </div>
     );
   }
-
-  // Get all tracks for this album
-  const tracks = getSongsByAlbum(album.id);
 
   const handlePlayAlbum = () => {
     if (tracks.length > 0) {
@@ -45,9 +60,9 @@ export function AlbumDetailView({ album, onBack }) {
 
       {/* Album Header */}
       <div className="album-detail-header">
-        <img 
-          src={album.cover} 
-          alt={album.title} 
+        <img
+          src={album.cover}
+          alt={album.title}
           className="album-detail-cover"
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/200?text=♪';
@@ -73,13 +88,15 @@ export function AlbumDetailView({ album, onBack }) {
 
       {/* Track List */}
       <div className="album-detail-tracks">
-        {tracks.length > 0 ? (
+        {loading ? (
+          <div style={{ padding: '20px', textAlign: 'center' }}>loading tracks...</div>
+        ) : tracks.length > 0 ? (
           <div className="album-track-list">
             {tracks.map((track, index) => {
               const isCurrentTrack = currentSong?.id === track.id;
               return (
-                <div 
-                  key={track.id} 
+                <div
+                  key={track.id}
                   className={`album-track-item ${isCurrentTrack ? 'playing' : ''}`}
                   onClick={() => handlePlayTrack(track, index)}
                 >
@@ -94,7 +111,7 @@ export function AlbumDetailView({ album, onBack }) {
                     <span className="album-track-title">{track.title}</span>
                   </div>
                   <span className="album-track-duration">
-                    {formatDuration(track.duration)}
+                    {track.formattedDuration}
                   </span>
                 </div>
               );
