@@ -20,10 +20,13 @@
 }
 
 @keyframes bounceDown {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(-50%) translateY(0);
         opacity: 0.4;
     }
+
     50% {
         transform: translateX(-50%) translateY(8px);
         opacity: 0.7;
@@ -137,4 +140,280 @@
     font-weight: 400;
     opacity: 0.8;
     margin-top: 2px;
+}
+
+/* ===== LIVE TILES ===== */
+
+.live-tile {
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.live-tile-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.tile-default-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.tile-notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+/* Music Live Tile */
+.live-tile-music .live-music-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.live-album-art {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.live-album-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
+}
+
+.live-album-art svg {
+    fill: white;
+    opacity: 0.5;
+}
+
+.live-music-info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.live-song-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-song-artist {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Music Playing Indicator */
+.music-playing-indicator {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 16px;
+    z-index: 2;
+}
+
+.music-playing-indicator .bar {
+    width: 3px;
+    background: white;
+    animation: musicBars 0.8s ease-in-out infinite;
+}
+
+.music-playing-indicator .bar:nth-child(1) {
+    animation-delay: 0s;
+    height: 60%;
+}
+
+.music-playing-indicator .bar:nth-child(2) {
+    animation-delay: 0.2s;
+    height: 100%;
+}
+
+.music-playing-indicator .bar:nth-child(3) {
+    animation-delay: 0.4s;
+    height: 40%;
+}
+
+@keyframes musicBars {
+
+    0%,
+    100% {
+        transform: scaleY(0.5);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+/* Photos Live Tile */
+.live-tile-photos {
+    background: transparent !important;
+}
+
+.photos-tile {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.photos-tile.flipped {
+    transform: rotateX(180deg);
+}
+
+.photos-front,
+.photos-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+.photos-back {
+    transform: rotateX(180deg);
+}
+
+.photo-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.photo-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+}
+
+.photos-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* News Live Tile */
+.news-tile {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.news-tile.flipped {
+    transform: translateY(-100%);
+}
+
+.news-front,
+.news-back {
+    position: absolute;
+    inset: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-back {
+    top: 100%;
+}
+
+.news-tile.flipped .news-front {
+    opacity: 0;
+}
+
+.news-tile.flipped .news-back {
+    top: 0;
+}
+
+.news-icon {
+    position: relative !important;
+    transform: none !important;
+    width: 24px !important;
+    height: 24px !important;
+    opacity: 0.7;
+    top: auto !important;
+    left: auto !important;
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.news-headline {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-source {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+/* Tile entrance animation enhancement */
+@keyframes tileSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.tile-animate {
+    animation: tileSlideIn 0.35s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+/* Tile press effect */
+.tile:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-out;
+}
+
+.tile:active .live-tile-content,
+.tile:active .photos-tile,
+.tile:active .news-tile {
+    transition: none;
 }

@@ -1,15 +1,76 @@
-/* Windows Phone 8.1 Store */
+/* Windows Phone 8.1 Store - Authentic Styling */
 .wp-store {
     padding-bottom: 40px;
+}
+
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 .wp-store-title {
     font-size: 48px;
     font-weight: 200;
-    margin-bottom: 8px;
     color: var(--text-color);
 }
 
+.store-search-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 8px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.store-search-btn:hover {
+    opacity: 1;
+}
+
+/* Search Header */
+.store-search-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+}
+
+.store-search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    border: 2px solid transparent;
+}
+
+.store-search-box:focus-within {
+    border-color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.store-search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    font-family: inherit;
+    outline: none;
+}
+
+.store-search-box input::placeholder {
+    color: var(--text-secondary);
+}
+
+.store-search-results {
+    padding-top: 8px;
+}
+
+/* Pivot Header */
 .wp-pivot-header {
     display: flex;
     gap: 24px;
@@ -25,31 +86,105 @@
     padding: 0;
     cursor: pointer;
     text-transform: lowercase;
+    transition: color 0.2s;
 }
 
 .wp-pivot.active {
     color: var(--text-color);
 }
 
+/* Featured Spotlight */
+.featured-spotlight {
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.spotlight-bg {
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.spotlight-icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.spotlight-icon svg {
+    fill: white;
+}
+
+.spotlight-info {
+    position: relative;
+    z-index: 1;
+}
+
+.spotlight-badge {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.spotlight-name {
+    font-size: 24px;
+    font-weight: 300;
+    color: white;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.spotlight-publisher {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
 /* Sections */
 .wp-store-section {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .wp-section-title {
     font-size: 20px;
     font-weight: 400;
     color: var(--accent-color);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    text-transform: lowercase;
 }
 
-/* Featured Apps */
+/* Featured Apps Scroll */
 .wp-featured-scroll {
     display: flex;
     gap: 16px;
     overflow-x: auto;
     padding-bottom: 8px;
     scrollbar-width: none;
+    margin: 0 -12px;
+    padding: 0 12px 8px;
 }
 
 .wp-featured-scroll::-webkit-scrollbar {
@@ -60,74 +195,289 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    min-width: 80px;
+    gap: 6px;
+    min-width: 90px;
     cursor: pointer;
+    transition: transform 0.1s;
 }
 
 .wp-featured-app:active {
-    opacity: 0.7;
+    transform: scale(0.95);
 }
 
 .wp-app-icon {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s;
+}
+
+.wp-app-icon svg {
+    fill: white;
+}
+
+.game-icon {
+    border-radius: 16px;
+}
+
+.wp-app-title {
+    font-size: 13px;
+    text-align: center;
+    color: var(--text-color);
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wp-app-rating-small {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.wp-app-rating-small .rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.wp-app-rating-small .star-icon {
+    color: var(--accent-color);
+    fill: var(--accent-color);
+}
+
+/* Categories Grid */
+.wp-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wp-category-tile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.wp-category-tile:active {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.category-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-icon svg {
+    fill: white;
+}
+
+.wp-category-name {
+    font-size: 14px;
+    color: var(--text-color);
+    text-transform: lowercase;
+}
+
+/* App List Items */
+.app-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.app-list-item:active {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 0 -12px;
+    padding: 12px;
+}
+
+.app-rank {
+    font-size: 18px;
+    font-weight: 200;
+    color: var(--text-secondary);
+    width: 24px;
+    text-align: center;
+}
+
+.app-list-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.app-list-icon svg {
+    fill: white;
+}
+
+.app-list-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.app-list-name {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.app-list-publisher {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.app-list-free {
+    font-size: 14px;
+    color: var(--accent-color);
+    text-transform: lowercase;
+}
+
+/* Rating Stars */
+.rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.star-icon {
+    color: var(--accent-color);
+    fill: var(--accent-color);
+}
+
+/* Games List */
+.games-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Music Section */
+.music-albums-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.album-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.album-card:active {
+    opacity: 0.8;
+}
+
+.album-art {
     width: 64px;
     height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
 }
 
-.wp-app-title {
+.album-art svg {
+    fill: white;
+    opacity: 0.8;
+}
+
+.album-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.album-rank {
+    font-size: 20px;
+    font-weight: 200;
+    color: var(--text-secondary);
+    width: 24px;
+}
+
+.album-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.album-name {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.album-artist {
     font-size: 14px;
-    text-align: center;
-    color: var(--text-color);
+    color: var(--text-secondary);
 }
 
-/* Categories */
-.wp-categories-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.wp-category-item {
+.music-promo {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    cursor: pointer;
+    padding: 20px;
+    background: var(--accent-color);
+    margin: 24px 0;
 }
 
-.wp-category-item:active {
-    background: rgba(255, 255, 255, 0.1);
+.music-promo svg {
+    fill: white;
 }
 
-.wp-category-icon {
-    font-size: 24px;
-}
-
-.wp-category-name {
+.promo-text h3 {
     font-size: 18px;
-    color: var(--text-color);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 4px;
 }
 
-/* Games List */
-.wp-games-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.promo-text p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.wp-game-item {
+/* Category Header */
+.category-header {
     display: flex;
     align-items: center;
-    gap: 16px;
-    cursor: pointer;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.wp-game-item:active {
-    opacity: 0.7;
+.category-title {
+    font-size: 32px;
+    font-weight: 200;
+    color: var(--text-color);
+    text-transform: lowercase;
+}
+
+.category-apps-list {
+    display: flex;
+    flex-direction: column;
 }
 
 /* App Detail */
@@ -143,12 +493,15 @@
     margin: -8px;
     margin-bottom: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wp-app-header {
     display: flex;
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .wp-app-icon-large {
@@ -157,87 +510,210 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
     flex-shrink: 0;
+}
+
+.wp-app-icon-large svg {
+    fill: white;
 }
 
 .wp-app-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 0;
 }
 
 .wp-app-name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 300;
     margin-bottom: 4px;
+    line-height: 1.2;
 }
 
-.wp-app-category {
+.wp-app-publisher {
     font-size: 14px;
     color: var(--text-secondary);
     margin-bottom: 8px;
 }
 
-.wp-app-rating {
-    font-size: 14px;
-    color: var(--accent-color);
+.wp-app-stats {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reviews-count {
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
 .wp-install-btn {
     width: 100%;
-    padding: 16px;
+    padding: 14px;
     background: var(--accent-color);
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: lowercase;
+    font-family: inherit;
+    transition: opacity 0.2s;
 }
 
 .wp-install-btn:active {
     opacity: 0.8;
 }
 
+.wp-install-btn svg {
+    fill: white;
+}
+
+.wp-app-meta {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.meta-value {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+.meta-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: lowercase;
+}
+
+.meta-divider {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .wp-app-description {
     margin-bottom: 24px;
 }
 
-.wp-app-description h3 {
+.wp-app-description h3,
+.wp-app-screenshots h3,
+.wp-app-reviews h3 {
     font-size: 16px;
     font-weight: 400;
     color: var(--accent-color);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    text-transform: lowercase;
 }
 
 .wp-app-description p {
     font-size: 14px;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-.wp-app-screenshots h3 {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--accent-color);
-    margin-bottom: 12px;
+.wp-app-screenshots {
+    margin-bottom: 24px;
 }
 
 .wp-screenshots-scroll {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     overflow-x: auto;
+    margin: 0 -12px;
+    padding: 0 12px;
+    scrollbar-width: none;
+}
+
+.wp-screenshots-scroll::-webkit-scrollbar {
+    display: none;
 }
 
 .wp-screenshot {
-    width: 120px;
-    height: 200px;
+    width: 140px;
+    height: 220px;
     flex-shrink: 0;
-    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-screenshot svg {
+    fill: white;
+    opacity: 0.6;
+}
+
+/* Reviews */
+.wp-app-reviews {
+    margin-bottom: 24px;
+}
+
+.review-card {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.review-author {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.review-rating {
+    font-size: 12px;
+    color: var(--accent-color);
+}
+
+.review-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
 }
 
 .wp-empty-text {
     color: var(--text-secondary);
     text-align: center;
-    padding: 40px;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 374px) {
+    .wp-store-title {
+        font-size: 40px;
+    }
+
+    .wp-pivot {
+        font-size: 26px;
+    }
+
+    .wp-categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spotlight-name {
+        font-size: 20px;
+    }
 }

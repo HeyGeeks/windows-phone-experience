@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tile } from '../components/Tile';
 import { WidgetTile } from '../components/WidgetTile';
+import { LiveTile } from '../components/LiveTile';
 import { Icon } from '../components/Icons';
 import './StartScreen.css';
 
@@ -13,10 +14,12 @@ const TILES = [
     { id: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', size: 'medium', color: '#25D366', route: '/whatsapp' },
     { id: 'email', icon: 'inbox', label: 'Outlook', size: 'wide', live: true, notification: 12, route: '/email' },
     { id: 'camera', icon: 'camera', label: 'Camera', size: 'small', route: '/camera' },
-    { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', live: true, route: '/photos' },
+    // Photos tile with live photo slideshow
+    { id: 'photos', icon: 'photo', label: 'Photos', size: 'medium', liveType: 'photos', route: '/photos' },
     { id: 'clock-widget', type: 'clock', size: 'small', route: '/clock' },
     { id: 'settings', icon: 'settings', label: 'Settings', size: 'small', route: '/settings' },
-    { id: 'music', icon: 'music', label: 'Music', size: 'medium', route: '/music' },
+    // Music tile with live album art display
+    { id: 'music', icon: 'music', label: 'Music', size: 'medium', liveType: 'music', route: '/music' },
     { id: 'store', icon: 'store', label: 'Store', size: 'small', route: '/store' },
     { id: 'games', icon: 'games', label: 'Games', size: 'small', route: '/games' },
     { id: 'calculator', icon: 'calculator', label: 'Calculator', size: 'small', route: '/calculator' },
@@ -27,7 +30,8 @@ const TILES = [
     { id: 'podcast', icon: 'podcast', label: 'Podcasts', size: 'medium', color: '#8E44AD', route: '/podcast' },
     { id: 'office', icon: 'word', label: 'Office', size: 'medium', color: '#D24726', route: '/office' },
     { id: 'health', icon: 'heart', label: 'Health', size: 'medium', color: '#60A917', live: true, route: '/health' },
-    { id: 'news', icon: 'newspaper', label: 'News', size: 'wide', live: true, route: '/news' },
+    // News tile with live headlines
+    { id: 'news', icon: 'newspaper', label: 'News', size: 'wide', liveType: 'news', color: '#FF6B00', route: '/news' },
 ];
 
 const APPS = [
@@ -72,10 +76,10 @@ export function StartScreen() {
         return () => clearInterval(interval);
     }, []);
 
-    const filteredApps = APPS.filter(app => 
+    const filteredApps = APPS.filter(app =>
         app.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
+
     const groupedApps = filteredApps.reduce((acc, app) => {
         const letter = app.name[0].toUpperCase();
         if (!acc[letter]) acc[letter] = [];
@@ -83,46 +87,72 @@ export function StartScreen() {
         return acc;
     }, {});
 
+    // Render the appropriate tile type
+    const renderTile = (tile, index) => {
+        // Widget tiles (calendar, clock, weather)
+        if (tile.type) {
+            return (
+                <WidgetTile
+                    key={tile.id}
+                    type={tile.type}
+                    size={tile.size}
+                    route={tile.route}
+                    delay={index}
+                />
+            );
+        }
+
+        // Live tiles (music, photos, news)
+        if (tile.liveType) {
+            return (
+                <LiveTile
+                    key={tile.id}
+                    type={tile.liveType}
+                    icon={tile.icon}
+                    label={tile.label}
+                    size={tile.size}
+                    color={tile.color}
+                    route={tile.route}
+                    delay={index}
+                    notification={tile.notification}
+                />
+            );
+        }
+
+        // Standard tiles
+        return (
+            <Tile
+                key={tile.id}
+                {...tile}
+                flipped={flippedTiles[tile.id]}
+                delay={index}
+            />
+        );
+    };
+
     return (
         <div className="hub-container">
             {/* Start Screen with Tiles */}
             <div className="hub-page start-screen">
                 <div className="tile-grid">
-                    {TILES.map((tile, index) => (
-                        tile.type ? (
-                            <WidgetTile 
-                                key={tile.id}
-                                type={tile.type}
-                                size={tile.size}
-                                route={tile.route}
-                                delay={index}
-                            />
-                        ) : (
-                            <Tile 
-                                key={tile.id} 
-                                {...tile} 
-                                flipped={flippedTiles[tile.id]} 
-                                delay={index} 
-                            />
-                        )
-                    ))}
+                    {TILES.map((tile, index) => renderTile(tile, index))}
                 </div>
                 {/* Arrow indicator to swipe for app list */}
                 <div className="swipe-indicator">
                     <Icon name="chevronDown" size={24} />
                 </div>
             </div>
-            
+
             {/* All Apps List */}
             <div className="hub-page all-apps">
                 <div className="all-apps-header">
                     <div className="search-box">
                         <Icon name="search" size={20} className="search-icon" />
-                        <input 
-                            type="text" 
-                            placeholder="Search" 
-                            value={searchQuery} 
-                            onChange={(e) => setSearchQuery(e.target.value)} 
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             aria-label="Search apps"
                         />
                     </div>
@@ -132,10 +162,10 @@ export function StartScreen() {
                         <div key={letter}>
                             <div className="app-letter">{letter}</div>
                             {groupedApps[letter].map(app => (
-                                <div 
-                                    key={app.name} 
-                                    className="app-item" 
-                                    onClick={() => app.route && navigate(app.route)} 
+                                <div
+                                    key={app.name}
+                                    className="app-item"
+                                    onClick={() => app.route && navigate(app.route)}
                                     style={{ opacity: app.route ? 1 : 0.5 }}
                                     role="button"
                                     tabIndex={app.route ? 0 : -1}
