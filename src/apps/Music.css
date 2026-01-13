@@ -17,7 +17,7 @@
 /* Typography: 46px, font-weight 100, lowercase */
 .wp-music-title {
   font-size: 46px;
-  font-weight: 100;
+  font-weight: 600;
   margin: 0 0 12px 0;
   color: var(--text-color);
   text-transform: lowercase;

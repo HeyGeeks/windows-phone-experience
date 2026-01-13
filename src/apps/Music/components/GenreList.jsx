@@ -45,7 +45,7 @@ export function GenreList({ songs, onSongPlay }) {
                     </div>
                   </div>
                   <div className="song-action">
-                    <Icon name="download" size={20} />
+                    <Icon name="play" size={20} />
                   </div>
                 </div>
               ))}
