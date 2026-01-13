@@ -123,7 +123,7 @@
   overflow-x: hidden;
 }
 
-/* Song List Styles */
+/* Song List Styles - Xbox Music Style */
 .song-list {
   display: flex;
   flex-direction: column;
@@ -132,22 +132,15 @@
 .song-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
+  justify-content: space-between;
+  padding: 14px 0;
   cursor: pointer;
   transition: opacity 0.15s ease;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
 }
 
 .song-item:active {
   opacity: 0.7;
-}
-
-.song-thumb {
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(128, 128, 128, 0.2);
 }
 
 .song-info {
@@ -159,18 +152,33 @@
 
 .song-title {
   font-size: 18px;
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-color);
+  margin-bottom: 2px;
+}
+
+.song-artist-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
 }
 
 .song-artist {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.song-action {
+  color: var(--text-secondary);
+  padding: 8px;
+  flex-shrink: 0;
 }
 
 .song-list-empty {
@@ -179,100 +187,131 @@
   color: var(--text-secondary);
 }
 
-/* Artist Grid Styles */
-.artist-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.artist-item {
+/* Artist List Styles - Xbox Music Style */
+.artist-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  padding: 12px;
-  transition: opacity 0.15s ease;
 }
 
-.artist-item:active {
+.artist-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.artist-list-item:active {
   opacity: 0.7;
 }
 
-.artist-image {
-  width: 100%;
-  aspect-ratio: 1;
+.artist-list-image {
+  width: 48px;
+  height: 48px;
   object-fit: cover;
+  flex-shrink: 0;
   background: rgba(128, 128, 128, 0.2);
-  margin-bottom: 8px;
 }
 
-.artist-name {
-  font-size: 16px;
+.artist-list-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.artist-list-name {
+  font-size: 18px;
+  font-weight: 400;
   color: var(--text-color);
-  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  margin-bottom: 2px;
+}
+
+.artist-list-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
 }
 
 .artist-grid-empty {
-  grid-column: 1 / -1;
   text-align: center;
   padding: 40px;
   color: var(--text-secondary);
 }
 
-/* Album Grid Styles */
-.album-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.album-item {
+/* Album List Styles - Xbox Music Style */
+.album-list {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
 }
 
-.album-item:active {
+.album-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.album-list-item:active {
   opacity: 0.7;
 }
 
-.album-cover {
-  width: 100%;
-  aspect-ratio: 1;
+.album-list-cover {
+  width: 48px;
+  height: 48px;
   object-fit: cover;
+  flex-shrink: 0;
   background: rgba(128, 128, 128, 0.2);
-  margin-bottom: 8px;
 }
 
-.album-info {
+.album-list-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
-.album-title {
-  font-size: 14px;
+.album-list-title {
+  font-size: 18px;
+  font-weight: 400;
   color: var(--text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 
-.album-artist {
-  font-size: 12px;
+.album-list-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.album-list-artist {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.album-list-action {
+  color: var(--text-secondary);
+  padding: 8px;
+  flex-shrink: 0;
+}
+
 .album-grid-empty {
-  grid-column: 1 / -1;
   text-align: center;
   padding: 40px;
   color: var(--text-secondary);

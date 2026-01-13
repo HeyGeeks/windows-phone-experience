@@ -19,14 +19,14 @@ import './Music.css';
  */
 export function Music() {
   const { currentSong, playQueue, playSong } = useMusic();
-  
+
   // Navigation state
   const [pivot, setPivot] = useState('collection');
-  
+
   // Detail view state for artist/album navigation
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [selectedAlbum, setSelectedAlbum] = useState(null);
-  
+
   // Queue overlay state
   const [showQueue, setShowQueue] = useState(false);
 
@@ -161,7 +161,7 @@ export function Music() {
       <div className="wp-music">
         {/* App Title - Requirement 1.4 */}
         {showPivotHeader && (
-          <h1 className="wp-music-title">music</h1>
+          <h1 className="wp-music-title">xbox music</h1>
         )}
 
         {/* Pivot Navigation - Requirements 1.1, 1.2, 1.3 */}

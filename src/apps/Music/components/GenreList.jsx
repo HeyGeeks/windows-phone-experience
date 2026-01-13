@@ -1,9 +1,9 @@
+import { Icon } from '../../../components/Icons';
 import { groupSongsByGenre } from '../data';
 
 /**
- * GenreList - Displays songs grouped by genre
- * Handles genre song tap to play
- * Requirements: 2.5
+ * GenreList - Xbox Music Style
+ * Displays songs grouped by genre matching Windows Phone 8.1 design
  */
 export function GenreList({ songs, onSongPlay }) {
   if (!songs || songs.length === 0) {
@@ -32,22 +32,20 @@ export function GenreList({ songs, onSongPlay }) {
             <h3 className="genre-header">{genre}</h3>
             <div className="genre-songs">
               {genreData.songs.map((song) => (
-                <div 
-                  key={song.id} 
-                  className="song-item" 
+                <div
+                  key={song.id}
+                  className="song-item"
                   onClick={() => handleSongClick(song, genreData.songs)}
                 >
-                  <img 
-                    src={song.cover} 
-                    alt={song.title} 
-                    className="song-thumb"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/56?text=♪';
-                    }}
-                  />
                   <div className="song-info">
                     <span className="song-title">{song.title}</span>
-                    <span className="song-artist">{song.artist}</span>
+                    <div className="song-artist-row">
+                      <Icon name="music" size={12} />
+                      <span className="song-artist">{song.artist}</span>
+                    </div>
+                  </div>
+                  <div className="song-action">
+                    <Icon name="download" size={20} />
                   </div>
                 </div>
               ))}

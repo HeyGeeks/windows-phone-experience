@@ -3,9 +3,8 @@ import { Icon } from '../../../components/Icons';
 import './NowPlayingView.css';
 
 /**
- * NowPlayingView Component
- * Full-screen now playing experience with album art, song info, and playback controls.
- * Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 6.1, 9.1, 9.2, 9.6
+ * NowPlayingView Component - Xbox Music Style
+ * Full-screen now playing experience matching Windows Phone 8.1 Xbox Music design.
  */
 export function NowPlayingView({ onOpenQueue, onBrowse }) {
   const {
@@ -13,14 +12,12 @@ export function NowPlayingView({ onOpenQueue, onBrowse }) {
     currentSong,
     currentTime,
     duration,
-    shuffleEnabled,
-    repeatMode,
+    queue,
+    queueIndex,
     togglePlay,
     playNext,
     playPrevious,
     seekTo,
-    toggleShuffle,
-    cycleRepeat
   } = useMusic();
 
   // Format time in m:ss format
@@ -29,6 +26,15 @@ export function NowPlayingView({ onOpenQueue, onBrowse }) {
     const m = Math.floor(time / 60);
     const s = Math.floor(time % 60);
     return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
+  // Format remaining time (negative format like -2:27)
+  const formatRemainingTime = (current, total) => {
+    if (!total || isNaN(total)) return '-0:00';
+    const remaining = total - current;
+    const m = Math.floor(remaining / 60);
+    const s = Math.floor(remaining % 60);
+    return `-${m}:${s.toString().padStart(2, '0')}`;
   };
 
   // Handle progress bar click/drag for seeking
@@ -40,6 +46,16 @@ export function NowPlayingView({ onOpenQueue, onBrowse }) {
     const newTime = percentage * duration;
     seekTo(Math.max(0, Math.min(newTime, duration)));
   };
+
+  // Get next song in queue
+  const getNextSong = () => {
+    if (queue && queue.length > queueIndex + 1) {
+      return queue[queueIndex + 1];
+    }
+    return null;
+  };
+
+  const nextSong = getNextSong();
 
   // Empty state when no song is playing
   if (!currentSong) {
@@ -60,117 +76,95 @@ export function NowPlayingView({ onOpenQueue, onBrowse }) {
 
   return (
     <div className="now-playing-view">
-      {/* Blurred background */}
-      <div 
-        className="now-playing-bg" 
-        style={{ backgroundImage: `url(${currentSong.cover})` }}
-      />
-      
-      {/* Content */}
-      <div className="now-playing-content">
-        {/* Album artwork - Requirement 5.1 */}
-        <div className="now-playing-artwork">
-          <img 
-            src={currentSong.cover} 
-            alt={`${currentSong.album} album art`}
-            onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/280?text=No+Art';
-            }}
+      {/* NOW PLAYING Header */}
+      <div className="now-playing-header">
+        <span className="now-playing-label">NOW PLAYING</span>
+      </div>
+
+      {/* Song Info - Xbox Music Style */}
+      <div className="now-playing-song-info">
+        <span className="now-playing-title">{currentSong.title}</span>
+        <span className="now-playing-artist">by {currentSong.artist}</span>
+      </div>
+
+      {/* Album Artwork - Centered */}
+      <div className="now-playing-artwork">
+        <img
+          src={currentSong.cover}
+          alt={`${currentSong.album} album art`}
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/280?text=No+Art';
+          }}
+        />
+      </div>
+
+      {/* Progress Bar - Xbox Music Style */}
+      <div className="now-playing-progress">
+        <span className="now-playing-time elapsed">{formatTime(currentTime)}</span>
+        <div
+          className="now-playing-progress-bar"
+          onClick={handleProgressClick}
+          role="slider"
+          aria-label="Seek"
+          aria-valuemin={0}
+          aria-valuemax={duration}
+          aria-valuenow={currentTime}
+        >
+          <div
+            className="now-playing-progress-fill"
+            style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
           />
         </div>
+        <span className="now-playing-time remaining">{formatRemainingTime(currentTime, duration)}</span>
+      </div>
 
-        {/* Song info - Requirement 5.2 */}
-        <div className="now-playing-info">
-          <span className="now-playing-title">{currentSong.title}</span>
-          <span className="now-playing-artist">{currentSong.artist}</span>
-          <span className="now-playing-album">{currentSong.album}</span>
+      {/* Up Next Section */}
+      {nextSong && (
+        <div className="now-playing-up-next">
+          <span className="up-next-label">Up next:</span>
+          <span className="up-next-song">{nextSong.title} - {nextSong.artist}</span>
         </div>
+      )}
 
-        {/* Progress bar - Requirement 5.3, 9.6 */}
-        <div className="now-playing-progress">
-          <span className="now-playing-time">{formatTime(currentTime)}</span>
-          <div 
-            className="now-playing-progress-bar" 
-            onClick={handleProgressClick}
-            role="slider"
-            aria-label="Seek"
-            aria-valuemin={0}
-            aria-valuemax={duration}
-            aria-valuenow={currentTime}
-          >
-            <div 
-              className="now-playing-progress-fill" 
-              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-            />
-            <div 
-              className="now-playing-progress-thumb"
-              style={{ left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-            />
-          </div>
-          <span className="now-playing-time">{formatTime(duration)}</span>
-        </div>
+      {/* Playback Controls - Xbox Music Style */}
+      <div className="now-playing-controls">
+        {/* Previous button */}
+        <button
+          className="now-playing-control-btn"
+          onClick={playPrevious}
+          aria-label="Previous track"
+        >
+          <Icon name="skip_prev" size={28} />
+        </button>
 
-        {/* Playback controls - Requirement 5.4, 9.1, 9.2 */}
-        <div className="now-playing-controls">
-          {/* Shuffle button - Requirement 5.5, 5.6 */}
-          <button 
-            className={`now-playing-control-btn now-playing-shuffle ${shuffleEnabled ? 'active' : ''}`}
-            onClick={toggleShuffle}
-            aria-label={shuffleEnabled ? 'Disable shuffle' : 'Enable shuffle'}
-            aria-pressed={shuffleEnabled}
-          >
-            <Icon name="refresh" size={24} />
-          </button>
+        {/* Play/Pause button - Larger */}
+        <button
+          className="now-playing-control-btn now-playing-play-btn"
+          onClick={togglePlay}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+        >
+          <Icon name={isPlaying ? 'pause' : 'play'} size={32} />
+        </button>
 
-          {/* Previous button */}
-          <button 
-            className="now-playing-control-btn"
-            onClick={playPrevious}
-            aria-label="Previous track"
-          >
-            <Icon name="skip_prev" size={32} />
-          </button>
+        {/* Next button */}
+        <button
+          className="now-playing-control-btn"
+          onClick={playNext}
+          aria-label="Next track"
+        >
+          <Icon name="skip_next" size={28} />
+        </button>
+      </div>
 
-          {/* Play/Pause button */}
-          <button 
-            className="now-playing-control-btn now-playing-play-btn"
-            onClick={togglePlay}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
-          >
-            <Icon name={isPlaying ? 'pause' : 'play'} size={40} />
-          </button>
-
-          {/* Next button */}
-          <button 
-            className="now-playing-control-btn"
-            onClick={playNext}
-            aria-label="Next track"
-          >
-            <Icon name="skip_next" size={32} />
-          </button>
-
-          {/* Repeat button - Requirement 5.7 */}
-          <button 
-            className={`now-playing-control-btn now-playing-repeat ${repeatMode !== 'off' ? 'active' : ''}`}
-            onClick={cycleRepeat}
-            aria-label={`Repeat mode: ${repeatMode}`}
-          >
-            <Icon name="refresh" size={24} />
-            {repeatMode === 'one' && <span className="repeat-one-indicator">1</span>}
-          </button>
-        </div>
-
-        {/* Queue button - Requirement 6.1 */}
-        <div className="now-playing-actions">
-          <button 
-            className="now-playing-queue-btn"
-            onClick={onOpenQueue}
-            aria-label="View queue"
-          >
-            <Icon name="more" size={24} />
-            <span>queue</span>
-          </button>
-        </div>
+      {/* More Options Button */}
+      <div className="now-playing-actions">
+        <button
+          className="now-playing-more-btn"
+          onClick={onOpenQueue}
+          aria-label="More options"
+        >
+          <span>•••</span>
+        </button>
       </div>
     </div>
   );

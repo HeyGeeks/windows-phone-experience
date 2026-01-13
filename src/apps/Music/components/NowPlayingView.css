@@ -1,4 +1,4 @@
-/* NowPlayingView Styles - Windows Phone 8.1 Style */
+/* NowPlayingView Styles - Windows Phone 8.1 Xbox Music Style */
 
 .now-playing-view {
   display: flex;
@@ -6,38 +6,53 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  background: var(--bg-color);
 }
 
-/* Blurred background - Requirement 5.8 */
-.now-playing-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(40px) brightness(0.4);
-  transform: scale(1.3);
-  z-index: 0;
+/* NOW PLAYING Header */
+.now-playing-header {
+  margin-bottom: 8px;
 }
 
-/* Content container */
-.now-playing-content {
-  position: relative;
-  z-index: 1;
+.now-playing-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Song Info - Xbox Music Style */
+.now-playing-song-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px 16px;
-  height: 100%;
-  overflow-y: auto;
+  margin-bottom: 16px;
 }
 
-/* Album artwork - Requirement 5.1 */
+.now-playing-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.now-playing-artist {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Album Artwork - Centered */
 .now-playing-artwork {
-  width: 70%;
-  max-width: 280px;
+  width: 100%;
+  max-width: 260px;
   aspect-ratio: 1;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  margin: 0 auto 16px auto;
   flex-shrink: 0;
 }
 
@@ -48,68 +63,34 @@
   display: block;
 }
 
-/* Song info - Requirement 5.2 */
-.now-playing-info {
-  text-align: center;
-  margin-bottom: 24px;
-  padding: 0 16px;
-  width: 100%;
-  max-width: 320px;
-}
-
-.now-playing-title {
-  display: block;
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--text-color);
-  margin-bottom: 6px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.now-playing-artist {
-  display: block;
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.now-playing-album {
-  display: block;
-  font-size: 14px;
-  color: var(--text-secondary);
-  opacity: 0.7;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Progress bar - Requirement 5.3 */
+/* Progress Bar - Xbox Music Style */
 .now-playing-progress {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  max-width: 320px;
-  margin-bottom: 28px;
+  max-width: 300px;
+  margin: 0 auto 12px auto;
 }
 
 .now-playing-time {
   font-size: 12px;
   color: var(--text-secondary);
   min-width: 36px;
-  text-align: center;
+}
+
+.now-playing-time.elapsed {
+  text-align: left;
+}
+
+.now-playing-time.remaining {
+  text-align: right;
 }
 
 .now-playing-progress-bar {
   flex: 1;
-  height: 4px;
-  background: rgba(128, 128, 128, 0.3);
-  border-radius: 2px;
+  height: 3px;
+  background: rgba(128, 128, 128, 0.4);
   position: relative;
   cursor: pointer;
   /* Increase touch target */
@@ -122,41 +103,47 @@
   position: absolute;
   top: 10px;
   left: 0;
-  height: 4px;
-  background: var(--accent-color);
-  border-radius: 2px;
+  height: 3px;
+  background: var(--text-color);
   transition: width 0.1s linear;
 }
 
-.now-playing-progress-thumb {
-  position: absolute;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.15s ease;
+/* Up Next Section */
+.now-playing-up-next {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 20px auto;
 }
 
-.now-playing-progress-bar:hover .now-playing-progress-thumb,
-.now-playing-progress-bar:active .now-playing-progress-thumb {
-  opacity: 1;
+.up-next-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
 }
 
-/* Playback controls - Requirement 5.4 */
+.up-next-song {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Playback Controls - Xbox Music Style */
 .now-playing-controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 20px;
+  margin-top: auto;
+  padding-bottom: 16px;
 }
 
 .now-playing-control-btn {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   background: transparent;
   border: 2px solid var(--text-color);
   border-radius: 50%;
@@ -166,7 +153,6 @@
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
-  position: relative;
 }
 
 .now-playing-control-btn:active {
@@ -175,65 +161,34 @@
   color: var(--bg-color);
 }
 
-/* Play/Pause button - larger */
+/* Play/Pause button - Larger */
 .now-playing-play-btn {
   width: 64px;
   height: 64px;
 }
 
-/* Shuffle and Repeat buttons - smaller */
-.now-playing-shuffle,
-.now-playing-repeat {
-  width: 40px;
-  height: 40px;
-  border-width: 1.5px;
-  opacity: 0.6;
-}
-
-/* Active state for shuffle/repeat - Requirement 5.6 */
-.now-playing-shuffle.active,
-.now-playing-repeat.active {
-  opacity: 1;
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-}
-
-/* Repeat one indicator */
-.repeat-one-indicator {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--accent-color);
-}
-
-/* Queue button - Requirement 6.1 */
+/* More Options Button */
 .now-playing-actions {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-end;
+  padding: 0 8px 8px 0;
 }
 
-.now-playing-queue-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.now-playing-more-btn {
   background: transparent;
   border: none;
-  color: var(--text-secondary);
-  font-size: 14px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.now-playing-queue-btn:hover,
-.now-playing-queue-btn:active {
   color: var(--text-color);
+  font-size: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  letter-spacing: 2px;
 }
 
-/* Empty state */
+.now-playing-more-btn:active {
+  opacity: 0.7;
+}
+
+/* Empty State */
 .now-playing-empty {
   flex: 1;
   display: flex;

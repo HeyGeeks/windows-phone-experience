@@ -1,7 +1,9 @@
+import { Icon } from '../../../components/Icons';
+
 /**
- * SongList - Displays a list of songs with thumbnail, title, and artist
- * Handles song tap to play with queue functionality
- * Requirements: 2.2
+ * SongList - Xbox Music Style
+ * Displays a list of songs with title, artist icon, and download icon
+ * Matches Windows Phone 8.1 Xbox Music design
  */
 export function SongList({ songs, onSongPlay }) {
   if (!songs || songs.length === 0) {
@@ -18,22 +20,20 @@ export function SongList({ songs, onSongPlay }) {
   return (
     <div className="song-list">
       {songs.map((song) => (
-        <div 
-          key={song.id} 
-          className="song-item" 
+        <div
+          key={song.id}
+          className="song-item"
           onClick={() => handleSongClick(song)}
         >
-          <img 
-            src={song.cover} 
-            alt={song.title} 
-            className="song-thumb"
-            onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/56?text=♪';
-            }}
-          />
           <div className="song-info">
             <span className="song-title">{song.title}</span>
-            <span className="song-artist">{song.artist}</span>
+            <div className="song-artist-row">
+              <Icon name="music" size={12} />
+              <span className="song-artist">{song.artist}</span>
+            </div>
+          </div>
+          <div className="song-action">
+            <Icon name="download" size={20} />
           </div>
         </div>
       ))}

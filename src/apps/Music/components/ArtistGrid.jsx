@@ -1,7 +1,8 @@
+import { Icon } from '../../../components/Icons';
+
 /**
- * ArtistGrid - Displays artists in a grid/list format with name and image
- * Handles artist tap to navigate to detail view
- * Requirements: 2.3
+ * ArtistGrid - Xbox Music Style
+ * Displays artists in a list format matching Windows Phone 8.1 design
  */
 export function ArtistGrid({ artists, onArtistSelect }) {
   if (!artists || artists.length === 0) {
@@ -15,22 +16,28 @@ export function ArtistGrid({ artists, onArtistSelect }) {
   };
 
   return (
-    <div className="artist-grid">
+    <div className="artist-list">
       {artists.map((artist) => (
-        <div 
-          key={artist.id} 
-          className="artist-item" 
+        <div
+          key={artist.id}
+          className="artist-list-item"
           onClick={() => handleArtistClick(artist)}
         >
-          <img 
-            src={artist.image} 
-            alt={artist.name} 
-            className="artist-image"
+          <img
+            src={artist.image}
+            alt={artist.name}
+            className="artist-list-image"
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/150?text=♪';
+              e.target.src = 'https://via.placeholder.com/48?text=♪';
             }}
           />
-          <span className="artist-name">{artist.name}</span>
+          <div className="artist-list-info">
+            <span className="artist-list-name">{artist.name}</span>
+            <div className="artist-list-meta">
+              <Icon name="music" size={12} />
+              <span>{artist.albumCount || 0} albums</span>
+            </div>
+          </div>
         </div>
       ))}
     </div>
